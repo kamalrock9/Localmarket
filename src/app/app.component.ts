@@ -214,7 +214,7 @@ export class MyApp {
   openChat() {
     if (this.settings.all.appSettings && this.settings.all.appSettings.direct_tawk_id && this.settings.all.appSettings.direct_tawk_id !== '') {
       this.loader.show();
-      const browser = this.iab.create(this.settings.all.appSettings.direct_tawk_id, '_self', { location: 'no', closebuttoncaption: 'Done', hidden: 'yes' });
+      const browser = this.iab.create(this.settings.all.appSettings.direct_tawk_id, '_blank', { location: 'no', closebuttoncaption: 'Done', hidden: 'yes' });
       browser.on('loadstop').subscribe(event => {
         browser.show();
         this.loader.dismiss();

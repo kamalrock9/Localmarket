@@ -39,7 +39,7 @@
       <ion-item no-padding>
         {{"PAYMENT_METHODS" | translate}}
         <span item-end>
-          {{data.payment_method_title || data.payment_method}}
+          {{ data.payment_method}}
         </span>
       </ion-item>
       <ion-item no-padding *ngIf="data.shipping_lines[0]">

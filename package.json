@@ -45,6 +45,7 @@
     "@ngx-translate/http-loader": "^2.0.1",
     "angular-tree-component": "^7.0.0",
     "com-sarriaroman-photoviewer": "1.1.18",
+    "com.razorpay.cordova": "^1.4.8",
     "cordova-android": "8.1.0",
     "cordova-plugin-advanced-http": "^1.11.1",
     "cordova-plugin-android-permissions": "^1.0.0",
@@ -139,7 +140,8 @@
         "MERCHANT_ID": "Sobhaa37519274706529",
         "INDUSTRY_TYPE_ID": "Retail109",
         "WEBSITE": "WEBPROD"
-      }
+      },
+      "com.razorpay.cordova": {}
     },
     "platforms": [
       "android"

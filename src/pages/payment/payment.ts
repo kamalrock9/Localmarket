@@ -7,6 +7,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SettingsProvider, ToastProvider } from '../../providers/providers';
 import { TranslateService } from '@ngx-translate/core';
 declare var paytm: any;
+declare var RazorpayCheckout: any;
 
 @IonicPage({
   priority: 'high'
@@ -90,6 +91,10 @@ export class PaymentPage {
     }
     if (this.orderDetails.payment_method == 'paytm') {
       this.paytmCheckout();
+      return;
+    }
+    if (this.orderDetails.payment_method == 'razorpay') {
+      this.razorpayCheckout();
       return;
     }
     this.translate.get(['PAYMENT_LOADING']).subscribe(x => {
@@ -197,7 +202,7 @@ export class PaymentPage {
   }
   paytmCheckout() {
     let txnRequest = {
-      "MID": "Sobhaa37519274706529",                  // PayTM Credentials
+      "MID": "rzp_live_uypJsy0kt3YvC7",                  // PayTM Credentials
       "ORDER_ID": this.orderDetails.id,      //Should be unique for every order.
       "CUST_ID": this.orderDetails.customer_id,
       "INDUSTRY_TYPE_ID": "Retail109",       // PayTM Credentials
@@ -226,6 +231,37 @@ export class PaymentPage {
     }, err => {
       this.loader.dismiss();
       alert('Error Generating Checksum ' + err);
+    });
+  }
+  razorpayCheckout() {
+    let options = {
+      description: 'Order  ' + this.orderDetails.id,
+      image: '',
+      currency: this.orderDetails.currency,
+      key: 'rzp_live_Mw6y1rFt9AqPGr',
+      amount: parseFloat(this.orderDetails.total) * 100,
+      name: App.store,
+      prefill: {
+        email: this.orderDetails.billing.email || '',
+        contact: this.orderDetails.billing.phone || '',
+        name: this.orderDetails.billing.first_name + ' ' + this.orderDetails.billing.last_name
+      },
+      theme: {
+        color: this.settings.all.appSettings.primary_color
+      },
+      modal: {
+        ondismiss: function () {
+          alert('Payment Cancelled');
+        }
+      }
+    };
+
+    RazorpayCheckout.open(options, (payment_id) => {
+      //alert('payment_id: ' + payment_id);
+      this.refreshPage(payment_id);
+    }, (error) => {
+      alert(error.description);
+      this.refreshPage();
     });
   }
   calculatePrice(x) {

@@ -38,12 +38,9 @@ page-order-detail {
         }
       }
 
-
-
       .order_products.item {
         &:last-child .item-inner {
           border-bottom: none;
-
         }
 
         .item-inner {
@@ -72,17 +69,16 @@ page-order-detail {
         min-height: initial;
 
         img {
-  @include margin(0px !important,null,null,null);
-  @include margin(null,10px !important,null,null);
-  @include margin(null,null,0px !important,null);
-  @include margin(null,null,null,0px !important);
+          @include margin(0px !important, null, null, null);
+          @include margin(null, 10px !important, null, null);
+          @include margin(null, null, 0px !important, null);
+          @include margin(null, null, null, 0px !important);
         }
 
         .item-inner {
           border-bottom: none;
 
           .input-wrapper {
-
             .label {
               margin: 0px;
               color: #757575;
@@ -99,17 +95,17 @@ page-order-detail {
           span[item-end],
           button[item-end],
           div[item-end] {
-  @include margin(0px,0px,5px,0px);
-
+            @include margin(0px, 0px, 8px, 0px);
+            flex: 1;
+            text-align: end;
             text-transform: capitalize;
           }
 
           .radio {
-  @include margin(0px !important,null,null,null);
-  @include margin(null,0px !important,null,null);
-  @include margin(null,null,5px !important,null);
-  @include margin(null,null,null,5px !important);
-
+            @include margin(0px !important, null, null, null);
+            @include margin(null, 0px !important, null, null);
+            @include margin(null, null, 5px !important, null);
+            @include margin(null, null, null, 5px !important);
           }
         }
       }
@@ -121,8 +117,6 @@ page-order-detail {
         color: #000 !important;
         margin-top: 8px;
       }
-
-    
     }
   }
   .footer {
