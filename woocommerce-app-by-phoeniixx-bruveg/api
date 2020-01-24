@@ -1,0 +1,19 @@
+Cart: alok.codiixx.com/wp-json/wc/v2/cart
+Add-cart: alok.codiixx.com/wp-json/wc/v2/cart/add
+Clear-cart: alok.codiixx.com/wp-json/wc/v2/cart/clear
+Update-cart: alok.codiixx.com/wp-json/wc/v2/cart/update
+Remove-cart: alok.codiixx.com/wp-json/wc/v2/cart/remove
+Total-cart: alok.codiixx.com/wp-json/wc/v2/cart/totals
+Item-Count: alok.codiixx.com/wp-json/wc/v2/cart/item-count
+Update-cart: alok.codiixx.com/wp-json/wc/v2/cart/update
+Coupon:alok.codiixx.com/wp-json/wc/v2/cart/coupon
+Remove-coupon:alok.codiixx.com/wp-json/wc/v2/cart/remove-coupon
+
+Checkout: alok.codiixx.com/wp-json/wc/v2/checkout/review-order
+
+Login: alok.codiixx.com/wp-json/wc/v2/login
+Social-Login: app.codiixx.com/wp-json/wc/v2/social-login
+Logout: alok.codiixx.com/wp-json/wc/v2/logout
+Register: alok.codiixx.com/wp-json/wc/v2/register
+Forget password: alok.codiixx.com/wp-json/wc/v2/forget-password
+Change password: alok.codiixx.com/wp-json/wc/v2/change-passwordphoen_woo_app_social_login

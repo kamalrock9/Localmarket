@@ -1,0 +1,113 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{'ORDER' | translate}} #{{data.id}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content no-padding>
+  <div class="order-details" padding-left padding-right>
+    <ion-list>
+      <ion-list-header no-padding no-lines>
+        {{'PRODUCTS' | translate}}
+        <div item-end>{{data.line_items.length}} {{'ITEM' | translate}}&rlm;(s)</div>
+      </ion-list-header>
+      <ion-item class="order_products" no-padding *ngFor="let x of data.line_items">
+        <!-- <ion-thumbnail item-start> -->
+        <img-loader useImg [src]="x.img_src ? x.img_src : ''" item-start style="max-width:90px"></img-loader>
+        <!-- </ion-thumbnail> -->
+        <p [innerHTML]="x.name"></p>
+        <div>
+          <span>{{x.price | money: settings.all.settings}}</span>
+          <span>Qty:{{x.quantity}}</span>
+          <span>{{x.subtotal}}</span>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div class="order-details" padding-left padding-right>
+    <ion-list no-lines>
+      <ion-list-header no-padding no-lines no-margin>
+        {{'ORDER_SUMMARY' | translate}}
+      </ion-list-header>
+      <ion-item no-padding>
+        Status
+        <span item-end>
+          {{data.status}}
+        </span>
+      </ion-item>
+      <ion-item no-padding>
+        {{"PAYMENT_METHODS" | translate}}
+        <span item-end>
+          {{data.payment_method_title || data.payment_method}}
+        </span>
+      </ion-item>
+      <ion-item no-padding *ngIf="data.shipping_lines[0]">
+        {{'SHIPPING' | translate}} ({{data.shipping_lines[0].method_title}})
+        <span item-end>
+          {{data.shipping_lines[0].total | money: settings.all.settings}}
+        </span>
+      </ion-item>
+      <ion-item no-padding *ngIf="data.shipping_lines[0]">
+        {{'TAX' | translate}}
+        <span item-end>
+          {{data.total_tax | money: settings.all.settings}}
+        </span>
+      </ion-item>
+      <ion-item no-padding *ngFor="let c of data.coupon_lines">
+        {{'COUPON' | translate}}( {{c.code}})
+        <span item-end>
+          {{c.discount | money: settings.all.settings}}
+        </span>
+      </ion-item>
+      <ion-item no-padding class="ord_total">
+        {{'TOTAL' | translate}} Amount
+        <span item-end>
+          {{calculatePrice(data) | money: settings.all.settings}} (inc. taxes)
+        </span>
+      </ion-item>
+    </ion-list>
+  </div>
+
+
+  <div class="order-details" padding-left padding-right>
+    <ion-list no-lines>
+      <ion-list-header no-padding no-lines no-margin>
+        {{'ADDRESS_INFORMATION' | translate}}
+      </ion-list-header>
+      <ion-item no-padding class="add_info">
+        <div>
+          <b>{{'BILLING' | translate}} {{'ADDRESS' | translate}}</b>
+        </div>
+        <div>
+          <p *ngIf="data.billing.company!=''">{{data.billing.company}}</p>
+          <p>{{data.billing.first_name}} {{data.billing.last_name}}</p>
+          <p>{{data.billing.address_1}}</p>
+          <p *ngIf="data.billing.address_2!=''">{{data.billing.address_2}}</p>
+          <p>{{data.billing.city}} - {{data.billing.postcode}}</p>
+          <p>{{data.billing.state}} • {{data.billing.country}}</p>
+        </div>
+
+      </ion-item>
+
+      <ion-item no-padding class="add_info">
+        <div>
+          <b>{{'SHIPPING' | translate}} {{'ADDRESS' | translate}}</b>
+        </div>
+        <div>
+          <p *ngIf="data.shipping.company!=''">{{data.shipping.company}}</p>
+          <p>{{data.shipping.first_name}} {{data.shipping.last_name}}</p>
+          <p>{{data.shipping.address_1}}</p>
+          <p *ngIf="data.shipping.address_2!=''">{{data.shipping.address_2}}</p>
+          <p>{{data.shipping.city}} - {{data.shipping.postcode}}</p>
+          <p>{{data.shipping.state}} • {{data.shipping.country}}</p>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
+<ion-footer *ngIf="data.status==='on-hold' || data.status==='pending' || data.status==='processing'">
+  <button ion-button block default class="accent-background" tappable (click)="orderCancel()">
+    Cancel Order
+  </button>
+</ion-footer>

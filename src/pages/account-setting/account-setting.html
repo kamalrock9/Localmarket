@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{'ACCOUNT'|translate}} {{'SETTING'|translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="account-setting-form">
+    <form [formGroup]="form_info" (ngSubmit)="submit()" novalidate>
+      <ion-list no-lines>
+        <ion-list-header mode="md" no-margin no-padding>
+          {{"INFORMATION" | translate}}
+        </ion-list-header>
+        <ion-item no-padding>
+          <ion-label stacked>{{'FIRST_NAME'| translate }}</ion-label>
+          <ion-input formControlName="first_name" type="text" required [dir]="dir"></ion-input>
+        </ion-item>
+
+        <ion-item no-padding>
+          <ion-label stacked>{{'LAST_NAME'| translate }}</ion-label>
+          <ion-input formControlName="last_name" type="text" required [dir]="dir"></ion-input>
+        </ion-item>
+
+        <ion-item no-padding>
+          <ion-label stacked>{{'EMAIL' | translate}}</ion-label>
+          <ion-input formControlName="email" required [dir]="dir"></ion-input>
+        </ion-item>
+      </ion-list>
+    </form>
+  </div>
+  <div class="account-setting-form">
+    <form [formGroup]="form_change_pass" (ngSubmit)="submit()" novalidate>
+      <ion-list no-lines>
+        <ion-list-header mode="md" no-margin no-padding>
+          {{"PASSWORD_INFO" | translate}}
+        </ion-list-header>
+        <ion-item no-padding>
+          <ion-label stacked>{{'OLD'| translate}} {{'PASSWORD'| translate}}</ion-label>
+          <ion-input formControlName="opass" type="password" [dir]="dir"></ion-input>
+        </ion-item>
+
+        <ion-item no-padding>
+          <ion-label stacked>{{'NEW'| translate}} {{'PASSWORD'| translate}}</ion-label>
+          <ion-input formControlName="npass" type="password" [dir]="dir"></ion-input>
+        </ion-item>
+
+        <ion-item no-padding>
+          <ion-label stacked>{{'CONFIRM_PASSWORD'| translate}}</ion-label>
+          <ion-input formControlName="cpass" type="password" [dir]="dir"></ion-input>
+        </ion-item>
+      </ion-list>
+    </form>
+  </div>
+</ion-content>
+<ion-footer>
+  <button ion-button full (click)="submit()" class="accent-background">{{'SAVE'| translate}}</button>
+</ion-footer>

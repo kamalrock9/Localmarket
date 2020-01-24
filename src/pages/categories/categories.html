@@ -1,0 +1,54 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{'CATEGORIES' | translate}}</ion-title>
+    <ion-buttons end>
+        <button mode="md" ion-button clear icon-only (click)="showSearch()">
+            <ion-icon name="md-search"></ion-icon>
+          </button> 
+      <!-- <button mode="md" ion-button icon-only (click)="goTo('WishlistPage')">
+        <ion-badge *ngIf="wishlist.total && wishlist.total > 0">{{wishlist.total}}</ion-badge>
+        <ion-icon name="md-heart"></ion-icon>
+      </button> -->
+      <button mode="md" ion-button clear icon-only (click)="goTo('CartPage')">
+        <ion-badge *ngIf="settings.all && settings.cartCount > 0">{{settings.cartCount}}</ion-badge>
+        <ion-icon name="md-cart"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content no-padding>
+
+  <!-- <div class="loader_outer" *ngIf="!nodes">
+    <div class="loader"></div>
+  </div> -->
+  <ion-list class="m-n" *ngIf="!nodes">
+    <ion-item no-lines *ngFor="let i of [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]">
+      <ion-avatar item-start>
+        <skeleton-item height="36px" width="36px"></skeleton-item>
+      </ion-avatar>
+      <skeleton-item width="67%"></skeleton-item>
+    </ion-item>
+  </ion-list>
+
+  <tree-root [nodes]="nodes" class="treeview" *ngIf="nodes">
+    <ng-template #treeNodeWrapperTemplate let-node let-index="index">
+      <ion-item no-lines class="node-wrapper" [style.padding-start]="node.getNodePadding()">
+        <!-- <ion-thumbnail item-start> -->
+        <img-loader class="thumb" [src]="node.data.image ? node.data.image.src : ''" useImg item-start></img-loader>
+        <!-- </ion-thumbnail> -->
+        <tree-node-expander [node]="node" item-end>
+        </tree-node-expander>
+        <div class="node-content-wrapper" [class.node-content-wrapper-active]="node.isActive"
+          [class.node-content-wrapper-focused]="node.isFocused" (click)="node.mouseAction('click', $event)" (dblclick)="node.mouseAction('dblClick', $event)"
+          (contextmenu)="node.mouseAction('contextMenu', $event)" (treeDrop)="node.onDrop($event)" [treeAllowDrop]="node.allowDrop"
+          [treeDrag]="node" [treeDragEnabled]="node.allowDrag()" (tap)="goTo('ProductPage', node.data)">
+          <div>
+            <span [innerHTML]="node.data.name"></span><span class="product-count">&nbsp;({{node.data.count}})</span>
+          </div>
+        </div>
+      </ion-item>
+    </ng-template>
+  </tree-root>
+</ion-content>

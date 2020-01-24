@@ -1,0 +1,50 @@
+<ion-content>
+  <ion-fab top left>
+    <button ion-fab mini tappable (click)="dismiss()" class="accent-background">
+      <ion-icon name="close"></ion-icon>
+    </button>
+  </ion-fab>
+  <!-- <button ion-fixed ion-button tappable round class="accent-background" (click)="dismiss()">
+    <ion-icon name="close" style="color:white" style="translate:scale(2.5)"></ion-icon>
+  </button> -->
+  <ng-container *ngIf="!referralData">
+    <skeleton-item height="200px"></skeleton-item>
+    <div class="main-content">
+      <skeleton-item width="50%"></skeleton-item>
+
+      <div class="refer_earn_code" >
+        <skeleton-item height="1.8rem"></skeleton-item>
+      </div>
+      <div class="refer-earn-desc"  style="height:48px;width: 100%">
+        <skeleton-item></skeleton-item>
+        <skeleton-item></skeleton-item>
+        <skeleton-item width="50%"></skeleton-item>
+      </div>
+      <br /><br />
+      <div  style="height:16px;width: 100%">
+        <skeleton-item width="80%"></skeleton-item>
+      </div>
+
+      <div  class="skeleton-button" style="height:48px;width: 100%">
+        <skeleton-item height="48px"></skeleton-item>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="referralData">
+    <img class="banner" [src]="(referralData.banner && referralData.banner!=='')?referralData.banner:'./assets/imgs/referandearn.jpg'" />
+    <div class="main-content">
+      <div>{{"YOUR_REFERRAL_CODE" | translate}}</div>
+      <div class="refer_earn_code">{{referralData.refer_earn_code}}</div>
+      <div class="refer-earn-desc" [innerHTML]="'REFER_EARN_DESC' | translate:{storeName:storeName,amount_referrer:referralData.amount_referrer, amount_earner:referralData.amount_earner}"></div>
+      <br /><br />
+      <div class="refer-earn-uses" *ngIf="referralData.refer_earn_uses && referralData.refer_earn_uses>0">Referral
+        Valid upto
+        {{referralData.refer_earn_uses}} friends.</div>
+      <button ion-button block class="accent-background" tappable (click)="share()">
+        {{"INVITE_FRIENDS" | translate}}
+      </button>
+    </div>
+  </ng-container>
+
+</ion-content>

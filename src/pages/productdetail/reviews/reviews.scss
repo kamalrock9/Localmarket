@@ -1,0 +1,46 @@
+page-reviews {
+  .loader_outer {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .no-reviews {
+      font-size: 1.8rem;
+      font-weight: 500;
+
+      .review-first {
+        margin-top: 20px;
+      }
+    }
+  }
+
+  .reviews {
+    margin-bottom: 8px;
+
+    .reviewer-name {
+      span:nth-of-type(1) {
+        font-weight: 700;
+      }
+    }
+  }
+
+  .rating {
+    padding: 0px !important;
+    margin: 0px !important;
+    display: inline-block;
+
+    &.rating li {
+      @include padding(0px !important, null, null, null);
+      @include padding(null, 2px !important, null, null);
+      @include padding(null, null, 0px !important, null);
+      @include padding(null, null, null, 0px !important);
+      background: none;
+      color: var(--accent_color) !important;
+
+      ion-icon {
+        font-size: 15px;
+      }
+    }
+  }
+}

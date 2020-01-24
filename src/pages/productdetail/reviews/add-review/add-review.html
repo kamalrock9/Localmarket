@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Add a Review</ion-title>
+    <ion-buttons end>
+      <button ion-button clear icon-only (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="review-form">
+
+    <form [formGroup]="form_review" (ngSubmit)="submit()" novalidate>
+      <ion-list no-lines padding>
+        <ion-list-header mode="md" no-margin no-padding text-wrap>
+          Your email address will not be published. Required fields are marked *
+        </ion-list-header>
+
+
+        <div>
+          <ion-label stacked>Your Rating*</ion-label>
+          <rating formControlName="rating" readOnly="false">
+          </rating>
+        </div>
+        <ion-item no-padding>
+          <ion-label stacked>Your Review*</ion-label>
+          <ion-textarea formControlName="review" required [dir]="dir"></ion-textarea>
+        </ion-item>
+
+        <ion-item no-padding *ngIf="!this.user.all">
+          <ion-label stacked>Name*</ion-label>
+          <ion-input formControlName="reviewer" type="text" required [dir]="dir" ></ion-input>
+        </ion-item>
+
+        <ion-item no-padding *ngIf="!this.user.all">
+          <ion-label stacked>Email*</ion-label>
+          <ion-input formControlName="reviewer_email" required [dir]="dir" ></ion-input>
+        </ion-item>
+      </ion-list>
+      <button ion-button full  class="accent-background">Submit</button>
+
+    </form>
+
+  </div>
+</ion-content>
+<!-- <ion-footer>
+</ion-footer> -->

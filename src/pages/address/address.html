@@ -1,0 +1,55 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{'ADDRESS' | translate}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <ion-list>
+
+    <ion-item>
+      <div margin-bottom>
+        <b>{{'BILLING' | translate}} {{'ADDRESS' | translate}}</b>
+        <button ion-button tappable clear icon-only (tap)="createModal('EditAddressPage','billing')">
+          <ion-icon name="md-create"></ion-icon>
+        </button>
+      </div>
+      <span *ngIf="isEmptyObject(user.billing)">{{'NO_ADDRESS_SAVED' | translate}}</span>
+      <div *ngIf="!isEmptyObject(user.billing)">
+        <p *ngIf="user.billing.company!=''">{{user.billing.company}}</p>
+        <p>{{user.billing.first_name}} {{user.billing.last_name}}</p>
+        <p>{{user.billing.address_1}}</p>
+        <p *ngIf="user.billing.address_2!=''">{{user.billing.address_2}}</p>
+        <p>{{user.billing.city}} - {{user.billing.postcode}}</p>
+        <p>{{user.billing.state}} • {{user.billing.country}}</p>
+      </div>
+
+
+    </ion-item>
+
+    <ion-item>
+      <div margin-bottom>
+        <b>{{'SHIPPING' | translate}} {{'ADDRESS' | translate}}</b>
+        <button ion-button tappable icon-only clear (tap)="createModal('EditAddressPage','shipping')">
+          <ion-icon name="md-create"></ion-icon>
+        </button>
+      </div>
+      <span *ngIf="isEmptyObject(user.shipping)">{{'NO_ADDRESS_SAVED' | translate}}</span>
+      <div *ngIf="!isEmptyObject(user.billing)">
+        <p *ngIf="user.shipping.company!=''">{{user.shipping.company}}</p>
+        <p>{{user.shipping.first_name}} {{user.shipping.last_name}}</p>
+        <p>{{user.shipping.address_1}}</p>
+        <p *ngIf="user.shipping.address_2!=''">{{user.shipping.address_2}}</p>
+        <p>{{user.shipping.city}} - {{user.shipping.postcode}}</p>
+        <p>{{user.shipping.state}} • {{user.shipping.country}}</p>
+      </div>
+    </ion-item>
+
+    <ion-item>
+      <span>{{'ADDRESS_USE'|translate}}</span>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

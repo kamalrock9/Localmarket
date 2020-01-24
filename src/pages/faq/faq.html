@@ -1,0 +1,43 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{"FAQ" | translate}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <!-- <div class="loader_outer" *ngIf="!faq">
+    <div class="loader"></div>
+  </div> -->
+  <ion-list class="m-n" *ngIf="!faq">
+    <ion-item no-lines *ngFor="let i of [0,1,2,3,4,5,6,7,8]">
+      <skeleton-item></skeleton-item>
+      <skeleton-item width="67%"></skeleton-item>
+    </ion-item>
+  </ion-list>
+  
+  <ng-container *ngIf="faq">
+    <div *ngFor="let key of Object.keys(faq);let i=index">
+      <button ion-item full clear icon-end tappable (click)="toggle(i)" class="header_button">
+        {{key}}
+        <ion-icon name="ios-arrow-forward" item-end [ngClass]="toggles[i] ? 'rotate-90' : 'rotate-normal'"></ion-icon>
+      </button>
+
+      <div [ngClass]="toggles[i] ? 'visible' : 'invisible'" *ngFor="let x of faq[key]">
+        <ion-card>
+          <ion-card-title>
+            {{x.question}}
+          </ion-card-title>
+          <ion-card-content>
+            <p>
+              {{x.answer}}
+            </p>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+  </ng-container>
+
+</ion-content>

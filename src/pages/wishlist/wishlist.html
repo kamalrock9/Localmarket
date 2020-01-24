@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ 'WISHLIST'| translate }} ({{products.length}})</ion-title>
+    <ion-buttons end>
+        <button mode="md" ion-button clear icon-only (click)="showSearch()">
+          <ion-icon name="md-search"></ion-icon>
+        </button> 
+      </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+  <div class="div" *ngIf="products.length == 0">
+    <ion-grid class="empty">
+      <ion-row align-items-center>
+        <ion-col align-self-center text-center>
+          <ion-icon name="heart-outline" class="accent" ></ion-icon>
+          <h4 margin-top class="accent">{{'NO_WISHLIST' | translate}}</h4>
+          <button class="accent-background" ion-button (click)="goTo('ProductPage','')" margin-top>{{'START_SHOPPING' |
+            translate}}</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <ion-list no-padding>
+    <ion-item-sliding *ngFor="let product of products">
+      <ion-item tappable (tap)="goTo('ProductdetailPage', product)">
+        <!-- <ion-thumbnail item-start> -->
+          <img-loader useImg [src]="product.images[0].src" item-start style="max-width:90px"></img-loader>
+        <!-- </ion-thumbnail> -->
+        <h5 [innerHTML]="product.name"></h5>
+        <div class="price">
+          <span [innerHTML]="product.price_html"></span>
+        </div>
+        <rating *ngIf="product.average_rating" max="5" readOnly="true" [(ngModel)]="product.average_rating">
+        </rating>
+        <span class="rating_count" *ngIf="product.rating_count">({{product.rating_count}})</span>
+
+      </ion-item>
+
+      <ion-item-options side="end">
+        <button ion-button icon-top class="accent-background" tappable (click)="remove(product)">
+          <ion-icon name="md-trash"></ion-icon>
+          {{"DELETE"|translate}}
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+</ion-content>

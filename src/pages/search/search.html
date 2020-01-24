@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start mode="ios">
+      <button ion-button clear icon-only (tap)="dismiss()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-searchbar autocomplete mode="ios" #searchBar [(ngModel)]="search" debounce=1000 (ionInput)="searchSuggestions()"
+      (keyup.enter)="submit('ProductPage',{search_data: search})" [placeholder]="'SEARCH' | translate">
+    </ion-searchbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="results">
+    <ng-container *ngIf="results['categories']">
+      <ion-item *ngFor="let c of results['categories']" tappable (click)="submit('ProductPage',c)">
+        <h5 [innerHTML]="c.name"></h5>
+      </ion-item>
+    </ng-container>
+    <ng-container *ngIf="results['products']">
+      <ion-item *ngFor="let product of results['products']" tappable (click)="submit('ProductdetailPage',product)">
+        <img-loader useImg [src]="product.images[0].src" item-start style="max-width:60px"></img-loader>
+        <h5 [innerHTML]="product.name"></h5>
+        <div class="price">
+          <span [innerHTML]="product.price_html"></span>
+        </div>
+      </ion-item>
+    </ng-container>
+
+    <ion-item *ngIf="search !== ''" tappable (click)="submit('ProductPage',{search_data: search})">
+      <div text-center>{{'SEARCH_MORE' | translate }}"{{search}}"</div>
+    </ion-item>
+  </ion-list>
+</ion-content>

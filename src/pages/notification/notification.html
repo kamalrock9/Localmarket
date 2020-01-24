@@ -1,0 +1,51 @@
+<ion-header no-border no-lines>
+  <ion-navbar>
+    <ion-title>
+      {{"NOTIFICATIONS" | translate}}
+    </ion-title>
+    <!-- <ion-buttons end>
+      <button mode="md" ion-button clear icon-only (click)="clear()">
+        <ion-icon name="delete"></ion-icon>
+      </button>
+    </ion-buttons> -->
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div class="div" *ngIf="notif.length == 0">
+    <ion-grid>
+      <ion-row align-items-center>
+        <ion-col align-self-center text-center>
+          <ion-icon name="notifications-off" class="accent"></ion-icon>
+          <h4 margin-top class="accent">{{"NO_NOTIFY" | translate}}</h4>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <ion-list no-lines>
+    <ion-item-sliding *ngFor="let x of notif" class="notification-item">
+
+      <ion-item text-wrap (click)="openNotification(x)">
+
+        <div class="notification-main-content">
+          <ion-icon name="ios-pricetag-outline"></ion-icon>
+          <div>
+            <h3 class="sale-title">{{x.title}}</h3>
+            <p>{{x.body}}</p>
+          </div>
+        </div>
+
+        <img-loader useImg [src]="x.bigPicture" *ngIf="x.bigPicture && x.bigPicture!==''"></img-loader>
+
+      </ion-item>
+
+      <ion-item-options side="end">
+        <button ion-button small class="accent-background" tappable (click)="remove(x)">
+          <ion-icon name="trash"></ion-icon>
+          {{"REMOVE" | translate}}
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

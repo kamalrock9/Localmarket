@@ -1,0 +1,43 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Reviews</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div class="loader_outer" *ngIf="!reviews">
+    <div class="loader"></div>
+  </div>
+  <div class="loader_outer" *ngIf="reviews && reviews.length==0">
+    <div class="no-reviews">
+      There are no reviews yet.
+      <div class="review-first" *ngIf="settings.reviewSettings.enable_reviews && (!settings.reviewSettings.review_rating_verification_required ||
+       (settings.reviewSettings.review_rating_verification_required && settings.reviewSettings.user_bought_product))">
+        Be the first to review “{{product.name}}”.
+      </div>
+    </div>
+  </div>
+  <ion-list mode="md" no-padding *ngIf="reviews && reviews.length>0">
+    <ng-container *ngFor="let x of reviews">
+      <ion-item text-wrap class="reviews" no-padding text-wrap *ngIf="x.status == 'approved'">
+        <div class="reviewer-name"><span [innerHTML]="x.reviewer"></span> <span *ngIf="settings.reviewSettings.review_rating_verification_label && x.verified">(verified
+            owner)</span></div>
+        <div>
+          <rating *ngIf="x.rating" max="5" readOnly="true" [(ngModel)]="x.rating" class="rating"> </rating>
+          <span class="ago">{{x.date_created | moment:"ago" | lowercase}}</span>
+        </div>
+        <div [innerHTML]="x.review"></div>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+
+  <ion-fab bottom end *ngIf="settings.reviewSettings.enable_reviews && (!settings.reviewSettings.review_rating_verification_required ||
+  (settings.reviewSettings.review_rating_verification_required && settings.reviewSettings.user_bought_product))">
+    <button ion-fab class="accent-background" (click)="promptReview()">
+      <ion-icon name="md-create"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

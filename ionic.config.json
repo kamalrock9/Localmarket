@@ -1,0 +1,7 @@
+{
+  "name": "WooApp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

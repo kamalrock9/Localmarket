@@ -1,0 +1,43 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{'WALLET' | translate}}</ion-title>
+    <ion-buttons end>
+      <button ion-button>
+        <span item-end [innerHTML]="(wallet && wallet.balance) ? wallet.balance : '-.--'"></span>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-row>
+    <ion-col>
+      <button ion-button icon-start class="accent-background" full (click)="addMoney()">
+        <ion-icon name="add"></ion-icon>
+        {{"ADD_MONEY" | translate}}
+      </button>
+    </ion-col>
+    <ion-col *ngIf="settings.appSettings.referearn">
+      <button ion-button icon-start class="accent-background" full (click)="goTo('ReferEarnPage','')">
+        <ion-icon name="share-alt"></ion-icon>
+       {{"REFER_AND_EARN" | translate}}
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-header>
+
+<ion-content>
+  <div class="loader_outer" *ngIf="!wallet">
+    <div class="loader"></div>
+  </div>
+  <ng-container *ngIf="wallet">
+    <ion-list class="wallet-transaction" *ngIf="isArray(wallet.transaction);else NoTransaction">
+      <ion-item no-padding *ngFor="let t of wallet.transaction">
+        <div [innerHTML]="t.details"></div>
+        <div [innerHTML]="t.date"></div>
+        <div [innerHTML]="t.amount" item-end [class]="t.type=='credit'?'credit':'debit'"></div>
+      </ion-item>
+    </ion-list>
+    <ng-template #NoTransaction>
+      <div class="no-transaction" [innerHtml]="wallet.transaction"></div>
+    </ng-template>
+  </ng-container>
+</ion-content>

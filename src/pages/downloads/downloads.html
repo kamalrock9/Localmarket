@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{'DOWNLOAD' | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="loader_outer" *ngIf="!downloads">
+    <div class="loader"></div>
+  </div>
+
+  <div class="div" *ngIf="downloads && downloads.length==0">
+    <ion-grid>
+      <ion-row align-items-center>
+        <ion-col align-self-center text-center>
+          <ion-icon name="ios-download-outline" class="accent" style="transform: scale(3);"></ion-icon>
+          <h4 margin-top class="accent">{{'NO_DOWNLOADS' | translate}}</h4>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <ion-list *ngIf="downloads">
+    <ion-item *ngFor="let x of downloads">
+      <ion-thumbnail item-start>
+        <img src="assets/svgs/folder.svg">
+      </ion-thumbnail>
+      <div>
+        <b [innerHtml]="x.product_name"></b>
+      </div>
+      <div>
+        {{'FILE_NAME' | translate}} :
+        <span [innerHtml]="x.file.name"></span>
+      </div>
+      <div>
+        {{'EXPIRES' | translate}} : {{ x.access_expires_gmt!='never'? (x.access_expires_gmt | date)
+        :x.access_expires_gmt}}
+      </div>
+      <button ion-button clear icon-only item-end style="zoom:2" (tap)="checkPermissionAndDownload(x.download_url,x.file.name)">
+        <ion-icon name="ios-download-outline"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
+</ion-content>

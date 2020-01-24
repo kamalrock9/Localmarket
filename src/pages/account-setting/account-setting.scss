@@ -1,0 +1,105 @@
+page-account-setting {
+  .content {
+    background: #f5f5f5 !important;
+  }
+
+  .account-setting-form {
+
+    margin: 10px;
+    padding: 4px 16px;
+    background: #fff;
+
+    .list {
+      .list-header {
+        border: none;
+        min-height: initial;
+
+        .label {
+          color: #000 !important;
+          font-weight: 600;
+          text-transform: capitalize;
+          margin-bottom: 0px;
+        }
+      }
+
+      .item.item-block {
+        margin-top: 10px;
+
+        .item-inner {
+          border: none;
+        }
+
+        .label[stacked] {
+          margin-bottom: 0px;
+          color: var(--secondary_text_color);
+        }
+
+        ion-input {
+          border-bottom: 1px solid #c0c0bd;
+          border-radius: 2px;
+
+          input.text-input {
+            margin-top: 0px !important;
+            margin-bottom: 2px !important;
+            font-size: 1.4rem !important;
+            width: calc(100% - 16px) !important;
+          }
+        }
+
+        ion-select {
+          border-bottom: 1px solid #c0c0bd !important;
+          border-radius: 2px !important;
+          padding: 0px !important;
+          margin-top: 0px !important;
+
+          .select-text,
+          .select-text-placeholder {
+            padding: 0px;
+            font-size: 1.4rem;
+          }
+
+          .select-icon {
+            content: url('./../assets/svgs/arrow-down.svg') !important;
+            margin: 0px;
+            width: 15px !important;
+            height: 20px !important;
+
+            .select-icon-inner {
+              border: 0px !important;
+            }
+          }
+        }
+
+        ion-textarea {
+          border-bottom: 1px solid #c0c0bd;
+          border-radius: 2px;
+          margin-top: 0px;
+
+          textarea.text-input {
+            @include margin(null, null, null, 0px !important);
+            font-size: 1.4rem !important;
+            width: calc(100% - 16px) !important;
+          }
+        }
+
+        &:last-child {
+          border: none !important;
+          box-shadow: none !important;
+        }
+      }
+
+      .item-input-has-focus {
+
+        ion-input,
+        ion-select {
+          border-bottom: 1px solid var(--accent_color) !important;
+        }
+      }
+    }
+  }
+
+  .footer {
+    background: #fff;
+    padding: 8px;
+  }
+}

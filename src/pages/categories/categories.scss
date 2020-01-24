@@ -1,0 +1,15 @@
+page-categories {
+  .loader_outer {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .thumb{
+    img{
+     max-width:36px;
+    }
+  }
+  .treeview .node-wrapper {
+    padding: 10px 10px 0px;
+  } 
+}

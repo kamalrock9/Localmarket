@@ -1,0 +1,96 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{'FILTER' | translate}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only type="button" (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div class="tab_btn">
+    <ul no-padding no-margin>
+      <ng-container *ngFor="let item of items;let i=index">
+        <li *ngIf="i==0" class="tabs" tappable (click)="toggleClass(item)" [ngClass]="{'active': item.active}">
+          {{ item.name}}
+        </li>
+        <li *ngIf="i==1 || i==2" class="tabs" tappable (click)="toggleClass(item)" [ngClass]="{'active': item.active}">
+          {{ item.name }} <span *ngIf="this.items[i].id && this.items[i].id!=''">&#9679;</span>
+        </li>
+        <li *ngIf="i>2 && item.options.length>0 " class="tabs tab_1" tappable (click)="toggleClass(item)" [ngClass]="{'active': item.active}">
+          {{ item.name +count(item)}}
+        </li>
+
+      </ng-container>
+
+    </ul>
+  </div>
+
+  <div class="tab_content">
+    <ng-container *ngFor="let item of items;let i=index">
+      <div class="tab_content_div" *ngIf="i==0;" [ngClass]="item.active ? 'active' : 'disable'" padding>
+        <form [formGroup]="priceForm" novalidate>
+          <ion-item no-padding no-lines>
+            <ion-label stacked>{{"MIN_PRICE" | translate}}</ion-label>
+            <ion-input formControlName="min_price" [dir]="dir"></ion-input>
+          </ion-item>
+          <ion-item no-padding no-lines>
+            <ion-label stacked>{{"MAX_PRICE" | translate}}</ion-label>
+            <ion-input formControlName="max_price" [dir]="dir"></ion-input>
+          </ion-item>
+        </form>
+        <!-- <ion-range min="20" max="80" [(ngModel)]="test">
+          <ion-icon small range-left name="sunny"></ion-icon>
+          <ion-icon range-right name="sunny"></ion-icon>
+        </ion-range> -->
+      </div>
+
+      <div class="tab_content_div" *ngIf="i==1" [ngClass]="item.active ? 'active' : 'disable'" padding>
+        <ion-list no-lines radio-group [(ngModel)]="item.id" (ionChange)="setName()">
+          <ion-item no-padding *ngFor="let cat of categories">
+            <ion-label><span [innerHTML]="cat.name"></span> </ion-label>
+            <ion-radio [value]="cat.id"></ion-radio>
+          </ion-item>
+        </ion-list>
+      </div>
+      <div class="tab_content_div" *ngIf="i==2" [ngClass]="item.active ? 'active' : 'disable'" padding>
+        <ion-list no-lines radio-group [(ngModel)]="item.id" (ionChange)="setName()">
+          <ion-item no-padding *ngFor="let b of brands">
+            <ion-label><span [innerHTML]="b.name"></span></ion-label>
+            <ion-radio [value]="b.id"></ion-radio>
+          </ion-item>
+        </ion-list>
+      </div>
+
+      <div class="tab_content_div" *ngIf="i > 2 && item.options.length>0" [ngClass]="item.active ? 'active' : 'disable'"
+        padding>
+        <ion-list no-lines>
+          <ion-item no-padding *ngFor="let option of item.options">
+            <ion-label text-capitalize><span [innerHTML]="option.name"></span></ion-label>
+            <ion-checkbox [(ngModel)]="option.checked"></ion-checkbox>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ng-container>
+  </div>
+
+</ion-content>
+<ion-footer>
+  <ion-row>
+    <ion-col col-4>
+      <button ion-button block default clear tappable class="accent" tappable (click)="reset()">
+        {{'RESET_ALL'|translate}}
+      </button>
+    </ion-col>
+    <ion-col col-8>
+      <button ion-button block default class="accent-background" tappable (click)="submit()">
+        {{'SHOW_RESULTS'|translate}}
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

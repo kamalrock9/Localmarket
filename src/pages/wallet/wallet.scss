@@ -1,0 +1,63 @@
+page-wallet {
+  .no-transaction {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+  }
+
+  .header::after {
+    display: none;
+  }
+
+  .item-inner {
+    border-bottom: none!important;
+  }
+
+  .loader_outer {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .wallet-transaction {
+    @include padding(null,16px,null,16px);
+    .item {
+      box-shadow: 0px 0px 2px 1px #eee;
+      margin-bottom: 10px;
+      padding:0 6px;
+
+      &:first-child {
+        margin-top: 10px;
+      }
+
+      .item-inner {
+        align-items: flex-start;
+    @include padding(null,0px,null,null);
+
+
+        .label {
+          overflow: visible;
+          white-space: normal;
+          text-overflow: initial;
+
+          div {
+            &:nth-of-type(1) {
+              margin-bottom: 10px;
+            }
+          }
+        }
+
+        .credit {
+          color: green;
+        }
+
+        .debit {
+          color: red;
+        }
+      }
+    }
+  }
+}

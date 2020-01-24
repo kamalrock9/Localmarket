@@ -1,0 +1,22 @@
+<ion-header>
+
+   <ion-navbar>
+    <ion-title>{{'LANGUAGE' | translate }} {{'SETTING' | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="submit()" [formGroup]="form" novalidate>
+    <ion-list radio-group formControlName="language">
+      <ion-item mode="ios" *ngFor="let x of languages">
+        <ion-label>{{x.name}}</ion-label>
+        <ion-radio mode="ios" [value]="x.id" required></ion-radio>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>
+<ion-footer>
+  <form (ngSubmit)="submit()" [formGroup]="form" novalidate>
+    <button ion-button block [disabled]="!form.valid" class="accent-background">{{ 'SAVE' | translate}}</button>
+  </form>
+</ion-footer>

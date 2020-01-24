@@ -1,0 +1,37 @@
+
+<ion-content>
+    <ion-navbar>
+        <ion-buttons left>
+          <button ion-button icon-only>
+            <ion-icon name="checkmark"></ion-icon>
+          </button>
+        </ion-buttons>
+        <ion-title>{{"ADDED_TO_CART" | translate}}</ion-title>
+        <ion-buttons right>
+          <button ion-button icon-only tappable (click)="dismiss()">
+            <ion-icon name="close"></ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-navbar>
+
+  <div class="msg" [innerHTML]="msg" ></div>
+</ion-content>
+
+<ion-footer>
+  <ion-row>
+    <ion-col col-6>
+      <button ion-button full clear class="accent" icon-end (click)="dismiss('back')">
+        {{'CONTINUE_BROWSING' | translate }}
+      </button>
+    </ion-col>
+    <ion-col col-6>
+      <button ion-button full clear class="accent" icon-end (click)="dismiss('root')">
+        {{'GO_TO_HOME' | translate }}
+      </button>
+    </ion-col>
+  </ion-row>
+  <button ion-button full class="accent-background" icon-end tappable (click)="dismiss('cart')">
+    {{('GO_TO_CART' | translate )}} ({{settings.cartCount}}) &nbsp;
+    <ion-icon name="ios-arrow-round-forward"></ion-icon>
+  </button>
+</ion-footer>

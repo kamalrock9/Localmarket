@@ -1,0 +1,339 @@
+page-guest-checkout {
+    .loader_outer {
+        height: 90vh;
+        display: flex;
+        align-items: center;
+    }
+
+    .multi-steps-contents {
+        background: #f5f5f5;
+
+        .billing,
+        .shipping {
+            .list {
+                margin: 10px;
+                background: #fff;
+
+                .item.item-block {
+                    margin-top: 10px;
+
+                    .item-inner {
+                        border: none;
+                    }
+
+                    .label[stacked] {
+                        margin-bottom: 0px;
+                        color: var(--secondary_text_color);
+                    }
+
+                    ion-input {
+                        border-bottom: 1px solid #c0c0bd;
+                        border-radius: 2px;
+
+                        input.text-input {
+                            margin-top: 0px !important;
+                            margin-bottom: 2px !important;
+                            font-size: 1.4rem !important;
+                            width: calc(100% - 16px) !important;
+                        }
+                    }
+
+                    ion-select {
+                        border-bottom: 1px solid #c0c0bd !important;
+                        border-radius: 2px !important;
+                        padding: 0px !important;
+                        margin-top: 0px !important;
+
+                        .select-text,
+                        .select-text-placeholder {
+                            padding: 0px;
+                            font-size: 1.4rem;
+                        }
+
+                        .select-icon {
+                            content: url('./../assets/svgs/arrow-down.svg') !important;
+                            margin: 0px;
+                            width: 15px !important;
+                            height: 20px !important;
+
+                            .select-icon-inner {
+                                border: 0px !important;
+                            }
+                        }
+                    }
+
+                    ion-textarea {
+                        border-bottom: 1px solid #c0c0bd;
+                        border-radius: 2px;
+                        margin-top: 0px;
+
+                        textarea.text-input {
+                            @include margin(null, null, null, 0px !important);
+                            font-size: 1.4rem !important;
+                            width: calc(100% - 16px) !important;
+                        }
+                    }
+
+
+
+                    &:last-child {
+                        border-bottom-color: transparent;
+                        box-shadow: none;
+                    }
+                }
+
+                .item-input-has-focus {
+
+                    ion-input,
+                    ion-select {
+                        border-bottom: 1px solid var(--accent_color) !important;
+                    }
+                }
+            }
+        }
+
+        .review {
+            .order-details {
+                margin: 10px;
+                padding: 16px;
+                background: #fff;
+                border-bottom: 1px solid #d3d3d370;
+                border-top: 1px solid #d3d3d370;
+
+                .applied_coupons {
+                    display: flex;
+
+                    p {
+                        display: flex;
+                        align-items: center;
+                        @include margin(0px, 7px, 0px, 0px);
+                        background: #f6f6f6c2;
+                        @include padding(0, 0, 0, 7px);
+
+
+                        span:nth-of-type(1) {
+                            color: #00CC00;
+                            @include margin(null, 6px, null, null);
+                        }
+                    }
+                }
+
+                .list {
+                    .list-header {
+                        border: none;
+                        padding-bottom: 0px;
+                        @include padding(null, null, null, 0px);
+                        margin-bottom: 5px;
+
+                        .label {
+                            color: #000 !important;
+                            font-weight: 600;
+                            text-transform: capitalize;
+                        }
+                    }
+
+                    .item {
+                        min-height: initial;
+
+                        img {
+                            @include margin(0px !important, nullnull, null);
+                            @include margin(null, 10px !important, null, null);
+                            @include margin(null, null, 0px !important, null);
+                            @include margin(null, null, null, 0px !important);
+                        }
+
+                        .item-inner {
+                            border-bottom: none;
+
+                            .input-wrapper {
+                                .label {
+                                    margin: 0px;
+                                    color: #757575;
+                                    // font-weight: 600;
+                                }
+
+                                .icon {
+                                    margin: 0 !important;
+                                    min-height: 2rem !important;
+                                    font-size: 2rem !important;
+                                }
+                            }
+
+                            span[item-end],
+                            button[item-end],
+                            div[item-end] {
+                                @include margin(0px, 0px, 5px, 0px);
+                            }
+
+                            .radio {
+                                @include margin(0px !important, null, null, null);
+                                @include margin(null, 0px !important, null, null);
+                                @include margin(null, null, 5px !important, null);
+                                @include margin(null, null, null, 5px !important);
+
+                            }
+                        }
+                    }
+
+                    .ord_total.item .item-inner {
+                        border-top: 1px solid #ddd;
+                        padding-top: 5px;
+                        padding-bottom: 5px;
+                        font-weight: 700;
+                        color: #000 !important;
+                    }
+
+                    .ord_total.item .item-inner {
+                        border-top: 1px solid #ddd;
+                        padding-top: 6px;
+                        font-weight: 700;
+                        color: #000 !important;
+                        margin-top: 5px;
+
+                        [item-end] {
+                            margin-bottom: 0;
+                        }
+                    }
+
+                    .button {
+                        padding: 5px 0 0 0;
+                    }
+                }
+            }
+
+            .payment_method {
+                .list {
+                    .item {
+                        margin-bottom: 4px;
+                        border: 1px solid #ccc !important;
+                        background: #f5f5f5;
+                        padding: 7px 2px;
+                        border-radius: 3px;
+
+                        .label {
+                            color: #000;
+                        }
+
+                        .item-inner {
+                            .radio {
+                                margin: 0px !important;
+                            }
+                        }
+                    }
+
+                    .list-header.item {
+                        background: none;
+                        border: none !important;
+                        border-color: transparent;
+                    }
+
+                }
+            }
+        }
+    }
+
+
+
+    %remain-steps {
+        &:before {
+            content: counter(stepNum);
+            font-family: inherit;
+            font-weight: 700;
+        }
+
+        &:after {
+            background-color: #ededed;
+        }
+    }
+
+    .multi-steps {
+        display: table;
+        table-layout: fixed;
+        width: 100%;
+        padding: 0;
+        font-size: 1.1rem;
+        margin-bottom: 0;
+
+        >li {
+            counter-increment: stepNum;
+            text-align: center;
+            display: table-cell;
+            position: relative;
+            color: green;
+
+            &:before {
+                content: '\f00c';
+                content: '\2713;';
+                content: '\10003';
+                content: '\10004';
+                content: '\2713';
+                display: block;
+                margin: 0 auto 4px;
+                background-color: green;
+                color: #fff;
+                width: 16px;
+                height: 16px;
+                line-height: 18px;
+                text-align: center;
+                font-weight: bold;
+
+                border: {
+                    width: 1px;
+                    style: solid;
+                    color: green;
+                    radius: 50%;
+                }
+            }
+
+            &:after {
+                content: '';
+                height: 2px;
+                width: 100%;
+                background-color: green;
+                position: absolute;
+                @include position(8px, null, null,50%);
+                z-index: -1;
+            }
+
+            &:last-child {
+                &:after {
+                    display: none;
+                }
+            }
+
+            &.is-active {
+                @extend %remain-steps;
+
+                &:before {
+                    background-color: green;
+                    border-color: green;
+                    color: #fff;
+                }
+
+
+                ~li {
+                    color: #808080;
+                    @extend %remain-steps;
+
+                    &:before {
+                        background-color: #ededed;
+                        border-color: #ededed;
+                    }
+                }
+            }
+        }
+    }
+
+    .footer {
+        background: #fff;
+        padding: 8px;
+
+        .col {
+            padding: 0px;
+
+            .button {
+                margin: 0px;
+            }
+        }
+    }
+}

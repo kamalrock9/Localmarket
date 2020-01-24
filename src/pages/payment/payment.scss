@@ -1,0 +1,107 @@
+page-payment {
+  .content {
+    background: #f5f5f5 !important;
+  }
+
+  .order-details {
+    @include padding(0px, 10px, 10px, 0px);
+    margin: 0px;
+    background: #f5f5f5;
+    border-bottom: 1px solid #d3d3d370;
+    border-top: 1px solid #d3d3d370;
+
+    .list {
+      .list-header {
+        border: none;
+        background: #fff;
+        padding: 10px !important;
+
+        .label {
+          color: #000 !important;
+          font-weight: 700;
+          text-transform: uppercase;
+          font-size: 1.5rem;
+          border-bottom: 1px solid #eee;
+          padding-bottom: 10px;
+
+          div {
+            font-weight: 800;
+          }
+        }
+      }
+
+      .item {
+        min-height: initial;
+        span[item-start] {
+          margin: 0px;
+        }
+
+        img {
+          @include margin(0px !important, null, null, null);
+          @include margin(null, 10px !important, null, null);
+          @include margin(null, null, 0px !important, null);
+          @include margin(null, null, null, 0px !important);
+        }
+
+        .item-inner {
+          border-bottom: none;
+
+          .input-wrapper {
+            .label {
+              margin: 0px;
+              color: #757575;
+              // font-weight: 600;
+            }
+
+            .icon {
+              margin: 0 !important;
+              min-height: 2rem !important;
+              font-size: 2rem !important;
+            }
+          }
+
+          span[item-end],
+          button[item-end],
+          div[item-end] {
+            @include margin(0px, 0px, 5px, 0px);
+          }
+
+          .radio {
+            @include margin(0px !important, null, null, null);
+            @include margin(null, 0px !important, null, null);
+            @include margin(null, null, 5px !important, null);
+            @include margin(null, null, null, 5px !important);
+
+          }
+        }
+
+      }
+
+      .ord_total.item .item-inner {
+        border-top: 1px solid #ddd;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        font-weight: 700;
+        color: #000 !important;
+      }
+
+      .button {
+        @include padding(5px, 0px, 0px, 0px);
+
+      }
+
+      &:nth-of-type(1) {
+        margin-bottom: 0px !important;
+      }
+
+      &:nth-of-type(2) {
+        margin-bottom: 35px;
+      }
+    }
+  }
+
+  .footer {
+    background: #fff;
+    padding: 8px;
+  }
+}

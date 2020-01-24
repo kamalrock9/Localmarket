@@ -1,0 +1,123 @@
+page-filter {
+
+  .tab_btn {
+    width: 35%;
+    height: 100%;
+    @include float(start);
+    background: #ECEEF5;
+    overflow-y: auto;
+    margin-top: 4.5px;
+
+    ul {
+      //margin-top:6px;
+
+      .tabs {
+        list-style: none;
+        width: 100%;
+        padding: 15px;
+        font-size: 15px;
+        font-weight: 500;
+  @include text-align('start');
+        text-transform: capitalize;
+        margin-bottom: 1px;
+        cursor: pointer;
+        outline: none;
+      }
+
+      .active {
+        background: #fff;
+      }
+    }
+
+    .tab_btn_inner {
+      height: auto;
+    }
+  }
+
+  .tab_content {
+    background: #fff;
+    width: calc(100% - 35%);
+    height: 100%;
+    @include float(end);
+    //overflow-y: scroll;
+
+    .item {
+      .checkbox {
+        @include margin(null,15px,null,null);
+        .checkbox-icon.checkbox-checked {
+          border-color: var(--primary_color);
+          background-color: var(--primary_color);
+        }
+      }
+
+      .radio {
+        .radio-checked {
+          border-color: var(--primary_color);
+
+          .radio-inner {
+            background-color: var(--primary_color);
+
+          }
+        }
+      }
+    }
+
+    .item-radio-checked.item .label {
+      color: var(--primary_color);
+      font-weight: 600;
+    }
+
+    .item.item-radio {
+      .item-inner {
+        flex-direction: row-reverse;
+      }
+    }
+
+    .active {
+      display: block;
+    }
+
+    .disable {
+      display: none;
+    }
+  }
+
+  .tab_content_div {
+
+    &:not(:first-child) {
+      overflow-y: auto;
+      height: 100%;
+    }
+  }
+
+  ion-input {
+    border: 1px solid #e2e1e1;
+    border-radius: 2px;
+    margin-top: 8px;
+  }
+
+  input.text-input {
+    @include margin(0px,0px,0px, null);
+    @include margin(null,null,null, 8px !important);
+    font-size: 1.4rem !important;
+    width: calc(100% - 16px) !important;
+  }
+
+  ::placeholder {
+    font-size: 1.3rem;
+  }
+
+  .footer {
+    background: #fff;
+    padding: 8px;
+
+    .col {
+      padding: 0px;
+
+      .button {
+        margin: 0px;
+      }
+    }
+  }
+
+}
