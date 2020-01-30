@@ -247,7 +247,7 @@ export class PaymentPage {
         name: this.orderDetails.billing.first_name + ' ' + this.orderDetails.billing.last_name
       },
       theme: {
-        color: this.settings.all.appSettings.primary_color
+        color: this.settings.all.appSettings.accent_color
       },
       modal: {
         ondismiss: function () {

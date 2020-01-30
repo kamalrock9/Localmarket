@@ -4,19 +4,19 @@ var fs = require('fs');
 var path = require('path');
 
 var filestocopy = [{
-    "resources/android/icon/drawable-hdpi-icon.png":
+    "resources/notif_icon/drawable-hdpi-icon.png":
         "platforms/android/app/src/main/res/drawable-hdpi/ic_stat_onesignal_default.png"
 }, {
-    "resources/android/icon/drawable-mdpi-icon.png":
+    "resources/notif_icon/drawable-mdpi-icon.png":
         "platforms/android/app/src/main/res/drawable-mdpi/ic_stat_onesignal_default.png"
 }, {
-    "resources/android/icon/drawable-xhdpi-icon.png":
+    "resources/notif_icon/drawable-xhdpi-icon.png":
         "platforms/android/app/src/main/res/drawable-xhdpi/ic_stat_onesignal_default.png"
 }, {
-    "resources/android/icon/drawable-xxhdpi-icon.png":
+    "resources/notif_icon/drawable-xxhdpi-icon.png":
         "platforms/android/app/src/main/res/drawable-xxhdpi/ic_stat_onesignal_default.png"
 }, {
-    "resources/android/icon/drawable-xxxhdpi-icon.png":
+    "resources/notif_icon/drawable-xxxhdpi-icon.png":
         "platforms/android/app/src/main/res/drawable-xxxhdpi/ic_stat_onesignal_default.png"
 } ];
 
