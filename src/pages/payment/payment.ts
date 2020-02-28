@@ -202,7 +202,7 @@ export class PaymentPage {
   }
   paytmCheckout() {
     let txnRequest = {
-      "MID": "rzp_live_uypJsy0kt3YvC7",                  // PayTM Credentials
+      "MID": "Sobhaa37519274706529",                  // PayTM Credentials
       "ORDER_ID": this.orderDetails.id,      //Should be unique for every order.
       "CUST_ID": this.orderDetails.customer_id,
       "INDUSTRY_TYPE_ID": "Retail109",       // PayTM Credentials
@@ -238,7 +238,7 @@ export class PaymentPage {
       description: 'Order  ' + this.orderDetails.id,
       image: '',
       currency: this.orderDetails.currency,
-      key: 'rzp_live_Mw6y1rFt9AqPGr',
+      key: 'rzp_live_uypJsy0kt3YvC7',
       amount: parseFloat(this.orderDetails.total) * 100,
       name: App.store,
       prefill: {
