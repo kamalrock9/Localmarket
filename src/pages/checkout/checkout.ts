@@ -174,6 +174,9 @@ export class CheckoutPage {
         this.toast.show(x.FILL_REQUIRED_FIELD);
       });
       return;
+    } else if (this.formBilling.value.phone.length < 10) {
+      this.toast.show("Phone number cannot be less than 10 digits");
+      return;
     }
     console.log("billing");
     let data: any = {};

@@ -46,6 +46,7 @@
     "angular-tree-component": "^7.2.1",
     "com-sarriaroman-photoviewer": "^1.2.4",
     "com.razorpay.cordova": "^1.4.8",
+    "cordova-android": "8.1.0",
     "cordova-ios": "5.1.1",
     "cordova-plugin-advanced-http": "^2.4.0",
     "cordova-plugin-android-permissions": "^1.0.2",
@@ -147,7 +148,8 @@
       }
     },
     "platforms": [
-      "ios"
+      "ios",
+      "android"
     ]
   }
 }
