@@ -61,6 +61,7 @@
     "cordova-plugin-google-analytics": "^1.8.6",
     "cordova-plugin-googleplus": "^8.2.1",
     "cordova-plugin-inappbrowser": "^3.2.0",
+    "cordova-plugin-ionic-webview": "^1.1.19",
     "cordova-plugin-nativestorage": "^2.3.2",
     "cordova-plugin-paytm": "0.0.10",
     "cordova-plugin-x-socialsharing": "^5.6.3",
@@ -145,11 +146,12 @@
         "MERCHANT_ID": "Sobhaa37519274706529",
         "INDUSTRY_TYPE_ID": "Retail109",
         "WEBSITE": "WEBPROD"
-      }
+      },
+      "cordova-plugin-ionic-webview": {}
     },
     "platforms": [
-      "ios",
-      "android"
+      "android",
+      "ios"
     ]
   }
 }
