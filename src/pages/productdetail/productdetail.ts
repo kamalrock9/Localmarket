@@ -1,3 +1,4 @@
+import { AdMobFree } from '@ionic-native/admob-free';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { TranslateService } from '@ngx-translate/core';
@@ -18,10 +19,13 @@ import { NgZone } from '@angular/core';
 export class ProductdetailPage {
   @ViewChild('slider') slider: Slides;
   product: any;
+  isSetVariation: boolean = false;
+  attr: any = {};
   postcode: string;
   postcodeEnter: boolean = true;
   newPostCode: string;
   deliveryDetails: any = {};
+  Attributes: Array<any> = [];
   initial_img_src: string;
   pattern: any = /\[.+\]/g;
   dir: string;
@@ -31,65 +35,16 @@ export class ProductdetailPage {
     private restClient: RestProvider, private translate: TranslateService, private platform: Platform,
     private alertCtrl: AlertController, private socialSharing: SocialSharing, private events: Events,
     private iab: InAppBrowser, public settings: SettingsProvider, private zone: NgZone, private modalCtrl: ModalController,
-    private photoViewer: PhotoViewer) {
+    private photoViewer: PhotoViewer, private admob: AdMobFree) {
 
     this.dir = platform.dir();
-    //this.product = JSON.parse(JSON.stringify(this.navParams.get('params')));
-    // this.product = this.navParams.get('params'); 
-    this.events.subscribe('Loaded Product', () => {
-      this.setupProduct();
-    });
-    console.log(this.navParams.data.params);
-    if (this.navParams.data.params && this.navParams.data.params.isReferedByPush) {
-      console.log("Push");
-      this.WC.getProductById(null, this.navParams.data.params.id).subscribe((res) => {
-        if (res) {
-          console.log(res);
-          this.product = res;
-          this.events.publish('Loaded Product');
-        } else {
-          this.toast.show("Something wrong from server");
-          this.navCtrl.pop();
-        }
-      }, err => {
-        this.toast.showError();
-        this.navCtrl.pop();
-      });
-    } else if (this.navParams.data.params && this.navParams.data.params.isReferedByDeeplinks) {
-      console.log("Deeplinks");
-      this.loader.show();
-      this.WC.getProductByUrl(this.navParams.data.params.link).subscribe((res) => {
-        if (res) {
-          this.product = res;
-          this.events.publish('Loaded Product');
-        } else {
-          this.toast.showError();
-          this.navCtrl.pop();
-        }
-      }, err => {
-        this.toast.showError();
-        this.navCtrl.pop();
-      });
-    } else {
-      console.log("default");
-      this.product = this.navParams.data.params;
-      this.events.publish('Loaded Product');
-    }
+    this.product = JSON.parse(JSON.stringify(this.navParams.get('params')));
 
-  }
-  setupProduct() {
-    if (!this.product.var_attributes) {
-      this.product.var_attributes = [];
-      for (let at of this.product.attributes) {
-        if (at.variation) {
-          this.product.var_attributes.push(at);
-        }
+    for (let at of this.product.attributes) {
+      if (at.variation) {
+        this.Attributes.push(at);
       }
     }
-    if (!this.product.attr) {
-      this.product.attr = {};
-    }
-
     this.postcode = this.settings.postcode;
     if (this.postcode && this.settings.all.appSettings.pincode_active) {
       this.submitPincodeCheck(this.postcode);
@@ -98,14 +53,14 @@ export class ProductdetailPage {
       this.product.quantity = 1;
     }
     if (this.product.related_ids.length > 0 && !this.product.related) {
-      this.WC.getProductById(this.product.related_ids.join()).subscribe((x) => {
+      WC.getProductById(this.product.related_ids.join()).subscribe((x) => {
         this.zone.run(() => {
           this.product.related = x;
         });
       });
     }
     if (this.product.upsell_ids.length > 0 && !this.product.upsell) {
-      this.WC.getProductById(this.product.upsell_ids.join()).subscribe((x) => {
+      WC.getProductById(this.product.upsell_ids.join()).subscribe((x) => {
         this.zone.run(() => {
           this.product.upsell = x;
         });
@@ -113,7 +68,7 @@ export class ProductdetailPage {
     }
     if (this.product.grouped_products.length > 0 && !this.product.grouped_products[0].name) {
       console.log(this.product.grouped_products);
-      this.WC.getProductById(this.product.grouped_products.join()).subscribe((x: any) => {
+      WC.getProductById(this.product.grouped_products.join()).subscribe((x: any) => {
         x.map((element) => {
           element.quantity = 0;
         });
@@ -125,16 +80,32 @@ export class ProductdetailPage {
     if (this.initial_img_src) {
       this.product.images[0].src = this.initial_img_src;
     }
+
     console.log(this.product);
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad: ProductdetailPage');
   }
   ionViewDidEnter() {
-    if (this.product) {
-      this.events.publish('view:enter', 'Single Product Page - ' + this.product.name);
-    } else {
-      this.events.publish('view:enter', 'Single Product Page - ');
+    this.events.publish('view:enter', 'Single Product Page - ' + this.product.name);
+    if (this.platform.is('cordova')) {
+      this.admob.banner.config({
+        id: 'ca-app-pub-2336008794991646/9868442895',
+        isTesting: false,
+        autoShow: true,
+        size: 'SMART_BANNER'
+      });
+      this.admob.banner.prepare()
+        .then(() => {
+          // banner Ad is ready
+          // if we set autoShow to false, then we will need to call the show method here
+        });
+    }
+  }
+  ionViewDidLeave() {
+    console.log('ionViewDidLoad: ProductdetailPage');
+    if (this.platform.is('cordova')) {
+      this.admob.banner.remove();
     }
   }
 
@@ -147,14 +118,14 @@ export class ProductdetailPage {
       if (!res.error) {
         this.setVariation(res);
       } else {
-        this.product.issetVariation = false;
+        this.isSetVariation = false;
         this.toast.showWithClose("Currently This variation is not available. Select a different Variation");
       }
     }, (err) => {
       console.log(err);
       this.toast.showError();
       this.loader.dismiss();
-      this.product.issetVariation = false;
+      this.isSetVariation = false;
     });
 
   }
@@ -171,7 +142,7 @@ export class ProductdetailPage {
     this.product.in_stock = x.in_stock;
     this.product.variation_selected = x;
     this.product.quantity = 1;
-    this.product.issetVariation = true;
+    this.isSetVariation = true;
   }
 
   setFav(product: any) {
@@ -216,7 +187,7 @@ export class ProductdetailPage {
         this.product.grouped_products[i].quantity++;
         console.log(this.product.grouped_products[i].quantity);
       } else if (this.product.type == 'variable') {
-        if (this.product.issetVariation) {
+        if (this.isSetVariation) {
           if (this.product.variation_selected.manage_stock == 'parent') {
             if (this.product.manage_stock) {
               if (this.product.quantity < this.product.stock_quantity) {
@@ -256,10 +227,10 @@ export class ProductdetailPage {
     });
   }
   onChange() {
-    if (Object.keys(this.product.attr).length == this.product.var_attributes.length) {
+    if (Object.keys(this.attr).length == this.Attributes.length) {
       let data = {
         product_id: this.product.id,
-        attributes: this.product.attr
+        attributes: this.attr
       }
       console.log(data);
       this.loadVariation(data);
@@ -304,9 +275,9 @@ export class ProductdetailPage {
         data.quantity = this.product.quantity;
       } else {
         data.quantity = this.product.quantity;
-        if (this.product.issetVariation) {
+        if (this.isSetVariation) {
           data.variation_id = this.product.variation_id;
-          data.variation = this.product.attr;
+          data.variation = this.attr;
           //let temp = this.product.variation_selected.permalink.substring(this.product.variation_selected.permalink.lastIndexOf("?") + 1).split('&');
         } else {
           this.toast.show(x.VALID_VARIATION);
@@ -359,7 +330,7 @@ export class ProductdetailPage {
       this.socialSharing.share(product.name, product.name, img, product.permalink).then((x) => {
         console.log(x);
         this.translate.get(['SHARED']).subscribe(x => {
-          this.toast.show('Successfully shared');
+          // this.toast.show('Successfully shared');
         });
       }).catch((err) => {
         console.log(err);

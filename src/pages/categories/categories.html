@@ -6,10 +6,10 @@
         <button mode="md" ion-button clear icon-only (click)="showSearch()">
             <ion-icon name="md-search"></ion-icon>
           </button> 
-      <!-- <button mode="md" ion-button icon-only (click)="goTo('WishlistPage')">
+      <button mode="md" ion-button icon-only (click)="goTo('WishlistPage')">
         <ion-badge *ngIf="wishlist.total && wishlist.total > 0">{{wishlist.total}}</ion-badge>
         <ion-icon name="md-heart"></ion-icon>
-      </button> -->
+      </button>
       <button mode="md" ion-button clear icon-only (click)="goTo('CartPage')">
         <ion-badge *ngIf="settings.all && settings.cartCount > 0">{{settings.cartCount}}</ion-badge>
         <ion-icon name="md-cart"></ion-icon>
@@ -26,9 +26,9 @@
   <ion-list class="m-n" *ngIf="!nodes">
     <ion-item no-lines *ngFor="let i of [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]">
       <ion-avatar item-start>
-        <skeleton-item height="36px" width="36px"></skeleton-item>
+        <skeleton-item no-animated  height="36px" width="36px"></skeleton-item>
       </ion-avatar>
-      <skeleton-item width="67%"></skeleton-item>
+      <skeleton-item no-animated  width="67%"></skeleton-item>
     </ion-item>
   </ion-list>
 

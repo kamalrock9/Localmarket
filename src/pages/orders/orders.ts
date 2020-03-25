@@ -1,6 +1,7 @@
+import { AdMobFree } from '@ionic-native/admob-free';
 import { WooCommerceProvider, UserProvider, SettingsProvider, ToastProvider } from './../../providers/providers';
 import { Component, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, Platform } from 'ionic-angular';
 
 
 @IonicPage({
@@ -17,7 +18,8 @@ export class OrdersPage {
   hasMore: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private WC: WooCommerceProvider,private modalCtrl:ModalController,
-    private toast: ToastProvider, public user: UserProvider, public settings: SettingsProvider, private zone: NgZone) {
+    private toast: ToastProvider, public user: UserProvider, public settings: SettingsProvider, private zone: NgZone,
+    private platform:Platform,private admob:AdMobFree) {
 
     this.getOrders();
   }
@@ -25,7 +27,23 @@ export class OrdersPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad OrdersPage');
   }
-  
+  ionViewDidEnter() {
+    if (this.platform.is('cordova')) {
+      this.admob.banner.config({
+        id: 'ca-app-pub-2336008794991646/9868442895',
+        isTesting: false,
+        autoShow: true,
+        size: 'SMART_BANNER'
+      });
+      this.admob.banner.prepare();
+    }
+  }
+  ionViewDidLeave() {
+    console.log('ionViewDidLoad: ProductdetailPage');
+    if (this.platform.is('cordova')) {
+      this.admob.banner.remove();
+    }
+  }
   getOrders() {
     if (this.user.all) {
       this.WC.getOrders(this.user.id, this.page, this.per_page).then(data => {

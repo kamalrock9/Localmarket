@@ -9,12 +9,15 @@
 
 <ion-content padding>
 
-  <ion-item text-wrap text-center *ngIf="orderDetails && (orderDetails.status=='processing' || orderDetails.status=='on-hold')">
+  <ion-item text-wrap text-center *ngIf="(orderDetails && (orderDetails.status=='processing' || orderDetails.status=='on-hold'));">
     <h2>{{'ORDER_CREATED_THANKYOU_MESSAGE' | translate}}</h2>
   </ion-item>
-  <ion-item text-wrap text-center *ngIf="orderDetails && orderDetails.status==='failed'">
+
+  <ion-item text-center *ngIf="(orderDetails && orderDetails.status=='failed')">
     <h2>{{'ORDER_FAILED' | translate}}</h2>
   </ion-item>
+
+
 
   <div class="order-detail>s">
     <ion-list *ngIf="orderDetails">

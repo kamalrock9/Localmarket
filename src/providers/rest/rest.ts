@@ -28,7 +28,8 @@ export class RestProvider {
         let s = state ? "&state=" + state : "";
         let p = postcode ? "&postcode=" + postcode : "";
         let sm = shipping_method ? "&shipping_method=" + shipping_method : "";
-        return this.ahttp.get(this.url + "/cart" + c + s + p + sm, {}, {});
+        let uid = this.user.id ? "&user_id=" + this.user.id : "";
+        return this.ahttp.get(this.url + "/cart" + c + s + p + sm + uid, {}, {});
     }
     removeCartItem(pakage, cart_item_key: string) {
         let country = pakage.country;
@@ -50,7 +51,8 @@ export class RestProvider {
         let s = state ? "&state=" + state : "";
         let p = postcode ? "&postcode=" + postcode : "";
         let cc = coupon_code ? "&coupon_code=" + coupon_code : "";
-        return this.ahttp.get(this.url + "/cart/coupon" + c + s + p + cc, {}, {});
+        let uid = this.user.id ? "&user_id=" + this.user.id : "";
+        return this.ahttp.get(this.url + "/cart/coupon" + c + s + p + cc + uid, {}, {});
     }
     removeCoupon(pakage, coupon_code: string) {
         let country = pakage.country;
@@ -126,6 +128,6 @@ export class RestProvider {
         }
         return this.ahttp.post(this.url + "/wallet/add", data, {});
     }
-    
+
 
 } 

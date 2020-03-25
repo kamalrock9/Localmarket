@@ -1,11 +1,10 @@
-import { NotifProvider } from './../../providers/notif/notif';
-import { OneSignal } from '@ionic-native/onesignal';
 import { App } from './../../app/app.config';
 import { Component, ViewChild } from '@angular/core';
 import { NavController, IonicPage, ModalController, Platform, Slides, Content } from 'ionic-angular';
 import { WooCommerceProvider, LoadingProvider, WishlistProvider, ToastProvider, SettingsProvider } from '../../providers/providers';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { PageTrack } from '../../decorator/page-track.decorator';
+import { AdMobFree } from '@ionic-native/admob-free';
 import { Deeplinks } from '@ionic-native/deeplinks';
 
 
@@ -19,7 +18,6 @@ import { Deeplinks } from '@ionic-native/deeplinks';
 })
 export class HomePage {
 	@ViewChild('slider') slides: Slides;
-	@ViewChild(Slides) slidesAll: Slides;
 	@ViewChild(Content) content: Content;
 	dir: string;
 	layout: any;
@@ -27,14 +25,27 @@ export class HomePage {
 
 	constructor(public navCtrl: NavController, private WC: WooCommerceProvider, public loader: LoadingProvider,
 		public wishlist: WishlistProvider, public modalCtrl: ModalController, public settings: SettingsProvider,
-		toast: ToastProvider, private splash: SplashScreen, public platform: Platform, public deeplinks: Deeplinks,
-		private oneSignal: OneSignal, private notif: NotifProvider) {
+		toast: ToastProvider, private splash: SplashScreen, public platform: Platform, private admob: AdMobFree, public deeplinks: Deeplinks) {
 		this.dir = platform.dir();
 		this.WC.loadSetting();
 
 		this.WC.getHomePageLayout().subscribe(x => {
 			this.layout = x;
 			this.settings.setSettings(x, 'layout');
+			// if (this.platform.is('cordova')) {
+			// 	this.admob.interstitial.config({
+			// 		id: 'ca-app-pub-2336008794991646/2315340216',
+			// 		isTesting: false,
+			// 		autoShow: true,
+			// 		//size: 'SMART_BANNER'
+			// 	});
+			// 	this.admob.interstitial.prepare()
+			// 		.then(() => {
+			// 			// banner Ad is ready
+			// 			// if we set autoShow to false, then we will need to call the show method here
+			// 		});
+			// }
+
 		}, err => {
 			if (this.settings.layout) {
 				this.layout = this.settings.layout;
@@ -43,47 +54,6 @@ export class HomePage {
 			toast.showError();
 		});
 		if (this.platform.is('cordova')) {
-			if (this.settings.all.appSettings.one_signal_app_id &&
-				this.settings.all.appSettings.one_signal_app_id != '' &&
-				this.settings.all.appSettings.google_project_number &&
-				this.settings.all.appSettings.google_project_number != '') {
-
-				this.oneSignal.startInit(this.settings.all.appSettings.one_signal_app_id, this.settings.all.appSettings.google_project_number);
-				this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
-				this.oneSignal.handleNotificationReceived().subscribe((x) => {
-					// do something when notification is received
-					console.log(x);
-					if (x && x.payload) {
-						this.notif.post(x.payload);
-					}
-				});
-				this.oneSignal.handleNotificationOpened().subscribe((x) => {
-					// do something when a notification is opened
-					console.log(x);
-					if (x && x.notification && x.notification.payload) {
-						this.notif.post(x.notification.payload);
-						if (x.notification.payload.additionalData && x.notification.payload.additionalData.product_id) {
-							let params = {
-								id: x.notification.payload.additionalData.product_id,
-								isReferedByPush: true
-							}
-							this.goTo('ProductdetailPage', params);
-
-						} else if (x.notification.payload.additionalData && x.notification.payload.additionalData.category_id) {
-							let params = {
-								id: x.notification.payload.additionalData.category_id
-							}
-							this.goTo('ProductPage', params);
-						} else if (x.notification.payload.additionalData && x.notification.payload.additionalData.brand_id) {
-							let params = {
-								brand_id: x.notification.payload.additionalData.brand_id
-							}
-							this.goTo('ProductPage', params);
-						}
-					}
-				});
-				this.oneSignal.endInit();
-			}
 			this.deeplinks.route({}).subscribe((match) => {
 				// match.$route - the route we matched, which is the matched entry from the arguments to route()
 				// match.$args - the args passed in the link
@@ -91,17 +61,25 @@ export class HomePage {
 				//console.log('Successfully matched route', match);
 			},
 				(nomatch) => {
+					console.log('check deeplink');
 					console.log(nomatch.$link.url);
-					if (nomatch.$link.url && nomatch.$link.url.includes(App.url + '/product/')) {
-						let params = {
-							link: nomatch.$link.url,
-							isReferedByDeeplinks: true
-						}
-						this.goTo('ProductdetailPage', params);
-						console.log("go to product details page");
+					if (nomatch.$link.url && nomatch.$link.url.includes(App.url + '/product/') || nomatch.$link.url && nomatch.$link.url.includes(App.url + '/book/')) {
+						this.loader.show();
+						this.WC.getProductByUrl(nomatch.$link.url).subscribe((res) => {
+							this.loader.dismiss();
+							if (res) {
+								this.goTo('ProductdetailPage', res);
+							}
+						}, err => {
+							this.loader.dismiss();
+						});
+						console.log("go to product page");
 					}
+					// nomatch.$link - the full link data
+					//console.error('Got a deeplink that didn\'t match', nomatch);
 				});
 		}
+
 	}
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad HomePage');
@@ -109,8 +87,8 @@ export class HomePage {
 	}
 	ionViewDidEnter() {
 		if (this.slides !== undefined) {
-			this.slidesAll.resize();
-			this.slidesAll.update();
+			this.slides.resize();
+			this.slides.update();
 			this.slides.autoplayDisableOnInteraction = false;
 			this.slides.startAutoplay();
 		}
@@ -140,21 +118,11 @@ export class HomePage {
 		let index = this.slides._slides[this.slides.clickedIndex].getAttribute('data-swiper-slide-index');
 		console.log(index);
 		if (index) {
-			this.gridClick('ProductPage', this.layout.banner[index])
+			this.goTo('ProductPage', this.layout.banner[index])
 		}
 	}
 	goTo(page, params) {
 		this.navCtrl.push(page, { params: params }, { animate: false });
-	}
-	gridClick(page, data) {
-		let params: any = {};
-		if (data && data.type == 'brand') {
-			params.brand_id = data.id;
-			params.brand_name = data.name;
-		} else {
-			params = data;
-		}
-		this.goTo(page, params)
 	}
 
 }

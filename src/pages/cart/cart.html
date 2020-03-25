@@ -38,7 +38,7 @@
       <img-loader useImg [src]="product.image" item-start style="max-width:90px"></img-loader>
       <div class="product-name-and-delete">
         <h2 [innerHtml]="product.name"></h2>
-        <button ion-button icon-only color="dark" clear tappable (click)="removeCart(product.cart_item_key,i)">
+        <button ion-button icon-only color="dark" class="delete_btn" clear tappable (click)="removeCart(product.cart_item_key,i)">
           <ion-icon name="md-trash"></ion-icon>
         </button>
       </div>
@@ -154,9 +154,7 @@
 
 
 <ion-footer *ngIf="cart.cart_data && cart.cart_data.length>0">
-  <ion-label *ngIf="cart.message" text-center>
-   <span [innerHTML]="cart.message" class="accent"></span>
-  </ion-label>
+
   <button ion-button block default class="accent-background" tappable (click)="checkout()">
     {{'CHECKOUT'|translate}} | &nbsp; <span [innerHtml]="cart.total"></span>
   </button>

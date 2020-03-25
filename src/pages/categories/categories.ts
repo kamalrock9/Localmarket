@@ -1,6 +1,7 @@
+import { AdMobFree } from '@ionic-native/admob-free';
 import { WishlistProvider, WooCommerceProvider, SettingsProvider } from './../../providers/providers';
 import { Component, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, Platform } from 'ionic-angular';
 //import * as _ from 'lodash';
 
 @IonicPage({
@@ -17,7 +18,7 @@ export class CategoriesPage {
   page = 1;
   tmp: Array<any> = [];
   constructor(public navCtrl: NavController, public navParams: NavParams, public settings: SettingsProvider,private modalCtrl:ModalController,
-    private WC: WooCommerceProvider, public wishlist: WishlistProvider, private zone: NgZone) {
+    private WC: WooCommerceProvider, public wishlist: WishlistProvider, private zone: NgZone,private platform:Platform,private admob:AdMobFree) {
 
 
   }
@@ -28,6 +29,7 @@ export class CategoriesPage {
         this.nodes = this.categories;
       });
     } 
+    
       this.WC.getAllCategories().subscribe((res) => {
         this.settings.setSettings(res, "category");
         this.categories = this.convert(res);
@@ -41,6 +43,23 @@ export class CategoriesPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad CategoriesPage');
     this.getAllCategories();
+  }
+  ionViewDidEnter() {
+    if (this.platform.is('cordova')) {
+      this.admob.banner.config({
+        id: 'ca-app-pub-2336008794991646/9868442895',
+        isTesting: false,
+        autoShow: true,
+        size: 'SMART_BANNER'
+      });
+      this.admob.banner.prepare();
+    }
+  }
+  ionViewDidLeave() {
+    console.log('ionViewDidLoad: ProductdetailPage');
+    if (this.platform.is('cordova')) {
+      this.admob.banner.remove();
+    }
   }
 
   convert(dataList) {

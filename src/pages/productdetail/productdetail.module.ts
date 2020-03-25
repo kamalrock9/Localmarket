@@ -1,4 +1,3 @@
-import { ComponentsModule } from './../../components/components.module';
 import { IonicImageLoader } from 'ionic-image-loader';
 import { TranslateModule } from '@ngx-translate/core';
 import { PipesModule } from './../../pipes/pipes.module';
@@ -14,7 +13,6 @@ import { Ionic2RatingModule } from 'ionic2-rating';
   imports: [
     IonicPageModule.forChild(ProductdetailPage),
     TranslateModule.forChild(),
-    ComponentsModule,
     Ionic2RatingModule,
     IonicImageLoader,
     PipesModule

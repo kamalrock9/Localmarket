@@ -23,9 +23,9 @@ export class NotifProvider {
     });
   }
 
-  remove(id: number) {
-    for (let i in this.notif) {
-      if (this.notif[i].notificationID == id) {
+  remove(id: number){
+    for(let i in this.notif){
+      if(this.notif[i].id == id){
         this.notif.splice(i, 1);
         break;
       }
@@ -33,30 +33,25 @@ export class NotifProvider {
     return this.save();
   }
 
-  post(data: any) {
-    //data.id = new Date().getTime();
-    for (let i in this.notif) {
-      if (this.notif[i].notificationID == data.notificationID) {
-        return;
-      }
-    }
+  post(data: any){
+    data.id = new Date().getTime();
     this.notif.push(data);
     return this.save();
   }
 
-  get clear() {
+  get clear(){
     this.notif = [];
     return this.save();
   }
 
-  save() {
+  save(){
     return this.storage.set(this.NOTIF_KEY, this.notif);
   }
 
   get all() {
-    if (this.notif) {
-      return this.notif;
-    } else {
+    if(this.notif){
+    return this.notif;
+    }else{
       return [];
     }
   }

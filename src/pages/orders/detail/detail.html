@@ -39,7 +39,7 @@
       <ion-item no-padding>
         {{"PAYMENT_METHODS" | translate}}
         <span item-end>
-          {{ data.payment_method}}
+          {{data.payment_method_title || data.payment_method}}
         </span>
       </ion-item>
       <ion-item no-padding *ngIf="data.shipping_lines[0]">
@@ -106,7 +106,7 @@
     </ion-list>
   </div>
 </ion-content>
-<ion-footer *ngIf="data.status==='on-hold' || data.status==='pending' || data.status==='processing'">
+<ion-footer *ngIf="data.status==='processing' || data.status==='on-hold' || data.status==='pending'">
   <button ion-button block default class="accent-background" tappable (click)="orderCancel()">
     Cancel Order
   </button>

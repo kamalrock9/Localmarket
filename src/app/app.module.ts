@@ -14,7 +14,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
-import { UserProvider, ToastProvider, SettingsProvider, LoadingProvider, NotifProvider, WooCommerceProvider, WishlistProvider, RestProvider, AnalyticsService } from '../providers/providers';
+import { UserProvider, ToastProvider, SettingsProvider, LoadingProvider, NotifProvider, WooCommerceProvider, WishlistProvider,  RestProvider, AnalyticsService } from '../providers/providers';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -23,9 +23,9 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import { Facebook } from '@ionic-native/facebook';
 import { GoogleAnalytics } from '@ionic-native/google-analytics';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
+import { AdMobFree } from '@ionic-native/admob-free';
 import { IonicImageLoader } from 'ionic-image-loader';
 import { Deeplinks } from '@ionic-native/deeplinks';
-
 
 export function createTranslateLoader(http: HttpClient) {
   console.log("TranslateLoader");
@@ -35,7 +35,7 @@ export function createTranslateLoader(http: HttpClient) {
 @NgModule({
   declarations: [
     MyApp
-  ],
+  ], 
   imports: [
     HttpClientModule,
     BrowserModule,
@@ -47,7 +47,7 @@ export function createTranslateLoader(http: HttpClient) {
       }
     }),
     IonicStorageModule.forRoot({
-      name: 'bruveg',
+      name: 'localmt',
       driverOrder: ['sqlite', 'websql', 'indexeddb']
     }),
     IonicImageLoader.forRoot(),
@@ -80,7 +80,7 @@ export function createTranslateLoader(http: HttpClient) {
     OneSignal,
     SocialSharing,
     AppRate,
-    AppVersion,
+    AppVersion, 
     EmailComposer,
     InAppBrowser,
     HTTP,
@@ -93,6 +93,7 @@ export function createTranslateLoader(http: HttpClient) {
     File,
     FileTransfer,
     AndroidPermissions,
+    AdMobFree,
     Deeplinks
   ]
 })

@@ -1,11 +1,9 @@
 page-productdetail {
-
   ion-slides:first-child {
     height: 100vw;
   }
 
   .header-image {
-
     .slide-zoom {
       height: 100%;
 
@@ -23,11 +21,21 @@ page-productdetail {
     @include padding(10px, 10px, 10px, 16px);
     @include border-radius(20px, 0px, 0px, 20px);
   }
+  .fav_single {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 99;
+    @include padding(10px, 16px, 10px, 10px);
+    @include border-radius(20px, 20px, 0px, 0px);
+    .icon {
+      color: var(--accent_color) !important;
+    }
+  }
 
   .item.item-block .item-inner {
     @include padding(null, 0px, null, null);
   }
-
 
   ion-select {
     border: 1px solid #e2e1e1 !important;
@@ -51,7 +59,7 @@ page-productdetail {
   }
 
   .select-icon {
-    content: url('./../assets/svgs/arrow-down.svg') !important;
+    content: url("./../assets/svgs/arrow-down.svg") !important;
     margin: 8px;
     width: 15px !important;
     height: 20px !important;
@@ -66,11 +74,11 @@ page-productdetail {
       text-transform: capitalize;
 
       span:after {
-        content: ',';
+        content: ",";
       }
 
       span:last-child:after {
-        content: '';
+        content: "";
       }
     }
 
@@ -141,7 +149,20 @@ page-productdetail {
         del {
           color: #999;
         }
+      }
 
+      ul {
+        margin: 0px;
+        padding: 0px;
+      }
+
+      li {
+        display: inline-block;
+
+        h6 {
+          color: green;
+          font-weight: bolder;
+        }
       }
     }
 
@@ -156,7 +177,6 @@ page-productdetail {
       ul {
         list-style-type: none;
       }
-
     }
 
     .price_n_stock,
@@ -198,7 +218,6 @@ page-productdetail {
         &:nth-of-type(2) {
           @include margin(null, null, null, 10px);
         }
-
       }
     }
 
@@ -214,7 +233,6 @@ page-productdetail {
         text-transform: capitalize;
       }
     }
-
 
     .item {
       min-height: initial;
@@ -296,7 +314,6 @@ page-productdetail {
           }
         }
       }
-
     }
 
     .grouped_products {
@@ -318,12 +335,9 @@ page-productdetail {
 
         &:nth-of-type(2) {
           @include margin(null, null, null, 10px);
-
         }
-
       }
     }
-
   }
 
   //removing google adsense added in description

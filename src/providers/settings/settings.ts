@@ -72,9 +72,6 @@ export class SettingsProvider {
   get category() {
     return this.settings.category;
   }
-  get brand(){
-    return this.settings.brand;
-  }
   get layout() {
     return this.settings.layout;
   }

@@ -2,13 +2,13 @@
   <ion-navbar>
     <ion-title><span [innerHTML]="params.search || ('PRODUCTS' | translate)"></span></ion-title>
     <ion-buttons end>
-      <button mode="md" ion-button clear icon-only (click)="showSearch()">
-        <ion-icon name="md-search"></ion-icon>
-      </button>
-      <!-- <button mode="md" ion-button icon-only (click)="goTo('WishlistPage')">
+        <button mode="md" ion-button clear icon-only (click)="showSearch()">
+            <ion-icon name="md-search"></ion-icon>
+          </button>
+      <button mode="md" ion-button icon-only (click)="goTo('WishlistPage')">
         <ion-badge *ngIf="wishlist.total && wishlist.total > 0">{{wishlist.total}}</ion-badge>
         <ion-icon name="md-heart"></ion-icon>
-      </button> -->
+      </button>
       <button mode="md" ion-button clear icon-only (click)="goTo('CartPage')">
         <ion-badge *ngIf="settings.all && settings.cartCount > 0">{{settings.cartCount}}</ion-badge>
         <ion-icon name="md-cart"></ion-icon>
@@ -43,23 +43,16 @@
     <div class="loader"></div>
   </div> -->
 
-  <!-- <ion-grid *ngIf="show_loader">
+  <ion-grid *ngIf="show_loader">
     <ion-row>
       <ion-col col-6 col-md-3 col-sm-4 no-padding *ngFor="let x of [0,1,2,3,4,5,6,7]">
-        <skeleton-item height="160px"></skeleton-item>
-        <skeleton-item></skeleton-item>
-        <skeleton-item width="50%"></skeleton-item>
-        <skeleton-item width="70%" height=10px></skeleton-item>
+        <skeleton-item no-animated  height="160px"></skeleton-item>
+        <skeleton-item no-animated ></skeleton-item>
+        <skeleton-item no-animated  width="50%"></skeleton-item>
+        <skeleton-item no-animated  width="70%" height=10px></skeleton-item>
       </ion-col>
     </ion-row>
-  </ion-grid> -->
-  <ion-list *ngIf="show_loader">
-    <ion-item style="align-items: flex-start;" *ngFor="let x of [0,1,2,3,4,5,6,7]">
-      <skeleton-item height="28vw" width="28vw" item-start></skeleton-item>
-      <skeleton-item></skeleton-item>
-      <skeleton-item width="50%"></skeleton-item>
-    </ion-item>
-  </ion-list>
+  </ion-grid>
 
   <div class="div" *ngIf="showEmpty">
     <ion-grid>
@@ -72,7 +65,7 @@
     </ion-grid>
   </div>
 
-  <!-- <ion-scroll scrollX="true" class="category-slide" *ngIf="!show_loader && categories && categories.length>0">
+  <ion-scroll scrollX="true" class="category-slide" *ngIf="!show_loader && categories && categories.length>0">
     <ion-row nowrap>
       <ng-container *ngFor="let x of categories; let i=index">
         <ion-col col-auto no-padding>
@@ -80,25 +73,16 @@
             tappable (click)="goTo('ProductPage', x)">
             <h5 [innerHTML]="x.name"></h5>
           </img-loader>
+          <!-- <div class="img" [ngStyle]="{'background-image':(x.image && x.image.src)?'url('+x.image.src+')':'url(http://via.placeholder.com/90x60)'}"
+                tappable (click)="goTo('ProductPage', x)">
+                <h5 [innerHTML]="x.name"></h5>
+              </div> -->
         </ion-col>
       </ng-container>
     </ion-row>
-  </ion-scroll> -->
-  <div class="category-slide">
-    <ion-row nowrap>
-      <ng-container *ngFor="let x of categories; let i=index">
-        <ion-col col-auto no-padding tappable (click)="goTo('ProductPage', x)">
-          <!-- <img-loader class="img" [src]="x.image ? x.image : ''" tappable (click)="goTo('ProductPage', x)">
-          </img-loader> -->
-          <div class="name-container">
-            <h5 [innerHTML]="x.name"></h5>
-          </div>
-        </ion-col>
-      </ng-container>
-    </ion-row>
-  </div>
+  </ion-scroll>
 
-  <!-- <ion-grid *ngIf="!show_loader">
+  <ion-grid *ngIf="!show_loader">
     <ion-row>
       <ion-col col-6 col-md-3 col-sm-4 no-padding *ngFor="let product of products">
         <div class="product-item">
@@ -122,70 +106,7 @@
         </div>
       </ion-col>
     </ion-row>
-  </ion-grid> -->
-
-  <ion-list class="products" no-lines>
-
-    <ng-container *ngFor="let product of products">
-      <ion-item text-wrap (click)="goTo('ProductdetailPage', product)">
-        <img-loader class="img-loader" useImg [src]="product.images[0].src" item-start>
-          <ion-badge *ngIf="product.on_sale">{{product | discount}}</ion-badge>
-        </img-loader>
-
-
-        <div class="product_desc">
-          <div>
-            <div class="title" [innerHTML]="product.name"></div>
-            <div class="price" [innerHTML]="product.price_html"></div>
-          </div>
-          <div *ngIf="product.variations.length > 0 && product.var_attributes.length > 0" style="padding:4px 0px">
-            <span *ngFor="let attribute of product.var_attributes;">
-              <ng-select [searchable]="false" [clearable]="false" [(ngModel)]="product.attr[attribute.slug]"
-                [placeholder]="attribute.name" (click)="$event.stopPropagation();" appendTo="body"
-                (change)="onChange(product)">
-                <ng-container *ngFor="let option of attribute.options">
-                  <ng-option [value]="option.slug" *ngIf='option && option.slug'>{{option.name}}</ng-option>
-                  <ng-option [value]="option" *ngIf='option && !option.slug'>{{option}}</ng-option>
-                </ng-container>
-              </ng-select>
-              <!-- <select [(ngModel)]="product.attr[attribute.slug]" (change)="onChange(product)" tappable (click)="$event.stopPropagation();">
-                <ng-container *ngFor="let option of attribute.options">
-                  <option [value]="option.slug" *ngIf='option && option.slug'>{{option.name}}</option>
-                  <option [value]="option" *ngIf='option && !option.slug'>{{option}}</option>
-                </ng-container>
-              </select> -->
-            </span>
-          </div>
-
-          <!-- <div class="price-and-add">
-            <div class="price" [innerHTML]="'MRP :'+product.price_html"></div>
-            <button tappable ion-button small class="accent-background add-to-cart-button" *ngIf="product.type==='simple' || product.type==='variable'"
-              (click)="addToCart(product);$event.stopPropagation();">
-              Add
-            </button>
-          </div> -->
-          <div class="quantity-and-add" *ngIf="product.type==='simple' || product.type==='variable'">
-            <div class="center">
-              <button ion-button icon-only clear color="dark"
-                (click)="decreaseQuantity(product);$event.stopPropagation();">
-                <ion-icon name="remove" color="light"></ion-icon>
-              </button>
-              <span class="border">{{product.quantity}}</span>
-              <button ion-button icon-only clear color="dark"
-                (click)="increaseQuantity(product);$event.stopPropagation();">
-                <ion-icon name="add"></ion-icon>
-              </button>
-            </div>
-            <button tappable ion-button small class="accent-background add-to-cart-button"
-              (click)="addToCart(product);$event.stopPropagation();">
-              Add
-            </button>
-          </div>
-        </div>
-      </ion-item>
-      <div class="divider"></div>
-    </ng-container>
-  </ion-list>
+  </ion-grid>
 
   <ion-infinite-scroll *ngIf="hasMore" (ionInfinite)="loadMoreProducts($event)">
     <ion-infinite-scroll-content>

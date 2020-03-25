@@ -8,7 +8,7 @@
       <li [class]="page=='billing'?'is-active':''">{{'BILLING' | translate}} <br />{{'ADDRESS' | translate}}</li>
       <li [class]="page=='shipping'?'is-active':''">{{'SHIPPING' | translate}} <br />{{'ADDRESS' |
         translate}}</li>
-      <li [class]="page=='review'?'is-active':''">{{'REVIEW' | translate}}</li>
+      <li [class]="page=='review'?'is-active':''">{{'PAYMENT' | translate}}</li>
     </ul>
   </div>
 </ion-header>
@@ -36,7 +36,7 @@
           </ion-item> -->
 
           <ion-item no-padding no-padding>
-            <ion-label stacked>{{'EMAIL' | translate}} <span class="mandatory">*</span></ion-label>
+            <ion-label stacked>{{'EMAIL' | translate}}<span class="mandatory">*</span></ion-label>
             <ion-input formControlName="email" type="email"></ion-input>
           </ion-item>
 
@@ -77,13 +77,13 @@
           </ion-item>
 
           <ion-item no-padding no-padding>
-            <ion-label stacked>{{'ADDRESS_1' | translate}} <span class="mandatory">*</span></ion-label>
+            <ion-label stacked>{{'ADDRESS_1_1' | translate}} <span class="mandatory">*</span></ion-label>
             <ion-textarea formControlName="address_1" name="description"></ion-textarea>
           </ion-item>
-          <ion-item no-padding no-padding>
-            <ion-label stacked>{{'ADDRESS_2' | translate}}</ion-label>
+          <!-- <ion-item no-padding no-padding>
+            <ion-label stacked>{{'ADDRESS_2_2' | translate}}</ion-label>
             <ion-textarea formControlName="address_2" name="description"></ion-textarea>
-          </ion-item>
+          </ion-item> -->
         </ion-list>
       </form>
     </div>
@@ -136,14 +136,14 @@
           </ion-item>
 
           <ion-item no-padding no-padding>
-            <ion-label stacked>{{'ADDRESS_1' | translate}} <span class="mandatory">*</span></ion-label>
+            <ion-label stacked>{{'ADDRESS_1_1' | translate}} <span class="mandatory">*</span></ion-label>
             <ion-textarea formControlName="address_1" name="description"></ion-textarea>
           </ion-item>
 
-          <ion-item no-padding no-padding no-lines>
-            <ion-label stacked>{{'ADDRESS_2' | translate}}</ion-label>
+          <!-- <ion-item no-padding no-padding no-lines>
+            <ion-label stacked>{{'ADDRESS_2_2' | translate}}</ion-label>
             <ion-textarea formControlName="address_2" name="description"></ion-textarea>
-          </ion-item>
+          </ion-item> -->
         </ion-list>
       </form>
     </div>
@@ -153,6 +153,14 @@
       </div>
 
       <div *ngIf="reviewData">
+        <div class="order-details" *ngIf="reviewData.cart_discount_coupon_error">
+          <ion-list>
+            <ion-item no-padding no-lines text-wrap>
+              <span [innerHTML]="reviewData.cart_discount_coupon_error"></span>
+            </ion-item>
+          </ion-list>
+        </div>
+
         <div class="order-details" *ngIf="reviewData.cart_discount_coupon && reviewData.cart_discount_coupon.length>0">
           <ion-list no-lines no-margin no-padding>
             <ion-list-header mode="md">
@@ -174,7 +182,8 @@
               <ion-item no-padding no-lines>
                 <ion-label [innerHtml]="method.shipping_method_name"></ion-label>
                 <span item-end [innerHTML]="method.shipping_method_price"></span>
-                <ion-radio [value]="method.id" tappable color="light" (click)="getReview(method.id,reviewData.chosen_gateway,reviewData.pay_via_wallet)">
+                <ion-radio [value]="method.id" tappable color="light"
+                  (click)="getReview(method.id,reviewData.chosen_gateway,reviewData.pay_via_wallet)">
                 </ion-radio>
               </ion-item>
             </ng-container>
@@ -230,7 +239,7 @@
               </ion-item>
             </ng-container>
 
-            <ion-item no-padding no-lines class="discount">
+            <ion-item no-padding no-lines>
               <span> {{"TOTAL_DISCOUNT" | translate}}t</span>
               <span item-end [innerHTML]="reviewData.discount_total"></span>
             </ion-item>
@@ -243,7 +252,9 @@
             </ion-item>
             <ion-item no-padding no-lines class="wallet-payment" *ngIf="reviewData.hasOwnProperty('pay_via_wallet')">
               <ion-label>{{'PAY_VIA_WALLET' | translate}}</ion-label>
-              <ion-checkbox [(ngModel)]="reviewData.pay_via_wallet" color="light" (ionChange)="getReview(reviewData.chosen_shipping_method,reviewData.chosen_gateway,reviewData.pay_via_wallet)"></ion-checkbox>
+              <ion-checkbox [(ngModel)]="reviewData.pay_via_wallet" color="light"
+                (ionChange)="getReview(reviewData.chosen_shipping_method,reviewData.chosen_gateway,reviewData.pay_via_wallet)">
+              </ion-checkbox>
             </ion-item>
           </ion-list>
         </div>
@@ -256,12 +267,9 @@
               {{"PAYMENT_METHODS" | translate}}
             </ion-list-header>
             <ion-item no-padding no-lines *ngFor="let option of reviewData.payment_gateway; let i=index">
-              <ion-label><span [innerHTML]="option.gateway_title"></span>
-                <span class="img-container" *ngIf="option.gateway_id!='paytm'" [innerHTML]="option.gateway_icon"></span>
-                <span class="img-container1" *ngIf="option.gateway_id=='paytm'"><img src="assets/imgs/cards.png"></span>
-              </ion-label>
-              <!-- <span [innerHTML]="option.gateway_icon"></span> -->
-              <ion-radio [value]="option.gateway_id" tappable color="light" (click)="getReview(reviewData.chosen_shipping_method,reviewData.chosen_gateway,reviewData.pay_via_wallet)">
+              <ion-label><span [innerHTML]="option.gateway_title"></span></ion-label>
+              <ion-radio [value]="option.gateway_id" tappable color="light"
+                (click)="getReview(reviewData.chosen_shipping_method,reviewData.chosen_gateway,reviewData.pay_via_wallet)">
               </ion-radio>
             </ion-item>
 

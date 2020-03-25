@@ -48,9 +48,10 @@ export class OrderDetailPage {
                 text: "Yes",
                 handler: () => {
                     this.loader.show();
-                    this.WC.updateOrder(this.data.id, 'cancelled').then((res => {
+                    let x = 'cancelled'
+                    this.WC.updateOrder(this.data.id, x).then((res => {
                         this.loader.dismiss();
-                        this.data.status = res.status;
+                        this.data = res;
                     }), err => {
                         this.loader.dismiss();
                         this.toast.showError();

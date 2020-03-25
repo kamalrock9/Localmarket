@@ -12,44 +12,8 @@ page-notification {
   }
 
   .notification-item {
-    border-bottom: 1px solid #ccc;
-   // margin-bottom: 8px;
-
-    .item {
-      padding:8px;
-
-      .item-inner {
-        padding: 0px;
-
-        .label {
-          margin: 0px;
-
-          .notification-main-content {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-
-
-
-            .sale-title {
-              font-weight: 600 !important;
-              font-size: 18px !important;
-            }
-          }
-
-          img-loader {
-            img {
-              padding-top: 8px;
-            }
-          }
-        }
-      }
-    }
-
     .icon {
       font-size: 4rem;
-
-      margin-right: 25px;
     }
   }
 }

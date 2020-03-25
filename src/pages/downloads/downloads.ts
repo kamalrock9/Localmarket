@@ -1,3 +1,4 @@
+import { AdMobFree } from '@ionic-native/admob-free';
 import { TranslateService } from '@ngx-translate/core';
 import { WooCommerceProvider, ToastProvider, LoadingProvider, UserProvider } from './../../providers/providers';
 import { Component, NgZone } from '@angular/core';
@@ -21,7 +22,7 @@ export class DownloadsPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public WC: WooCommerceProvider,
     public platform: Platform, public toast: ToastProvider, private file: File, private transfer: FileTransfer,
     private alertCtrl: AlertController, private zone: NgZone, private androidPermissions: AndroidPermissions,
-    private loader: LoadingProvider, public user: UserProvider, public translate: TranslateService) {
+    private loader: LoadingProvider, public user: UserProvider, public translate: TranslateService, private admob: AdMobFree) {
 
     this.WC.getDownloads(user.id).then((data) => {
       console.log(data);
@@ -52,6 +53,23 @@ export class DownloadsPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad DownloadsPage');
   }
+  ionViewDidEnter() {
+    if (this.platform.is('cordova')) {
+      this.admob.banner.config({
+        id: 'ca-app-pub-2336008794991646/9868442895',
+        isTesting: false,
+        autoShow: true,
+        size: 'SMART_BANNER'
+      });
+      this.admob.banner.prepare();
+    }
+  }
+  ionViewDidLeave() {
+    console.log('ionViewDidLoad: ProductdetailPage');
+    if (this.platform.is('cordova')) {
+      this.admob.banner.remove();
+    }
+  }
   checkPermissionAndDownload(url, fileName) {
     if (!this.platform.is('cordova')) {
       this.translate.get(['ONLY_DEVICE', 'ONLY_DEVICE_DESC', 'OK']).subscribe(x => {
@@ -71,6 +89,8 @@ export class DownloadsPage {
           console.log('Has permission?', result.hasPermission);
           if (result.hasPermission) {
             this.downloadNow(url, fileName);
+          } else {
+            this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.WRITE_EXTERNAL_STORAGE)
           }
         },
         err => {

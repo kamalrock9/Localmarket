@@ -63,6 +63,14 @@ export class CouponPage {
           if (data.code && data.code == 201) {
             if (data.message && data.message.length > 0) {
               this.errMsg = data.message.join();
+            } else if (data.code && data.code == 202) {
+              if (data.message && data.message !== '') {
+                this.errMsg = data.message;
+              } else {
+                this.translate.get(['INVALID_COUPON']).subscribe(x => {
+                  this.errMsg = x.INVALID_COUPON;
+                });
+              }
             } else {
               this.translate.get(['INVALID_COUPON']).subscribe(x => {
                 this.errMsg = x.INVALID_COUPON;

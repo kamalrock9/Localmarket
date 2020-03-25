@@ -13,28 +13,30 @@
 
     <div class="top_header">
       <h2>{{'WELCOME_TO_WOOAPP' | translate:storeName}}</h2>
-      <p>{{"FASHION_INFO"| translate}}</p>
+      <p style="padding:20px 60px;line-height:1.5;">{{"FASHION_INFO"| translate}}</p>
     </div>
 
-    <ion-row class="social-login-toggle">
-      <ion-col col-6>
+    <!-- <ion-row class="social-login-toggle" style> -->
+    <div class="social-login-toggle">
+      <ion-col>
         <button block ion-button outline icon-start tappable (click)="facebookLogin()">
           <ion-icon name="logo-facebook"></ion-icon>
           {{'FACEBOOK' | translate}}
         </button>
       </ion-col>
-      <ion-col col-6>
+      <ion-col>
         <button block ion-button outline icon-start tappable (click)="googleLogin()">
           <ion-icon name="logo-google"></ion-icon>
           {{"GOOGLE" | translate}}
         </button>
       </ion-col>
-    </ion-row>
-
-    <div class="alternate-login social-login-toggle">
-      <p>{{"LOGIN_METHODS" | translate}}</p>
     </div>
+    <!-- </ion-row> -->
 
+    <!-- <div class="alternate-login social-login-toggle">
+      <p>{{"LOGIN_METHODS" | translate}}</p>
+    </div> -->
+    <!-- 
     <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate mode="ios">
       <ion-item no-padding>
         <ion-label stacked>{{'EMAIL' | translate}} <span class="mandatory">*</span></ion-label>
@@ -51,15 +53,14 @@
 
       <button class="login-btn" block ion-button>{{'SIGN_IN' | translate}}</button>
 
-    </form>
+    </form> -->
 
-    <div class="go-back">
+    <!-- <div class="go-back"> 
       <span>{{"DONT_HAVE_ACCOUNT" | translate}}</span>
       <button type="button" ion-button small outline tappable (click)="goToSignup()">
-        <!-- {{'GO_TO_SIGNUP' | translate}} -->
         {{'SIGN_UP' | translate}}
       </button>
-    </div>
+    </div> -->
 
   </div>
 
@@ -153,8 +154,8 @@
         </ion-col>
         <ion-col>
           <button block type="button" ion-button tappable (click)="dismiss(true)">{{'SKIP' | translate}}</button>
-        </ion-col> 
+        </ion-col>
       </ion-row>
     </form>
-  </div> 
-</ion-content>  
+  </div>
+</ion-content>

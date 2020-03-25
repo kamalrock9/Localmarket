@@ -23,46 +23,4 @@ page-home {
     }
   }
 
-  .center_banner {
-    img-loader {
-
-      img {
-        width: 100%;
-        height: auto;
-        @include padding(0px, 4px, 4px, 4px);
-      }
-
-      &:last-child {
-        img {
-          padding-bottom: 8px;
-        }
-      }
-    }
-
-  }
-
-  .brandstore {
-    @include margin(0px, 4px, 16px, 4px);
-    width: calc(100% - 8px);
-    .button {
-      background-color: #a22323;
-      font-weight: bold;
-      width: calc(100% - 16px);
-      margin: 4px 8px;
-    }
-
-    .grid{
-      padding: 1px;
-    .col {
-      border: 1px solid #ccc;
-      padding: 1px;
-    }
-  }
-
-    .img-brand {
-      width: 100%;
-      padding-top: 100%;
-    }
-  }
-
 }

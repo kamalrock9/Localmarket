@@ -6,7 +6,6 @@ import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { ProductPage } from './product';
 import { IonicImageLoader } from 'ionic-image-loader';
-import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -18,8 +17,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ComponentsModule,
     Ionic2RatingModule,
     IonicImageLoader,
-    PipesModule,
-    NgSelectModule
+    PipesModule
   ],
 })
 export class ProductPageModule {}

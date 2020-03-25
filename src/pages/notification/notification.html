@@ -23,23 +23,18 @@
     </ion-grid>
   </div>
 
-  <ion-list no-lines>
+  <ion-list >
     <ion-item-sliding *ngFor="let x of notif" class="notification-item">
-
-      <ion-item text-wrap (click)="openNotification(x)">
-
-        <div class="notification-main-content">
-          <ion-icon name="ios-pricetag-outline"></ion-icon>
+      <ion-item no-padding >
+        <ion-item no-lines no-padding (click)="showAlert(x)">
+          <ion-icon name="ios-pricetag-outline" item-start></ion-icon>
           <div>
-            <h3 class="sale-title">{{x.title}}</h3>
+            <h3>{{x.title}}</h3>
             <p>{{x.body}}</p>
           </div>
-        </div>
-
-        <img-loader useImg [src]="x.bigPicture" *ngIf="x.bigPicture && x.bigPicture!==''"></img-loader>
-
-      </ion-item>
-
+        </ion-item>
+        <img-loader useImg [src]="x.bigPicture" *ngIf="x.bigPicture && x.bigPicture!==''" ></img-loader>
+      </ion-item> 
       <ion-item-options side="end">
         <button ion-button small class="accent-background" tappable (click)="remove(x)">
           <ion-icon name="trash"></ion-icon>

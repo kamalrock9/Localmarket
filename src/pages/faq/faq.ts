@@ -31,6 +31,7 @@ export class FaqPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad AccountHelpPage');
   }
+  
   toggle(val) {
     this.toggles[val] = !this.toggles[val];
   }

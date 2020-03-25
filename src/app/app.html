@@ -94,6 +94,11 @@
         {{ 'HOME' | translate }}
       </ion-item>
       
+      <ion-item menuClose tappable class="btn" menuClose (click)="order_request()" *ngIf="this.settings.appSettings && this.settings.appSettings.contact_phone !== ''">
+        <ion-icon item-start name="logo-whatsapp"></ion-icon>
+        {{'ORDER_REQUEST' | translate}}
+      </ion-item>
+
       <ion-item menuClose tappable class="btn" (click)="goTo('ProductPage','')">
         <ion-icon item-start name="ios-basket-outline"></ion-icon>
         {{'SHOP' | translate}}
@@ -103,11 +108,6 @@
         <ion-icon item-start name="ios-pricetags-outline"></ion-icon>
         {{'SHOP_BY_CATEGORY' | translate}}
       </ion-item>
-
-      <ion-item tappable class="btn" menuClose (click)="goTo('NotificationPage','')">
-        <ion-icon item-start name="ios-notifications-outline"></ion-icon>
-        {{'NOTIFICATIONS' | translate}}
-      </ion-item>
     </ion-list>
 
     <div class="devider" *ngIf="user.all">
@@ -115,10 +115,10 @@
     </div>
 
     <ion-list mode="md" no-lines padding-left padding-right *ngIf="user.all">
-      <!-- <ion-item tappable class="btn" menuClose (click)="goTo('NotificationPage','')">
+      <ion-item tappable class="btn" menuClose (click)="goTo('NotificationPage','')">
         <ion-icon item-start name="ios-notifications-outline"></ion-icon>
         {{'NOTIFICATIONS' | translate}}
-      </ion-item> -->
+      </ion-item>
       <ion-item tappable class="btn" menuClose (click)="goTo('OrdersPage','')">
         <ion-icon item-start name="ios-list-box-outline"></ion-icon>
         {{ 'ORDERS' | translate }}
@@ -158,10 +158,7 @@
         <ion-icon item-start name="ios-call-outline"></ion-icon>
         {{'CONTACT' | translate}}
       </ion-item>
-      <!-- <ion-item menuClose tappable class="btn" menuClose (click)="order_request()" *ngIf="this.settings.appSettings.contact_phone !== ''">
-        <ion-icon item-start name="logo-whatsapp"></ion-icon>
-        Order Request
-      </ion-item> -->
+     
 
       <ion-item tappable class="btn" menuClose (click)="goTo('FaqPage','')" *ngIf="this.settings.appSettings.enable_faq">
         <ion-icon item-start name="ios-help-circle-outline"></ion-icon>

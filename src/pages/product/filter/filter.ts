@@ -15,7 +15,6 @@ export class FilterPage {
   items: Array<any>;
   priceForm: FormGroup;
   categories: Array<any> = [];
-  brands: Array<any> = [];
   dir: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private zone: NgZone, private settings: SettingsProvider,
@@ -30,34 +29,10 @@ export class FilterPage {
     });
     if (this.settings.category && this.settings.category.length > 0) {
       this.zone.run(() => {
-        if (!this.items[1].id || this.items[1].id == '') {
-          this.categories = this.settings.category;
-        } else {
-          for (let i of this.settings.category) {
-            if (this.items[1].id == i.parent) {
-              this.categories.push(i);
-            }
-          }
-        }
+        this.categories = this.settings.category;
       });
     } else {
       this.loadCategories();
-    }
-    if (this.settings.brand && this.settings.brand.length > 0) {
-      console.log("Associated brand");
-      this.zone.run(() => {
-        if (!this.items[2].id || this.items[2].id == '') {
-          this.brands = this.settings.brand;
-        } else {
-          for (let i of this.settings.brand) {
-            if (this.items[2].id == i.parent) {
-              this.brands.push(i);
-            }
-          }
-        }
-      });
-    } else {
-      this.loadBrands();
     }
   }
 
@@ -69,33 +44,7 @@ export class FilterPage {
     this.WC.getAllCategories().subscribe((res: any) => {
       this.settings.setSettings(res, "category");
       this.zone.run(() => {
-        if (!this.items[1].id || this.items[1].id == '') {
-          this.categories = res;
-        } else {
-          for (let i of res) {
-            if (this.items[1].id == i.parent) {
-              this.categories.push(i);
-            }
-          }
-        }
-      })
-    }, err => {
-      console.log(err);
-    });
-  }
-  loadBrands() {
-    this.WC.getAllBrands().subscribe((res: any) => {
-      this.settings.setSettings(res, "brand");
-      this.zone.run(() => {
-        if (!this.items[2].id || this.items[2].id == '') {
-          this.brands = res;
-        } else {
-          for (let i of res) {
-            if (this.items[2].id == i.parent) {
-              this.brands.push(i);
-            }
-          }
-        }
+        this.categories = res;
       })
     }, err => {
       console.log(err);
@@ -141,8 +90,7 @@ export class FilterPage {
     this.priceForm.controls['max_price'].setValue("");
     this.items[1].cat_name = '';
     this.items[1].id = '';
-    this.items[2].id = '';
-    for (let i = 3; i < this.items.length; i++) {
+    for (let i = 2; i < this.items.length; i++) {
       for (let j in this.items[i].options) {
         this.items[i].options[j].checked = false;
       }

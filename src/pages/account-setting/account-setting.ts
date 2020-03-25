@@ -8,7 +8,7 @@ import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 @IonicPage({
   priority:'off'
 })
-@Component({
+@Component({ 
   selector: 'page-account-setting',
   templateUrl: 'account-setting.html',
 })
@@ -50,7 +50,7 @@ export class AccountSettingPage {
         if (this.form_change_pass.controls['npass'].value !== this.form_change_pass.controls['cpass'].value) {
           this.toast.show(x.PASSWORD_NOT_MATCH);
           return;
-        }
+        } 
       }
       this.loader.show();
       this.WC.updateUserInfo(this.user.id, this.form_info.value).then((res) => {

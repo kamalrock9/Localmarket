@@ -43,7 +43,7 @@ export class LoginPage {
     this.signupForm = this.formBuilder.group({
       fname: ['', Validators.required],
       lname: ['', Validators.required],
-      email: ['', Validators.email],
+      email: ['', Validators.required],
       pass: ['', Validators.required],
       pass2: ['', Validators.required]
     });
@@ -80,7 +80,7 @@ export class LoginPage {
   }
   goToSignup() {
     this.page = "signup";
-    this.removeFocus();
+   // this.removeFocus();
   }
   goToReset() {
     this.page = "reset";
@@ -120,10 +120,34 @@ export class LoginPage {
       this.toast.show(err.code);
     });
   }
-  register() {
-    if (!this.signupForm.valid) {
-      this.translate.get(['FILL_REQUIRED_FIELD']).subscribe(x => {
-        this.toast.show(x.FILL_REQUIRED_FIELD);
+  register() {  
+  if (!this.signupForm.valid) {
+    this.translate.get(['FILL_REQUIRED_FIELD']).subscribe(x => {
+      this.toast.show(x.FILL_REQUIRED_FIELD);
+    });
+    return;
+  }
+    
+    if(!this.signupForm.value.fname.match(/^([^0-9]*)$/))
+    {
+      this.translate.get(['NAME_CAN_ONLY_CONTAIN_LETTERS']).subscribe(x=>{
+       this.toast.show(x.NAME_CAN_ONLY_CONTAIN_LETTERS);
+      });
+      return;
+    }
+
+    if(!this.signupForm.value.lname.match(/^([^0-9]*)$/))
+    {
+      this.translate.get(['NAME_CAN_ONLY_CONTAIN_LETTERS']).subscribe(x=>{
+       this.toast.show(x.NAME_CAN_ONLY_CONTAIN_LETTERS);
+      });
+      return;
+    }
+  
+    if(!this.signupForm.value.email.match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/))
+    {
+      this.translate.get(['PLEASE_ENTER_THE_VALID_EMAIL']).subscribe(x=>{
+       this.toast.show(x.PLEASE_ENTER_THE_VALID_EMAIL);
       });
       return;
     }
