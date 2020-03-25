@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.bruveg.bruveg" ios-CFBundleVersion="40" version="0.4.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="40" id="com.bruveg.bruveg" version="0.4.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Bruveg</name>
     <description>An awesome ecommerce app</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Phoeniixx Team</author>
@@ -25,13 +25,6 @@
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="orientation" value="portrait" />
-    <feature name="CDVWKWebViewEngine">
-        <param name="ios-package" value="CDVWKWebViewEngine" />
-    </feature>
-    <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
-    <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
-        <string>Camera Permission needed by paypal native sdk for scanning cards for faster checkout.</string>
-    </edit-config>
     <platform name="android">
         <allow-intent href="market:*" />
         <hook src="hooks/copy_android_notification_icons.js" type="after_prepare" />
