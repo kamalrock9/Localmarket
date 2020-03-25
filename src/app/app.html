@@ -93,8 +93,9 @@
         <ion-icon item-start name="ios-home-outline"></ion-icon>
         {{ 'HOME' | translate }}
       </ion-item>
-      
-      <ion-item menuClose tappable class="btn" menuClose (click)="order_request()" *ngIf="this.settings.appSettings && this.settings.appSettings.contact_phone !== ''">
+
+      <ion-item menuClose tappable class="btn" menuClose (click)="order_request()"
+        *ngIf="this.settings.appSettings && this.settings.appSettings.contact_phone !== ''">
         <ion-icon item-start name="logo-whatsapp"></ion-icon>
         {{'ORDER_REQUEST' | translate}}
       </ion-item>
@@ -111,7 +112,7 @@
     </ion-list>
 
     <div class="devider" *ngIf="user.all">
-      <hr>
+      <hr />
     </div>
 
     <ion-list mode="md" no-lines padding-left padding-right *ngIf="user.all">
@@ -127,7 +128,8 @@
         <ion-icon item-start name="ios-download-outline"></ion-icon>
         {{'DOWNLOAD' | translate }}
       </ion-item>
-      <ion-item tappable class="btn" menuClose (click)="goTo('WalletPage','')" *ngIf="this.settings.all.appSettings && this.settings.all.appSettings.wallet_active">
+      <ion-item tappable class="btn" menuClose (click)="goTo('WalletPage','')"
+        *ngIf="this.settings.all.appSettings && this.settings.all.appSettings.wallet_active">
         <ion-icon item-start name="ios-cash-outline"></ion-icon>
         {{'WALLET' | translate}}
       </ion-item>
@@ -150,22 +152,30 @@
     </div>
 
     <ion-list mode="md" no-lines padding-left padding-right *ngIf="this.settings.appSettings">
-      <ion-item tappable class="btn" menuClose (click)="openChat()" *ngIf="this.settings.appSettings.direct_tawk_id && this.settings.all.appSettings.direct_tawk_id !== ''">
+      <ion-item tappable class="btn" menuClose (click)="rewardVideo()">
+        <ion-icon item-start name="ios-ribbon-outline"></ion-icon>
+        Reward Video
+      </ion-item>
+
+      <ion-item tappable class="btn" menuClose (click)="openChat()"
+        *ngIf="this.settings.appSettings.direct_tawk_id && this.settings.all.appSettings.direct_tawk_id !== ''">
         <ion-icon item-start name="ios-chatbubbles-outline"></ion-icon>
         {{'CHAT_SUPPORT' | translate}}
       </ion-item>
-      <ion-item menuClose tappable class="btn" menuClose (click)="contact()" *ngIf="this.settings.appSettings.contact_email !== '' || this.settings.appSettings.contact_phone !== ''">
+      <ion-item menuClose tappable class="btn" menuClose (click)="contact()"
+        *ngIf="this.settings.appSettings.contact_email !== '' || this.settings.appSettings.contact_phone !== ''">
         <ion-icon item-start name="ios-call-outline"></ion-icon>
         {{'CONTACT' | translate}}
       </ion-item>
-     
 
-      <ion-item tappable class="btn" menuClose (click)="goTo('FaqPage','')" *ngIf="this.settings.appSettings.enable_faq">
+      <ion-item tappable class="btn" menuClose (click)="goTo('FaqPage','')"
+        *ngIf="this.settings.appSettings.enable_faq">
         <ion-icon item-start name="ios-help-circle-outline"></ion-icon>
         {{'FAQ' | translate}}
       </ion-item>
 
-      <ion-item menuClose tappable class="btn" menuClose (click)="goTo('TosPage','')" *ngIf="this.settings.appSettings.enable_term_condition">
+      <ion-item menuClose tappable class="btn" menuClose (click)="goTo('TosPage','')"
+        *ngIf="this.settings.appSettings.enable_term_condition">
         <ion-icon item-start name="ios-construct-outline"></ion-icon>
         {{'TOS' | translate}}
       </ion-item>
@@ -174,7 +184,6 @@
         {{'GIVE_FEEDBACK' | translate}}
       </ion-item>
     </ion-list>
-
   </ion-content>
   <ion-footer padding text-end>
     {{'VERSION' | translate}} : {{version}}
