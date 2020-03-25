@@ -42,12 +42,10 @@
     "@ionic/storage": "2.2.0",
     "@ngx-translate/core": "^9.1.1",
     "@ngx-translate/http-loader": "^2.0.1",
-    "@types/lodash": "^4.14.62",
     "angular-tree-component": "^7.0.0",
     "com-sarriaroman-photoviewer": "1.1.18",
     "com.razorpay.cordova": "^1.4.8",
     "cordova-admob-sdk": "0.22.0",
-    "cordova-android": "8.1.0",
     "cordova-plugin-admob-free": "^0.25.0",
     "cordova-plugin-advanced-http": "^2.4.0",
     "cordova-plugin-android-permissions": "^1.0.2",
@@ -92,7 +90,9 @@
   "description": "An Ionic project",
   "cordova": {
     "plugins": {
-      "cordova-plugin-email-composer": {},
+      "cordova-plugin-email-composer": {
+        "ANDROID_SUPPORT_V4_VERSION": "27.+"
+      },
       "cordova-plugin-app-version": {},
       "cordova-plugin-x-socialsharing": {
         "ANDROID_SUPPORT_V4_VERSION": "24.1.1+",
@@ -107,7 +107,9 @@
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
-      "cordova-plugin-advanced-http": {},
+      "cordova-plugin-advanced-http": {
+        "OKHTTP_VERSION": "3.10.0"
+      },
       "cordova-plugin-statusbar": {},
       "cordova-plugin-googleplus": {
         "REVERSED_CLIENT_ID": "com.googleusercontent.apps.565271828853-r8rtr22lcbkljjcoeimh2omjmg65e5kq",
@@ -116,7 +118,8 @@
       "cordova-plugin-facebook4": {
         "APP_ID": "745299765837567",
         "APP_NAME": "Local Market",
-        "FACEBOOK_ANDROID_SDK_VERSION": "4.37.0"
+        "FACEBOOK_ANDROID_SDK_VERSION": "4.37.0",
+        "FACEBOOK_HYBRID_APP_EVENTS": "false"
       },
       "cordova-plugin-google-analytics": {
         "GMS_VERSION": "11.8.0"
@@ -152,8 +155,6 @@
       },
       "com.razorpay.cordova": {}
     },
-    "platforms": [
-      "android"
-    ]
+    "platforms": []
   }
 }
