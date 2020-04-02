@@ -51,7 +51,7 @@ export class MyApp {
     public settings: SettingsProvider,
     public translate: TranslateService,
     private events: Events,
-    rest: RestProvider,
+    public rest: RestProvider,
     private toast: ToastProvider,
     private modalCtrl: ModalController,
     private emailComposer: EmailComposer,
@@ -399,6 +399,7 @@ export class MyApp {
   }
 
   rewardVideo() {
+    let videoStarted = true;
     this.loader.show();
     this.admob.rewardVideo.config({
       id: "ca-app-pub-2336008794991646/3460590790",
@@ -407,14 +408,32 @@ export class MyApp {
     });
     this.admob.on(this.admob.events.REWARD_VIDEO_LOAD_FAIL).subscribe(() => {
       this.toast.show("Something went wrong try again later.");
+      videoStarted = false;
       this.loader.dismiss();
     });
     this.admob.on(this.admob.events.REWARD_VIDEO_OPEN).subscribe(() => {
       this.loader.dismiss();
     });
     this.admob.on(this.admob.events.REWARD_VIDEO_REWARD).subscribe(() => {
-      this.toast.show("Provide Rewards");
+      if (videoStarted) {
+        this.toast.show("Provide Rewards");
+
+        this.rest
+          .walletReward()
+          .then(res => {
+            let data = JSON.parse(res.data);
+            if (data && data.message) {
+              this.toast.show(data.message);
+            }
+          })
+          .catch(err => {
+            console.log(err);
+            this.toast.show("Something went wrong try later");
+          });
+      }
+      videoStarted = false;
     });
+
     this.admob.rewardVideo.prepare();
   }
 }

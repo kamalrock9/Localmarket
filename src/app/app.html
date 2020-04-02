@@ -152,7 +152,7 @@
     </div>
 
     <ion-list mode="md" no-lines padding-left padding-right *ngIf="this.settings.appSettings">
-      <ion-item tappable class="btn" menuClose (click)="rewardVideo()">
+      <ion-item tappable class="btn" menuClose (click)="rewardVideo()" *ngIf="user.all">
         <ion-icon item-start name="ios-ribbon-outline"></ion-icon>
         Reward Video
       </ion-item>
