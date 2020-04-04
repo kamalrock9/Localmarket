@@ -46,7 +46,6 @@
     "com-sarriaroman-photoviewer": "1.1.18",
     "com.razorpay.cordova": "^1.4.8",
     "cordova-admob-sdk": "0.22.0",
-    "cordova-android": "8.1.0",
     "cordova-plugin-admob-free": "^0.25.0",
     "cordova-plugin-advanced-http": "^2.4.0",
     "cordova-plugin-android-permissions": "^1.0.2",
@@ -157,8 +156,6 @@
       },
       "com.razorpay.cordova": {}
     },
-    "platforms": [
-      "android"
-    ]
+    "platforms": []
   }
 }
