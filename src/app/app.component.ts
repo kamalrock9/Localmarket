@@ -11,7 +11,7 @@ import {
   NotifProvider,
   WooCommerceProvider,
   ToastProvider,
-  UserProvider
+  UserProvider,
 } from "./../providers/providers";
 import { OneSignal } from "@ionic-native/onesignal";
 import { Component, NgZone, ViewChild } from "@angular/core";
@@ -22,7 +22,7 @@ import {
   AlertController,
   Nav,
   IonicApp,
-  MenuController
+  MenuController,
 } from "ionic-angular";
 import { StatusBar } from "@ionic-native/status-bar";
 import { TranslateService } from "@ngx-translate/core";
@@ -30,7 +30,7 @@ import { ImageLoaderConfig } from "ionic-image-loader";
 import { AdMobFree } from "@ionic-native/admob-free";
 
 @Component({
-  templateUrl: "app.html"
+  templateUrl: "app.html",
 })
 export class MyApp {
   rootPage: any; //='MenuPage';
@@ -68,7 +68,7 @@ export class MyApp {
     private loader: LoadingProvider,
     private imageLoaderConfig: ImageLoaderConfig
   ) {
-    this.settings.load().then(res => {
+    this.settings.load().then((res) => {
       this.setting = res;
       this.initTranslate();
     });
@@ -88,7 +88,7 @@ export class MyApp {
 
       if (this.platform.is("cordova")) {
         events.subscribe("cartchanged", () => {
-          rest.getCartCount().then(res => {
+          rest.getCartCount().then((res) => {
             console.log(res);
             settings.setSettings(JSON.parse(res.data), "cart_count");
           });
@@ -135,7 +135,7 @@ export class MyApp {
   }
   initApp() {
     this.WC.saveAppSettings().subscribe(
-      res => {
+      (res) => {
         console.log(res);
         this.settings.setSettings(res, "appSettings").then(() => {
           console.log(this.settings.all);
@@ -143,20 +143,20 @@ export class MyApp {
             ["primary_color", this.settings.all.appSettings.primary_color],
             [
               "primary_color_dark",
-              this.settings.all.appSettings.primary_color_dark
+              this.settings.all.appSettings.primary_color_dark,
             ],
             ["accent_color", this.settings.all.appSettings.accent_color],
             [
               "toolbar_text_color",
-              this.settings.all.appSettings.primary_color_text
+              this.settings.all.appSettings.primary_color_text,
             ],
             [
               "toolbar-badge-color",
               this.settings.all.appSettings.toolbarbadgecolor ||
-                this.settings.all.appSettings.accent_color
+                this.settings.all.appSettings.accent_color,
             ],
             ["primary_text_color", "#212121"],
-            ["secondary_text_color", "#757575"]
+            ["secondary_text_color", "#757575"],
           ]);
           Array.from(colors.entries()).forEach(([name, value]) => {
             document.body.style.setProperty(`--${name}`, value);
@@ -169,7 +169,7 @@ export class MyApp {
             this.statusBar.backgroundColorByHexString(
               this.settings.all.appSettings.primary_color_dark
             );
-            this.appVersion.getVersionNumber().then(v => {
+            this.appVersion.getVersionNumber().then((v) => {
               this.version = v;
               if (
                 this.settings.all.appSettings.google_analytics_tracker_id &&
@@ -188,7 +188,9 @@ export class MyApp {
                     this.events.publish("view:enter", "Home Page");
                     this.anlyticsService.setAppVersion("Android - " + v);
                   })
-                  .catch(e => console.log("Error starting GoogleAnalytics", e));
+                  .catch((e) =>
+                    console.log("Error starting GoogleAnalytics", e)
+                  );
               }
             });
 
@@ -205,7 +207,7 @@ export class MyApp {
               this.oneSignal.inFocusDisplaying(
                 this.oneSignal.OSInFocusDisplayOption.Notification
               );
-              this.oneSignal.handleNotificationReceived().subscribe(x => {
+              this.oneSignal.handleNotificationReceived().subscribe((x) => {
                 // do something when notification is received
                 console.log(x);
                 this.notif.post(x.payload);
@@ -218,7 +220,7 @@ export class MyApp {
           }
         });
       },
-      err => {
+      (err) => {
         console.log(err);
         this.toast.showError();
       }
@@ -242,22 +244,22 @@ export class MyApp {
           to: this.settings.appSettings.contact_email,
           subject: "App Support",
           body: "Hi, please help me.",
-          isHtml: true
+          isHtml: true,
         };
         this.emailComposer.open(email);
       } else {
         this.translate
           .get(["ONLY_DEVICE", "ONLY_DEVICE_DESC", "OK"])
-          .subscribe(x => {
+          .subscribe((x) => {
             this.alertCtrl
               .create({
                 title: x.ONLY_DEVICE,
                 message: x.ONLY_DEVICE_DESC,
                 buttons: [
                   {
-                    text: x.OK
-                  }
-                ]
+                    text: x.OK,
+                  },
+                ],
               })
               .present();
           });
@@ -271,25 +273,25 @@ export class MyApp {
     if (!this.platform.is("cordova")) {
       this.translate
         .get(["OK", "ONLY_DEVICE", "ONLY_DEVICE_DESC"])
-        .subscribe(x => {
+        .subscribe((x) => {
           this.alertCtrl
             .create({
               title: x.ONLY_DEVICE,
               message: x.ONLY_DEVICE_DESC,
-              buttons: [{ text: x.OK }]
+              buttons: [{ text: x.OK }],
             })
             .present();
           return false;
         });
     } else {
-      this.appVersion.getAppName().then(res => {
+      this.appVersion.getAppName().then((res) => {
         this.appRate.preferences.displayAppName = res;
       });
 
-      this.appVersion.getPackageName().then(res => {
+      this.appVersion.getPackageName().then((res) => {
         this.appRate.preferences.storeAppURL = {
           ios: App.IosAppId, // FOR IOS USE APPLE ID from appstoreconnect
-          android: "market://details?id=" + res // FOR ANDROID, use your own android package name
+          android: "market://details?id=" + res, // FOR ANDROID, use your own android package name
         };
         this.appRate.promptForRating(true);
       });
@@ -300,7 +302,7 @@ export class MyApp {
     this.admob.interstitial.config({
       id: "ca-app-pub-2336008794991646/4281109684",
       isTesting: false,
-      autoShow: true
+      autoShow: true,
     });
     this.admob.on(this.admob.events.INTERSTITIAL_LOAD_FAIL).subscribe(() => {
       this.platform.exitApp();
@@ -314,7 +316,7 @@ export class MyApp {
   exit() {
     this.translate
       .get(["CONFIRM", "EXIT_MSG", "EXIT", "CANCEL"])
-      .subscribe(x => {
+      .subscribe((x) => {
         this.alertCtrl
           .create({
             title: x.CONFIRM,
@@ -325,13 +327,13 @@ export class MyApp {
                 handler: () => {
                   //this.showAdmobBannerAds();
                   this.platform.exitApp();
-                }
+                },
               },
               {
                 text: "Cancel",
-                role: x.CANCEL
-              }
-            ]
+                role: x.CANCEL,
+              },
+            ],
           })
           .present();
       });
@@ -348,7 +350,7 @@ export class MyApp {
         "_self",
         { location: "no", closebuttoncaption: "Done", hidden: "yes" }
       );
-      browser.on("loadstop").subscribe(event => {
+      browser.on("loadstop").subscribe((event) => {
         browser.show();
         this.loader.dismiss();
       });
@@ -371,15 +373,15 @@ export class MyApp {
               text: "Email",
               handler: () => {
                 this.email();
-              }
+              },
             },
             {
               text: "Call",
               handler: () => {
                 this.call();
-              }
-            }
-          ]
+              },
+            },
+          ],
         })
         .present();
     } else if (this.settings.appSettings.contact_email !== "") {
@@ -404,7 +406,7 @@ export class MyApp {
     this.admob.rewardVideo.config({
       id: "ca-app-pub-2336008794991646/3460590790",
       isTesting: false,
-      autoShow: true
+      autoShow: true,
     });
     this.admob.on(this.admob.events.REWARD_VIDEO_LOAD_FAIL).subscribe(() => {
       this.toast.show("Something went wrong try again later.");
@@ -417,16 +419,15 @@ export class MyApp {
     this.admob.on(this.admob.events.REWARD_VIDEO_REWARD).subscribe(() => {
       if (videoStarted) {
         this.toast.show("Provide Rewards");
-
         this.rest
           .walletReward()
-          .then(res => {
+          .then((res) => {
             let data = JSON.parse(res.data);
             if (data && data.message) {
               this.toast.show(data.message);
             }
           })
-          .catch(err => {
+          .catch((err) => {
             console.log(err);
             this.toast.show("Something went wrong try later");
           });
