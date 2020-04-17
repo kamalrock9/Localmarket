@@ -344,21 +344,48 @@ export class MyApp {
       this.settings.all.appSettings.direct_tawk_id &&
       this.settings.all.appSettings.direct_tawk_id !== ""
     ) {
-      this.loader.show();
+      //this.loader.show();
       const browser = this.iab.create(
         this.settings.all.appSettings.direct_tawk_id,
-        "_self",
-        { location: "no", closebuttoncaption: "Done", hidden: "yes" }
+        "_system",
+        { location: "no", closebuttoncaption: "Done", hidden: "no" }
       );
-      browser.on("loadstop").subscribe((event) => {
+      /* browser.on("loadstop").subscribe((event) => {
         browser.show();
         this.loader.dismiss();
-      });
+      });*/
     }
   }
+  tos() {
+    this.iab.create(App.url + "/terms-and-conditions/", "_system", {
+      location: "no",
+      closebuttoncaption: "Done",
+    });
+  }
+  privacy() {
+    this.iab.create(App.url + "/privacy-policy/", "_system", {
+      location: "no",
+      closebuttoncaption: "Done",
+    });
+  }
+  refund() {
+    this.iab.create(App.url + "/refund-policy/", "_system", {
+      location: "no",
+      closebuttoncaption: "Done",
+    });
+  }
+  about() {
+    this.iab.create(App.url + "/about-us/", "_system", {
+      location: "no",
+      closebuttoncaption: "Done",
+    });
+  }
   contact() {
-    //this.iab.create(App.url + "/contact-us/", '_system', { location: 'no', closebuttoncaption: 'Done' });
-    if (
+    this.iab.create(App.url + "/contact-us/", "_system", {
+      location: "no",
+      closebuttoncaption: "Done",
+    });
+    /* if (
       this.settings.appSettings.contact_email &&
       this.settings.appSettings.contact_phone &&
       this.settings.appSettings.contact_email !== "" &&
@@ -388,7 +415,7 @@ export class MyApp {
       this.email();
     } else {
       this.call();
-    }
+    }*/
   }
   order_request() {
     this.iab.create(

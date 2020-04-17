@@ -162,22 +162,31 @@
         <ion-icon item-start name="ios-chatbubbles-outline"></ion-icon>
         {{'CHAT_SUPPORT' | translate}}
       </ion-item>
-      <ion-item menuClose tappable class="btn" menuClose (click)="contact()"
-        *ngIf="this.settings.appSettings.contact_email !== '' || this.settings.appSettings.contact_phone !== ''">
+
+      <ion-item menuClose tappable class="btn" menuClose (click)="tos()">
+        <ion-icon item-start name="ios-construct-outline"></ion-icon>
+        Term & Condition
+      </ion-item>
+      <ion-item menuClose tappable class="btn" menuClose (click)="privacy()">
+        <ion-icon item-start name="ios-lock-outline"></ion-icon>
+        Privacy Policy
+      </ion-item>
+      <ion-item menuClose tappable class="btn" menuClose (click)="refund()">
+        <ion-icon item-start name="ios-return-left-outline"></ion-icon>
+        Refund & Cancellation
+      </ion-item>
+      <ion-item menuClose tappable class="btn" menuClose (click)="contact()">
         <ion-icon item-start name="ios-call-outline"></ion-icon>
         {{'CONTACT' | translate}}
       </ion-item>
-
+      <ion-item menuClose tappable class="btn" menuClose (click)="about()">
+        <ion-icon item-start name="ios-contacts-outline"></ion-icon>
+        About Us
+      </ion-item>
       <ion-item tappable class="btn" menuClose (click)="goTo('FaqPage','')"
         *ngIf="this.settings.appSettings.enable_faq">
         <ion-icon item-start name="ios-help-circle-outline"></ion-icon>
         {{'FAQ' | translate}}
-      </ion-item>
-
-      <ion-item menuClose tappable class="btn" menuClose (click)="goTo('TosPage','')"
-        *ngIf="this.settings.appSettings.enable_term_condition">
-        <ion-icon item-start name="ios-construct-outline"></ion-icon>
-        {{'TOS' | translate}}
       </ion-item>
       <ion-item menuClose tappable class="btn" menuClose (click)="rate()">
         <ion-icon item-start name="ios-paper-outline"></ion-icon>

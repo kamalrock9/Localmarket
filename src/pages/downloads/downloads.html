@@ -22,9 +22,7 @@
 
   <ion-list *ngIf="downloads">
     <ion-item *ngFor="let x of downloads">
-      <ion-thumbnail item-start>
-        <img src="assets/svgs/folder.svg">
-      </ion-thumbnail>
+      <img src="assets/svgs/folder.svg" style="width: 48px;height: auto;" item-start>
       <div>
         <b [innerHtml]="x.product_name"></b>
       </div>
@@ -36,7 +34,8 @@
         {{'EXPIRES' | translate}} : {{ x.access_expires_gmt!='never'? (x.access_expires_gmt | date)
         :x.access_expires_gmt}}
       </div>
-      <button ion-button clear icon-only item-end style="zoom:2" (tap)="checkPermissionAndDownload(x.download_url,x.file.name)">
+      <button ion-button clear icon-only item-end style="zoom:2"
+        (tap)="checkPermissionAndDownload(x.file.file,x.file.name)">
         <ion-icon name="ios-download-outline"></ion-icon>
       </button>
     </ion-item>
