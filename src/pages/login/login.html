@@ -2,30 +2,44 @@
   <ion-navbar>
     <ion-buttons left>
       <button ion-button tappable clear large (click)="dismiss()">
-        <ion-icon name="close" style="translate:scale(2)"></ion-icon>
+        <ion-icon name="close" style="translate: scale(2);"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-
   <div class="login" *ngIf="page=='login'" #textInput>
-
     <div class="top_header">
       <h2>{{'WELCOME_TO_WOOAPP' | translate:storeName}}</h2>
-      <p style="padding:20px 60px;line-height:1.5;">{{"FASHION_INFO"| translate}}</p>
+      <p style="padding: 20px 60px; line-height: 1.5;">
+        {{"FASHION_INFO"| translate}}
+      </p>
     </div>
 
     <!-- <ion-row class="social-login-toggle" style> -->
     <div class="social-login-toggle">
       <ion-col>
-        <button block ion-button outline icon-start tappable (click)="facebookLogin()">
+        <button
+          block
+          ion-button
+          outline
+          icon-start
+          tappable
+          (click)="facebookLogin()"
+        >
           <ion-icon name="logo-facebook"></ion-icon>
           {{'FACEBOOK' | translate}}
         </button>
       </ion-col>
       <ion-col>
-        <button block ion-button outline icon-start tappable (click)="googleLogin()">
+        <button
+          block
+          ion-button
+          outline
+          icon-start
+          tappable
+          (click)="googleLogin()"
+        >
           <ion-icon name="logo-google"></ion-icon>
           {{"GOOGLE" | translate}}
         </button>
@@ -61,18 +75,26 @@
         {{'SIGN_UP' | translate}}
       </button>
     </div> -->
-
   </div>
 
   <div class="reset" *ngIf="page=='reset'">
     <h1>{{'RESET_PASS' | translate}}</h1>
-    <p> {{'FORGOT_DESC' | translate}}</p>
+    <p>{{'FORGOT_DESC' | translate}}</p>
     <form [formGroup]="resetForm" (ngSubmit)="reset()" novalidate mode="ios">
       <ion-item no-padding>
-        <ion-label stacked>{{'EMAIL' | translate}} <span class="mandatory">*</span></ion-label>
-        <ion-input type="email" formControlName="email" autocomplete="off" [dir]='dir'></ion-input>
+        <ion-label stacked
+          >{{'EMAIL' | translate}} <span class="mandatory">*</span></ion-label
+        >
+        <ion-input
+          type="email"
+          formControlName="email"
+          autocomplete="off"
+          [dir]="dir"
+        ></ion-input>
       </ion-item>
-      <button class="reset-btn" block ion-button tappable>{{'RESET_PASS' | translate}}</button>
+      <button class="reset-btn" block ion-button tappable>
+        {{'RESET_PASS' | translate}}
+      </button>
     </form>
     <div class="go-back" tappable (click)="goToLogin()">
       <ion-icon name="arrow-back"></ion-icon>
@@ -105,32 +127,81 @@
       <p>{{'OR' | translate}}</p>
     </div>
     <input type="hidden" #textInput />
-    <form [formGroup]="signupForm" (ngSubmit)="register()" novalidate mode="ios">
+    <form
+      [formGroup]="signupForm"
+      (ngSubmit)="register()"
+      novalidate
+      mode="ios"
+    >
       <ion-item no-padding>
-        <ion-label stacked>{{'FIRST_NAME' | translate}} <span class="mandatory">*</span></ion-label>
-        <ion-input formControlName="fname" autocomplete="off" type="text" [dir]='dir'></ion-input>
+        <ion-label stacked
+          >{{'FIRST_NAME' | translate}}
+          <span class="mandatory">*</span></ion-label
+        >
+        <ion-input
+          formControlName="fname"
+          autocomplete="off"
+          type="text"
+          [dir]="dir"
+        ></ion-input>
       </ion-item>
       <ion-item no-padding>
-        <ion-label stacked>{{'LAST_NAME' | translate}} <span class="mandatory">*</span></ion-label>
-        <ion-input formControlName="lname" autocomplete="off" type="text" [dir]='dir'></ion-input>
+        <ion-label stacked
+          >{{'LAST_NAME' | translate}}
+          <span class="mandatory">*</span></ion-label
+        >
+        <ion-input
+          formControlName="lname"
+          autocomplete="off"
+          type="text"
+          [dir]="dir"
+        ></ion-input>
       </ion-item>
       <ion-item no-padding>
-        <ion-label stacked>{{'EMAIL' | translate}} <span class="mandatory">*</span></ion-label>
-        <ion-input formControlName="email" autocomplete="off" type="email" [dir]='dir'></ion-input>
+        <ion-label stacked
+          >{{'EMAIL' | translate}} <span class="mandatory">*</span></ion-label
+        >
+        <ion-input
+          formControlName="email"
+          autocomplete="off"
+          type="email"
+          [dir]="dir"
+        ></ion-input>
       </ion-item>
       <ion-item no-padding>
-        <ion-label stacked>{{'PASSWORD' | translate}} <span class="mandatory">*</span></ion-label>
-        <ion-input formControlName="pass" autocomplete="off" type="password" [dir]='dir'></ion-input>
+        <ion-label stacked
+          >{{'PASSWORD' | translate}}
+          <span class="mandatory">*</span></ion-label
+        >
+        <ion-input
+          formControlName="pass"
+          autocomplete="off"
+          type="password"
+          [dir]="dir"
+        ></ion-input>
       </ion-item>
       <ion-item no-padding>
-        <ion-label stacked>{{'CONFIRM_PASSWORD' | translate}} <span class="mandatory">*</span></ion-label>
-        <ion-input formControlName="pass2" autocomplete="off" type="password" [dir]='dir'></ion-input>
+        <ion-label stacked
+          >{{'CONFIRM_PASSWORD' | translate}}
+          <span class="mandatory">*</span></ion-label
+        >
+        <ion-input
+          formControlName="pass2"
+          autocomplete="off"
+          type="password"
+          [dir]="dir"
+        ></ion-input>
       </ion-item>
 
-      <button class="signup-btn" block ion-button>{{'SIGN_UP' | translate}}</button>
+      <button class="signup-btn" block ion-button>
+        {{'SIGN_UP' | translate}}
+      </button>
 
-      <div class="term_div"> {{"SIGNIN_POLICY"| translate}} <strong>{{"PRIVACY_POLICY" | translate}}</strong> {{'AND' |
-        translate}} <strong>{{"TERMS" | translate}}</strong></div>
+      <div class="term_div">
+        {{"SIGNIN_POLICY"| translate}}
+        <strong>{{"PRIVACY_POLICY" | translate}}</strong> {{'AND' | translate}}
+        <strong>{{"TERMS" | translate}}</strong>
+      </div>
     </form>
     <div class="go-back">
       <span>{{'HAVE_AN_ACCOUNT' | translate}}</span>
@@ -142,18 +213,39 @@
 
   <div class="referral" *ngIf="page=='referral'">
     <h1>{{'HAVE_REFERRAL_CODE' | translate}}</h1>
-    <p> {{'REFERRAL_CODE_DESC' | translate}}</p>
-    <form [formGroup]="referralForm" (ngSubmit)="applyReferralCode()" novalidate mode="ios">
+    <p>{{'REFERRAL_CODE_DESC' | translate}}</p>
+    <form
+      [formGroup]="referralForm"
+      (ngSubmit)="applyReferralCode()"
+      novalidate
+      mode="ios"
+    >
       <ion-item no-padding>
-        <ion-label stacked>{{'REFFERAL_CODE' | translate}} <span class="mandatory">*</span></ion-label>
-        <ion-input type="text" formControlName="refer_code" autocomplete="off" [dir]='dir'></ion-input>
+        <ion-label stacked
+          >{{'REFFERAL_CODE' | translate}}
+          <span class="mandatory">*</span></ion-label
+        >
+        <ion-input
+          type="text"
+          formControlName="refer_code"
+          autocomplete="off"
+          [dir]="dir"
+        ></ion-input>
       </ion-item>
       <ion-row class="refferal-btn">
         <ion-col>
           <button block ion-button tappable>{{'APPLY' | translate}}</button>
         </ion-col>
         <ion-col>
-          <button block type="button" ion-button tappable (click)="dismiss(true)">{{'SKIP' | translate}}</button>
+          <button
+            block
+            type="button"
+            ion-button
+            tappable
+            (click)="dismiss(true)"
+          >
+            {{'SKIP' | translate}}
+          </button>
         </ion-col>
       </ion-row>
     </form>

@@ -5,7 +5,10 @@ page-home {
 
   .banner-slide {
     .swiper-container {
-      height: 200px !important;
+      height: 160px !important;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      background-color: var(--primary_color);
     }
   }
 
@@ -14,7 +17,8 @@ page-home {
 
     .slide-zoom {
       .banner_img {
-        width: 100% !important;
+        border-radius: 10px;
+        width: 95% !important;
         height: 100%;
         object-fit: cover;
       }
@@ -22,5 +26,4 @@ page-home {
       height: 100%;
     }
   }
-
 }

@@ -2,17 +2,16 @@
 //@import url('https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i');
 
 @font-face {
-  font-family: 'GIDOLE';
-  src: url('../assets/fonts/Gidole-Regular.ttf');
+  font-family: "GIDOLE";
+  src: url("../assets/fonts/Gidole-Regular.ttf");
 }
 
 * {
-  font-family: 'GIDOLE', sans-serif;
+  font-family: "GIDOLE", sans-serif;
 }
 
 .menu-css {
   .menu-header {
-
     .label,
     .label p {
       color: var(--toolbar_text_color);
@@ -40,7 +39,7 @@
   }
 
   .button.light-grey-button {
-    background-color: #F7F7F7;
+    background-color: #f7f7f7;
     color: #000;
     font-weight: bolder;
   }
@@ -78,8 +77,6 @@ h6 {
   padding: 0;
 }
 
-
-
 //Bottom Tabs Theme
 .tabs .tabbar {
   background: white !important;
@@ -114,7 +111,6 @@ h6 {
   contain: strict;
 
   .modal-wrapper {
-
     &,
     .ion-page,
     .ion-page .content,
@@ -200,7 +196,7 @@ h6 {
     display: inline-block;
     width: 100%;
     border-radius: 2px;
-    transition: background-color .15s, box-shadow .15s;
+    transition: background-color 0.15s, box-shadow 0.15s;
 
     .product-count {
       display: inline-block;
@@ -215,7 +211,7 @@ h6 {
 
   .empty-tree-drop-slot .node-drop-slot {
     height: 20px;
-    min-width: 100px
+    min-width: 100px;
   }
 
   .angular-tree-component {
@@ -241,12 +237,14 @@ h6 {
     direction: rtl;
   }
 
-  tree-root .angular-tree-component-rtl .toggle-children-wrapper-collapsed .toggle-children {
+  tree-root
+    .angular-tree-component-rtl
+    .toggle-children-wrapper-collapsed
+    .toggle-children {
     transform: rotate(180deg) !important;
   }
 
   tree-root .angular-tree-component-rtl .tree-children {
-
     @include padding(null, 20px, null, 0);
   }
 
@@ -298,7 +296,6 @@ h6 {
 }
 
 .product-slider {
-
   .item button[item-end] {
     @include margin(null, 0px, null, null);
   }
@@ -313,7 +310,7 @@ h6 {
     width: 160px;
     padding: 0px;
     border: 1px solid #ddd;
-    @include text-align('start');
+    @include text-align("start");
     @include margin(null, 8px !important, null, null);
 
     &:first-child {
@@ -393,45 +390,57 @@ h6 {
 
 .category-slide {
   ion-col {
-    @include margin(null, 10px !important, null, null);
+    @include margin(null, 20px !important, null, null);
   }
 
   .scroll-content {
     @include padding(null, null, null, 8px !important);
   }
 
-  margin-bottom :16px;
-  margin-top :16px;
-  height: 60px !important;
+  margin-bottom: 16px;
+  margin-top: 16px;
+  height: 90px !important;
+  align-self: center !important;
 
   .img {
-    //width: 90px;
-    //height: 60px;
-    border-radius: 3px !important;
+    width: 60px !important;
+    height: 60px;
+    border-radius: 150px !important;
     //margin-bottom: 10px;
     //background-size: cover;
   }
 
   h5 {
-    position: absolute;
-    text-transform: uppercase;
-    @include position(null, auto, 0px, 0px);
+    width: "100%";
     text-align: center;
-    color: #fff;
-    font-weight: bold;
-    font-size: 1.2rem;
-    display: block;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    word-wrap: break-word;
-    letter-spacing: 1px;
-    background: linear-gradient(to bottom, rgba(175, 175, 175, 0.37) 0%, rgba(0, 0, 0, 1) 100%);
-    width: 100%;
-    padding: 4px 0 2px 0;
-    margin: 0;
+    padding-top: 5px;
+    // padding-left: 8px;
+    //padding-right: 8px;
+    font-size: 10px;
+    width: 60px;
+    //   //position: absolute;
+    //   text-transform: uppercase;
+    //   @include position(null, auto, 0px, 0px);
+    //   text-align: center;
+    //   color: #fff;
+    //   font-weight: bold;
+    //   font-size: 1.2rem;
+    //   // display: block;
+    //   display: -webkit-box;
+    //   -webkit-line-clamp: 2;
+    //   -webkit-box-orient: vertical;
+    //   text-overflow: ellipsis;
+    //   overflow: hidden;
+    //   word-wrap: break-word;
+    //   letter-spacing: 1px;
+    //   background: linear-gradient(
+    //     to bottom,
+    //     rgba(175, 175, 175, 0.37) 0%,
+    //     rgba(0, 0, 0, 1) 100%
+    //   );
+    //   width: 100%;
+    //   padding: 4px 0 2px 0;
+    //   margin-top: 0px;
   }
 }
 
@@ -451,7 +460,7 @@ h6 {
 }
 
 .product-item {
-  @include text-align('start');
+  @include text-align("start");
   border: 1px solid #ddd;
 
   ion-badge {
@@ -579,7 +588,7 @@ h6 {
   text-transform: capitalize;
   font-size: 14px;
   line-height: 1.5;
-  @include position(null, -75px, null, null)
+  @include position(null, -75px, null, null);
 }
 
 @keyframes spin {
@@ -603,7 +612,6 @@ h6 {
   }
 }
 
-
 .list .item-input.item-input-has-focus:last-child {
   border: 0px !important;
   box-shadow: none !important;
@@ -622,7 +630,7 @@ h6 {
   margin: 0 !important;
 }
 
-//Dynamic 
+//Dynamic
 .toolbar {
   .toolbar-background {
     background-color: var(--primary_color);
@@ -641,7 +649,7 @@ h6 {
       background-color: var(--toolbar-badge-color) !important;
       color: white !important;
 
-      &~ion-icon {
+      & ~ ion-icon {
         @include margin(null, 1.2rem, null, null);
       }
     }
@@ -688,7 +696,7 @@ button.fav {
 ion-alert {
   .alert-wrapper {
     .alert-radio-group {
-      .alert-radio-button[aria-checked=true] {
+      .alert-radio-button[aria-checked="true"] {
         .button-inner {
           .alert-radio-icon {
             border-color: var(--accent_color) !important;
@@ -892,10 +900,8 @@ loading-custom-msg {
         color: #fff !important;
         @include margin(null, 0px, null, null);
 
-
         &:nth-of-type(1) {
           background: var(--primary_color);
-
         }
 
         &:nth-of-type(2) {
@@ -907,7 +913,6 @@ loading-custom-msg {
         }
       }
     }
-
   }
 }
 
@@ -945,10 +950,8 @@ loading-custom-msg {
         color: #fff !important;
         @include margin(null, 0px, null, null);
 
-
         &:nth-of-type(1) {
           background: var(--primary_color);
-
         }
 
         &:nth-of-type(2) {
@@ -960,6 +963,5 @@ loading-custom-msg {
         }
       }
     }
-
   }
 }
