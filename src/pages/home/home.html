@@ -26,7 +26,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content no-padding>
+<ion-content no-padding style="background-color: #f6f6f6;">
   <ng-container *ngIf="!layout">
     <skeleton-item no-animated height="180px"></skeleton-item>
     <ion-item no-lines>
@@ -97,12 +97,13 @@
         </button>
       </ion-item>
     </ion-list> -->
-    <ion-scroll scrollX="true" class="category-slide">
-      <ion-row nowrap>
+
+    <ion-grid>
+      <ion-row>
         <ng-container *ngFor="let x of layout.categories; let i=index">
-          <ion-col col-auto no-padding>
+          <ion-col col-3>
             <img-loader
-              class="img"
+              class="imageCat"
               width="60px"
               height="60px"
               backgroundSize="cover"
@@ -119,9 +120,381 @@
           </ion-col>
         </ng-container>
       </ion-row>
-    </ion-scroll>
+    </ion-grid>
 
     <div
+      class="custom-product-slider"
+      *ngIf="layout.sale_products && layout.sale_products.length>0"
+    >
+      <!-- <ion-item no-lines>
+      {{"TRENDING_OFFERS"| translate}}
+      <button
+        item-end
+        ion-button
+        clear
+        icon-end
+        tappable
+        (click)="goTo('ProductPage',{on_sale:true})"
+      >
+        See More
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </ion-item> -->
+      <img
+        src="assets/imgs/banner_home.jpg"
+        style="
+          width: 100%;
+          height: 42px;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+        "
+        item-start
+      />
+      <ion-slides
+        style="padding: 8px 10px 10px 10px; margin-bottom: 10px;"
+        spaceBetween="0"
+        slidesPerView="2.5"
+        [dir]="dir"
+      >
+        <ion-slide *ngFor="let product of layout.sale_products">
+          <div
+            style="border-width: 1px solid #fff !important;"
+            class="product-item"
+          >
+            <button
+              class="fav"
+              tappable
+              (click)="setFav(product)"
+              ion-button
+              clear
+              icon-only
+            >
+              <ion-icon
+                no-padding
+                name="heart{{!wishlist.isFav(product) ? '-outline' : ''}}"
+              ></ion-icon>
+            </button>
+            <div tappable (click)="goTo('ProductdetailPage', product)">
+              <img-loader class="img" [src]="product.images[0].src">
+                <ion-badge *ngIf="product.on_sale"
+                  >{{product | discount}}</ion-badge
+                >
+              </img-loader>
+              <!-- <div class="img" [ngStyle]="{'background-image': 'url(' + product.images[0].src +')'}">
+            <ion-badge *ngIf="product.on_sale">{{product | discount}}</ion-badge>
+          </div> -->
+              <h5 [innerHTML]="product.name" class="custom-product-name"></h5>
+              <div class="custom-price">
+                <span [innerHTML]="product.price_html"></span>
+              </div>
+            </div>
+          </div>
+        </ion-slide>
+      </ion-slides>
+    </div>
+
+    <ion-slides
+      class="custom-banner-slide"
+      autoplay="4000"
+      loop
+      pager
+      *ngIf="layout.banner && layout.banner.length>0"
+      [dir]="dir"
+      #slider
+      tappable
+      (click)="handleSlideClick()"
+    >
+      <ion-slide *ngFor="let banner of layout.banner">
+        <img [src]="banner.banner_url" class="banner_img" />
+        <!-- <img-loader [src]="banner.banner_url" useImg class="banner_img"></img-loader> -->
+      </ion-slide>
+    </ion-slides>
+
+    <ion-grid>
+      <ion-row>
+        <ng-container *ngFor="let x of layout.categories; let i=index">
+          <ion-col col-3>
+            <img-loader
+              class="imageCat"
+              width="60px"
+              height="60px"
+              backgroundSize="cover"
+              [src]="x.image ? x.image : ''"
+              tappable
+              (click)="goTo('ProductPage', x)"
+            >
+            </img-loader>
+            <h5 [innerHTML]="x.name"></h5>
+            <!-- <div class="img" [ngStyle]="{'background-image':(x.image && x.image.src)?'url('+x.image.src+')':'url(http://via.placeholder.com/90x60)'}"
+                tappable (click)="goTo('ProductPage', x)">
+                <h5 [innerHTML]="x.name"></h5>
+              </div> -->
+          </ion-col>
+        </ng-container>
+      </ion-row>
+    </ion-grid>
+
+    <ion-slides margin-bottom slidesPerView="2" [dir]="dir">
+      <ion-slide *ngFor="let product of layout.featured_products">
+        <div class="custom-product">
+          <div tappable (click)="goTo('ProductdetailPage', product)">
+            <img
+              style="
+                border-top-left-radius: 10px !important;
+                border-top-right-radius: 10px !important;
+                margin-left: 0px !important;
+                margin-right: 0px !important;
+              "
+              src="assets/imgs/bournvita.jpg"
+              class="custom-img"
+              item-start
+            />
+            <!-- <img-loader class="img" [src]="product.images[0].src"> </img-loader> -->
+          </div>
+        </div>
+      </ion-slide>
+    </ion-slides>
+
+    <ion-slides
+      class="custom-banner-slide"
+      autoplay="4000"
+      loop
+      pager
+      *ngIf="layout.banner && layout.banner.length>0"
+      [dir]="dir"
+      #slider
+      tappable
+      (click)="handleSlideClick()"
+    >
+      <ion-slide *ngFor="let banner of layout.banner">
+        <img [src]="banner.banner_url" class="banner_img" />
+        <!-- <img-loader [src]="banner.banner_url" useImg class="banner_img"></img-loader> -->
+      </ion-slide>
+    </ion-slides>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col class="row_col">
+          <div class="icon_row">
+            <ion-icon name="md-apps"></ion-icon>
+          </div>
+          <h5 style="margin-right: 0px !important;">All Categories</h5>
+        </ion-col>
+        <ion-col>
+          <div class="icon_row">
+            <ion-icon name="md-git-pull-request"></ion-icon>
+          </div>
+          <h5>Request For Quotation</h5>
+        </ion-col>
+        <ion-col>
+          <div class="icon_row">
+            <ion-icon name="md-shirt"></ion-icon>
+          </div>
+          <h5>Ready To Ship</h5>
+        </ion-col>
+        <ion-col>
+          <div class="icon_row">
+            <ion-icon name="md-search"></ion-icon>
+          </div>
+          <h5>Personal Protective Equipment</h5>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <div style="margin-left: 8px; margin-right: 8px;">
+      <h6 style="margin-bottom: 10px;">New Buyer Rewards</h6>
+      <img src="assets/imgs/shempoo.jpg" class="single_banner" />
+    </div>
+
+    <ng-container style="margin-top: 8px;">
+      <ion-card class="brandstore">
+        <button ion-button round>Bakery Store</button>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-4>
+              <img src="assets/imgs/shempoo.jpg" class="img-brand" />
+            </ion-col>
+            <ion-col col-4>
+              <img src="assets/imgs/shempoo.jpg" class="img-brand" />
+            </ion-col>
+            <ion-col col-4>
+              <img src="assets/imgs/shempoo.jpg" class="img-brand" />
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-4>
+              <img src="assets/imgs/shempoo.jpg" class="img-brand" />
+            </ion-col>
+            <ion-col col-4>
+              <img src="assets/imgs/shempoo.jpg" class="img-brand" />
+            </ion-col>
+            <ion-col col-4>
+              <img src="assets/imgs/shempoo.jpg" class="img-brand" />
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+    </ng-container>
+
+    <div style="margin-left: 8px; margin-right: 8px;">
+      <img src="assets/imgs/cake.jpg" class="single_banner" />
+      <img
+        src="assets/imgs/pizza.jpg"
+        class="single_banner"
+        style="margin-top: 8px;"
+      />
+    </div>
+
+    <ng-container style="margin-top: 8px;">
+      <ion-card class="brandstore">
+        <button ion-button round>Bakery Store</button>
+      </ion-card>
+      <ion-content
+        style="
+          margin-left: 8px !important;
+          margin-top: -8px;
+          background-color: #f6f6f6;
+        "
+      >
+        <div style="margin-right: 11px !important;">
+          <ion-grid *ngIf="show_loader">
+            <ion-row>
+              <ion-col
+                col-6
+                col-md-3
+                col-sm-4
+                no-padding
+                *ngFor="let x of [0,1,2,3,4,5,6,7]"
+              >
+                <skeleton-item no-animated height="160px"></skeleton-item>
+                <skeleton-item no-animated></skeleton-item>
+                <skeleton-item no-animated width="50%"></skeleton-item>
+                <skeleton-item
+                  no-animated
+                  width="70%"
+                  height="10px"
+                ></skeleton-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+          <div class="div" *ngIf="showEmpty">
+            <ion-grid>
+              <ion-row align-items-center>
+                <ion-col align-self-center text-center>
+                  <ion-icon
+                    name="cart"
+                    class="accent"
+                    style="transform: scale(3);"
+                  ></ion-icon>
+                  <h4 margin-top class="accent">
+                    {{'NO_PRODUCTS' | translate}}
+                  </h4>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+
+          <ion-scroll
+            scrollX="true"
+            class="category-slide"
+            *ngIf="!show_loader && categories && categories.length>0"
+          >
+            <ion-row nowrap>
+              <ng-container *ngFor="let x of categories; let i=index">
+                <ion-col col-auto no-padding>
+                  <img-loader
+                    class="img"
+                    width="90px"
+                    height="60px"
+                    backgroundSize="cover"
+                    [src]="x.image ? x.image.src : ''"
+                    tappable
+                    (click)="goTo('ProductPage', x)"
+                  >
+                    <h5 [innerHTML]="x.name"></h5>
+                  </img-loader>
+                  <!-- <div class="img" [ngStyle]="{'background-image':(x.image && x.image.src)?'url('+x.image.src+')':'url(http://via.placeholder.com/90x60)'}"
+                      tappable (click)="goTo('ProductPage', x)">
+                      <h5 [innerHTML]="x.name"></h5>
+                    </div> -->
+                </ion-col>
+              </ng-container>
+            </ion-row>
+          </ion-scroll>
+
+          <ion-grid style="padding: 0px !important;" *ngIf="!show_loader">
+            <ion-row>
+              <ion-col
+                col-6
+                col-md-3
+                col-sm-4
+                no-padding
+                *ngFor="let product of products"
+              >
+                <div
+                  class="product-item"
+                  style="
+                    border-radius: 8px !important;
+                    margin-top: 4px !important;
+                    margin-right: 4px !important;
+                  "
+                >
+                  <!-- <button
+                  class="fav"
+                  tappable
+                  (click)="setFav(product)"
+                  ion-button
+                  clear
+                  icon-only
+                >
+                  <ion-icon
+                    no-padding
+                    name="heart{{!wishlist.isFav(product) ? '-outline' : ''}}"
+                  ></ion-icon>
+                </button> -->
+                  <div tappable (click)="goTo('ProductdetailPage', product)">
+                    <img-loader class="img" [src]="product.images[0].src">
+                      <!-- <ion-badge *ngIf="product.on_sale"
+                      >{{product | discount}}</ion-badge
+                    > -->
+                    </img-loader>
+                    <h5 [innerHTML]="product.name" class="product-name"></h5>
+                    <div class="bottom_price">
+                      <span [innerHTML]="product.price_html"></span>
+                    </div>
+                    <!-- <div class="rate">
+                    <rating
+                      *ngIf="product.average_rating"
+                      max="5"
+                      readOnly="true"
+                      [(ngModel)]="product.average_rating"
+                    >
+                    </rating>
+                    <span class="rating_count" *ngIf="product.rating_count"
+                      >({{product.rating_count}})</span
+                    >
+                  </div> -->
+                  </div>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+          <ion-infinite-scroll
+            *ngIf="hasMore"
+            (ionInfinite)="loadMoreProducts($event)"
+          >
+            <ion-infinite-scroll-content style="min-height: 8px !important;">
+            </ion-infinite-scroll-content>
+          </ion-infinite-scroll>
+        </div>
+      </ion-content>
+    </ng-container>
+
+    <!-- <div
       class="product-slider"
       *ngIf="layout.featured_products && layout.featured_products.length>0"
     >
@@ -168,7 +541,7 @@
               </img-loader>
               <!-- <div class="img" [ngStyle]="{'background-image': 'url(' + product.images[0].src +')'}">
               <ion-badge *ngIf="product.on_sale">{{product | discount}}</ion-badge>
-            </div> -->
+            </div> 
               <h5 [innerHTML]="product.name" class="product-name"></h5>
               <div class="price">
                 <span [innerHTML]="product.price_html"></span>
@@ -189,9 +562,9 @@
           </div>
         </ion-slide>
       </ion-slides>
-    </div>
+    </div> -->
 
-    <div
+    <!-- <div
       class="product-slider"
       *ngIf="layout.top_seller && layout.top_seller.length>0"
     >
@@ -238,7 +611,7 @@
               </img-loader>
               <!-- <div class="img" [ngStyle]="{'background-image': 'url(' + product.images[0].src +')'}">
               <ion-badge *ngIf="product.on_sale">{{product | discount}}</ion-badge>
-            </div> -->
+            </div>
               <h5 [innerHTML]="product.name" class="product-name"></h5>
               <div class="price">
                 <span [innerHTML]="product.price_html"></span>
@@ -259,79 +632,9 @@
           </div>
         </ion-slide>
       </ion-slides>
-    </div>
+    </div> -->
 
-    <div
-      class="product-slider"
-      *ngIf="layout.sale_products && layout.sale_products.length>0"
-    >
-      <ion-item no-lines>
-        {{"TRENDING_OFFERS"| translate}}
-        <button
-          item-end
-          ion-button
-          clear
-          icon-end
-          tappable
-          (click)="goTo('ProductPage',{on_sale:true})"
-        >
-          See More
-          <ion-icon name="arrow-forward"></ion-icon>
-        </button>
-      </ion-item>
-      <ion-slides
-        margin-bottom
-        spaceBetween="8"
-        slidesPerView="2.5"
-        [dir]="dir"
-      >
-        <ion-slide *ngFor="let product of layout.sale_products">
-          <div class="product-item">
-            <button
-              class="fav"
-              tappable
-              (click)="setFav(product)"
-              ion-button
-              clear
-              icon-only
-            >
-              <ion-icon
-                no-padding
-                name="heart{{!wishlist.isFav(product) ? '-outline' : ''}}"
-              ></ion-icon>
-            </button>
-            <div tappable (click)="goTo('ProductdetailPage', product)">
-              <img-loader class="img" [src]="product.images[0].src">
-                <ion-badge *ngIf="product.on_sale"
-                  >{{product | discount}}</ion-badge
-                >
-              </img-loader>
-              <!-- <div class="img" [ngStyle]="{'background-image': 'url(' + product.images[0].src +')'}">
-              <ion-badge *ngIf="product.on_sale">{{product | discount}}</ion-badge>
-            </div> -->
-              <h5 [innerHTML]="product.name" class="product-name"></h5>
-              <div class="price">
-                <span [innerHTML]="product.price_html"></span>
-              </div>
-              <div class="rate">
-                <rating
-                  *ngIf="product.average_rating"
-                  max="5"
-                  readOnly="true"
-                  [(ngModel)]="product.average_rating"
-                >
-                </rating>
-                <span class="rating_count" *ngIf="product.rating_count"
-                  >({{product.rating_count}})</span
-                >
-              </div>
-            </div>
-          </div>
-        </ion-slide>
-      </ion-slides>
-    </div>
-
-    <div
+    <!-- <div
       class="product-slider"
       *ngIf="layout.top_rated_products && layout.top_rated_products.length>0"
     >
@@ -378,7 +681,7 @@
               </img-loader>
               <!-- <div class="img" [ngStyle]="{'background-image': 'url(' + product.images[0].src +')'}">
               <ion-badge *ngIf="product.on_sale">{{product| discount}}</ion-badge>
-            </div> -->
+            </div>
               <h5 [innerHTML]="product.name" class="product-name"></h5>
               <div class="price">
                 <span [innerHTML]="product.price_html"></span>
@@ -399,6 +702,6 @@
           </div>
         </ion-slide>
       </ion-slides>
-    </div>
+    </div> -->
   </ng-container>
 </ion-content>
