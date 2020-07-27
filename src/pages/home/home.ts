@@ -15,12 +15,14 @@ import {
   WishlistProvider,
   ToastProvider,
   SettingsProvider,
+  UserProvider,
 } from "../../providers/providers";
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { PageTrack } from "../../decorator/page-track.decorator";
 import { AdMobFree } from "@ionic-native/admob-free";
 import { Deeplinks } from "@ionic-native/deeplinks";
 import { TranslateService } from "@ngx-translate/core";
+import { InAppBrowser } from "@ionic-native/in-app-browser";
 
 @IonicPage({
   priority: "high",
@@ -49,10 +51,12 @@ export class HomePage {
   categories: Array<any>;
   on_sale: boolean;
   featured: boolean;
+  blog: Array<any>;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    private iab: InAppBrowser,
     private WC: WooCommerceProvider,
     public loader: LoadingProvider,
     public wishlist: WishlistProvider,
@@ -60,6 +64,7 @@ export class HomePage {
     public settings: SettingsProvider,
     private toast: ToastProvider,
     private splash: SplashScreen,
+    public user: UserProvider,
     public platform: Platform,
     private admob: AdMobFree,
     public deeplinks: Deeplinks,
@@ -322,5 +327,14 @@ export class HomePage {
   }
   goTo(page, params) {
     this.navCtrl.push(page, { params: params }, { animate: false });
+  }
+  goToBlog(blog) {
+    this.loader.show();
+    let browser = this.iab.create(blog.block_url, "_blank", {
+      location: "no",
+      clearcache: "yes",
+      clearsessioncache: "yes",
+    });
+    this.loader.dismiss();
   }
 }
