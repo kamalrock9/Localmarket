@@ -1,27 +1,31 @@
-import { Facebook } from '@ionic-native/facebook';
-import { GooglePlus } from '@ionic-native/google-plus';
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Storage } from '@ionic/storage';
+import { Facebook } from "@ionic-native/facebook";
+import { GooglePlus } from "@ionic-native/google-plus";
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Storage } from "@ionic/storage";
 
-import { App } from '../../app/app.config';
+import { App } from "../../app/app.config";
 
 @Injectable()
 export class UserProvider {
-  private USER_KEY: string = 'user';
+  private USER_KEY: string = "user";
 
   user: any;
   _readyPromise: Promise<any>;
   url: any;
-  constructor(public storage: Storage, private http: HttpClient, private googlePlus: GooglePlus, private fb: Facebook) {
+  constructor(
+    public storage: Storage,
+    private http: HttpClient,
+    private googlePlus: GooglePlus,
+    private fb: Facebook
+  ) {
     this.load();
     this.url = App.url + "/wp-json/wc/v2";
   }
 
   load() {
     return this.storage.get(this.USER_KEY).then((val) => {
-      if (val)
-        this.loggedIn(val);
+      if (val) this.loggedIn(val);
     });
   }
 
@@ -34,43 +38,59 @@ export class UserProvider {
   login(data: any) {
     let param = {
       email: data.user,
-      password: data.pass
-    }
-    return this.http.post(this.url + '/login', param);
+      password: data.pass,
+    };
+    return this.http.post(this.url + "/login", param);
   }
   reset(data: any) {
-    let emailField = '?email=' + data.email;
+    let emailField = "?email=" + data.email;
     console.log(emailField);
-    return this.http.get(this.url + '/forget-password' + emailField);
+    return this.http.get(this.url + "/forget-password" + emailField);
   }
   changePassword(data: any) {
-    let changefield = '?user_id=' + this.user.id + '&password_current=' + data.opass + '&password_1=' + data.npass + '&password_2=' + data.cpass;
+    let changefield =
+      "?user_id=" +
+      this.user.id +
+      "&password_current=" +
+      data.opass +
+      "&password_1=" +
+      data.npass +
+      "&password_2=" +
+      data.cpass;
     console.log(changefield);
-    return this.http.get(this.url + '/change-password' + changefield);
+    return this.http.get(this.url + "/change-password" + changefield);
   }
   socialLogin(data) {
     return this.http.post(this.url + "/social-login", data);
   }
   register(data: any) {
-    let fields = 'fname=' + data.fname + '&lname=' + data.lname + '&email=' + data.email + '&password=' + data.pass;
+    let fields =
+      "fname=" +
+      data.fname +
+      "&lname=" +
+      data.lname +
+      "&email=" +
+      data.email +
+      "&password=" +
+      data.pass;
     console.log(fields);
-    return this.http.post(this.url + '/register', fields,
-      {
-        headers: {
-          'Content-Type': "application/x-www-form-urlencoded;charset=utf-8"
-        }
-      });
+    return this.http.post(this.url + "/register", fields, {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+      },
+    });
   }
   getReferEarnData() {
-    let u = (this.user && this.user.id) ? "?user_id=" + this.user.id : "?user_id=";
+    let u =
+      this.user && this.user.id ? "?user_id=" + this.user.id : "?user_id=";
     return this.http.get(this.url + "/refer" + u);
   }
   applyReferralCode(id, code) {
     let fields = "user_id=" + id + "&refer_code=" + code;
     return this.http.post(this.url + "/referapply", fields, {
       headers: {
-        'Content-Type': "application/x-www-form-urlencoded;charset=utf-8"
-      }
+        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+      },
     });
   }
 
@@ -79,16 +99,17 @@ export class UserProvider {
     this.googlePlus.disconnect();
     this.fb.logout();
     this.storage.remove(this.USER_KEY).then(() => {
-      console.log("Logged Out")
+      console.log("Logged Out");
     });
-    this.http.get(this.url + '/logout', { responseType: 'text' }).subscribe((data) => {
-      console.log(data);
-    });
+    this.http
+      .get(this.url + "/logout", { responseType: "text" })
+      .subscribe((data) => {
+        console.log(data);
+      });
   }
 
   get email() {
-    if (this.user.email)
-      return this.user.email;
+    if (this.user.email) return this.user.email;
   }
 
   get billing() {
@@ -107,40 +128,37 @@ export class UserProvider {
   }
 
   get first_name() {
-    if (this.user.first_name)
-      return this.user.first_name;
-    else
-      return null;
+    if (this.user.first_name) return this.user.first_name;
+    else return null;
   }
 
   get last_name() {
-    if (this.user.last_name)
-      return this.user.last_name;
-    else
-      return '';
+    if (this.user.last_name) return this.user.last_name;
+    else return "";
+  }
+
+  get avatar_url() {
+    if (this.user.avatar_url) return this.user.avatar_url;
+    else return "";
   }
 
   get id() {
     if (this.user && this.user.id) {
       return this.user.id;
     } else {
-      return '';
+      return "";
     }
-
   }
 
   get username() {
-    if (this.user.username)
-      return this.user.username;
+    if (this.user.username) return this.user.username;
   }
 
   get all() {
-    if (this.user)
-      return this.user;
+    if (this.user) return this.user;
   }
 
   save() {
     return this.storage.set(this.USER_KEY, this.user);
   }
-
 }

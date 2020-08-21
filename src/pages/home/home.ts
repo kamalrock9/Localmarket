@@ -209,8 +209,58 @@ export class HomePage {
       "data-swiper-slide-index"
     );
     console.log(index);
-    if (index) {
+    if (this.layout.banner[index].ref_banner_url === "") {
       this.goTo("ProductPage", this.layout.banner[index]);
+    } else {
+      this.loader.show();
+      let browser = this.iab.create(
+        this.layout.banner[index].ref_banner_url,
+        "_blank",
+        {
+          location: "no",
+          clearcache: "yes",
+          clearsessioncache: "yes",
+        }
+      );
+      this.loader.dismiss();
+    }
+  }
+  handleSlideClickSeconBanner() {
+    let index = this.slides._slides[this.slides.clickedIndex].getAttribute(
+      "data-swiper-slide-index"
+    );
+    console.log(index);
+    if (this.layout.second_banner[index].second_banner_url === "") {
+      this.goTo("ProductPage", this.layout.second_banner[index]);
+    } else {
+      let browser = this.iab.create(
+        this.layout.second_banner[index].second_banner_url,
+        "_blank",
+        {
+          location: "no",
+          clearcache: "yes",
+          clearsessioncache: "yes",
+        }
+      );
+    }
+  }
+  handleSlideClickThirdBanner() {
+    let index = this.slides._slides[this.slides.clickedIndex].getAttribute(
+      "data-swiper-slide-index"
+    );
+    console.log(index);
+    if (this.layout.third_banner[index].third_banner_url === "") {
+      this.goTo("ProductPage", this.layout.third_banner[index]);
+    } else {
+      let browser = this.iab.create(
+        this.layout.third_banner[index].third_banner_url,
+        "_blank",
+        {
+          location: "no",
+          clearcache: "yes",
+          clearsessioncache: "yes",
+        }
+      );
     }
   }
   loadProducts() {
@@ -328,13 +378,98 @@ export class HomePage {
   goTo(page, params) {
     this.navCtrl.push(page, { params: params }, { animate: false });
   }
+  goToBlock(page, params) {
+    console.log(params);
+    if (params.block_url === "") {
+      this.navCtrl.push(page, { params: params }, { animate: false });
+    } else {
+      let browser = this.iab.create(params.block_url, "_blank", {
+        location: "no",
+        clearcache: "yes",
+        clearsessioncache: "yes",
+      });
+    }
+  }
+  goToSecondBannerProduct(page, params) {
+    console.log(params);
+    if (params.banner2_product_url === "") {
+      this.navCtrl.push(page, { params: params }, { animate: false });
+    } else {
+      let browser = this.iab.create(params.banner2_product_url, "_blank", {
+        location: "no",
+        clearcache: "yes",
+        clearsessioncache: "yes",
+      });
+    }
+  }
+  goToThirdBannerIcon(page, params) {
+    console.log(params);
+    if (params.banner3_icon_url === "") {
+      this.navCtrl.push(page, { params: params }, { animate: false });
+    } else {
+      let browser = this.iab.create(params.banner3_icon_url, "_blank", {
+        location: "no",
+        clearcache: "yes",
+        clearsessioncache: "yes",
+      });
+    }
+  }
+  goToSingleBannerData(page, params) {
+    console.log(params);
+    if (params.single_banner_url === "") {
+      this.navCtrl.push(page, { params: params }, { animate: false });
+    } else {
+      let browser = this.iab.create(params.single_banner_url, "_blank", {
+        location: "no",
+        clearcache: "yes",
+        clearsessioncache: "yes",
+      });
+    }
+  }
+  goTobanner_10x_first(page, params) {
+    console.log(params);
+    if (params.banner_10x_first_url === "") {
+      this.navCtrl.push(page, { params: params }, { animate: false });
+    } else {
+      let browser = this.iab.create(params.banner_10x_first_url, "_blank", {
+        location: "no",
+        clearcache: "yes",
+        clearsessioncache: "yes",
+      });
+    }
+  }
+  goTonew_arrival(page, params) {
+    console.log(params);
+    if (params.new_arrival_url === "") {
+      this.navCtrl.push(page, { params: params }, { animate: false });
+    } else {
+      let browser = this.iab.create(params.new_arrival_url, "_blank", {
+        location: "no",
+        clearcache: "yes",
+        clearsessioncache: "yes",
+      });
+    }
+  }
+  goTobanner_10x_second(page, params) {
+    console.log(params);
+    if (params.banner_10x_second_url === "") {
+      this.navCtrl.push(page, { params: params }, { animate: false });
+    } else {
+      let browser = this.iab.create(params.banner_10x_second_url, "_blank", {
+        location: "no",
+        clearcache: "yes",
+        clearsessioncache: "yes",
+      });
+    }
+  }
   goToBlog(blog) {
-    this.loader.show();
-    let browser = this.iab.create(blog.block_url, "_blank", {
+    //this.loader.show();
+    console.log(blog);
+    let browser = this.iab.create(blog, "_blank", {
       location: "no",
       clearcache: "yes",
       clearsessioncache: "yes",
     });
-    this.loader.dismiss();
+    // this.loader.dismiss();
   }
 }

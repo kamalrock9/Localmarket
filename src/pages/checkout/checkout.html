@@ -1,27 +1,30 @@
 <ion-header>
-
   <ion-navbar>
     <ion-title>{{"CHECKOUT" | translate}}</ion-title>
   </ion-navbar>
   <div>
     <ul class="list-unstyled multi-steps">
-      <li [class]="page=='billing'?'is-active':''">{{'BILLING' | translate}} <br />{{'ADDRESS' | translate}}</li>
-      <li [class]="page=='shipping'?'is-active':''">{{'SHIPPING' | translate}} <br />{{'ADDRESS' |
-        translate}}</li>
+      <li [class]="page=='billing'?'is-active':''">
+        {{'BILLING' | translate}} <br />{{'ADDRESS' | translate}}
+      </li>
+      <li [class]="page=='shipping'?'is-active':''">
+        {{'SHIPPING' | translate}} <br />{{'ADDRESS' | translate}}
+      </li>
       <li [class]="page=='review'?'is-active':''">{{'PAYMENT' | translate}}</li>
     </ul>
   </div>
 </ion-header>
 
-
 <ion-content no-bounce>
   <div class="multi-steps-contents">
     <div *ngIf="page=='billing'" class="billing">
       <form [formGroup]="formBilling" (ngSubmit)="billingSubmit()" novalidate>
-
         <ion-list no-linesno-lines padding-left padding-right>
           <ion-item no-padding no-padding>
-            <ion-label stacked>{{'FIRST_NAME' | translate}} <span class="mandatory">*</span></ion-label>
+            <ion-label stacked
+              >{{'FIRST_NAME' | translate}}
+              <span class="mandatory">*</span></ion-label
+            >
             <ion-input formControlName="first_name" type="text"></ion-input>
           </ion-item>
 
@@ -36,18 +39,41 @@
           </ion-item> -->
 
           <ion-item no-padding no-padding>
-            <ion-label stacked>{{'EMAIL' | translate}}<span class="mandatory">*</span></ion-label>
+            <ion-label stacked
+              >{{'EMAIL' | translate}}<span class="mandatory"
+                >*</span
+              ></ion-label
+            >
             <ion-input formControlName="email" type="email"></ion-input>
           </ion-item>
 
           <ion-item no-padding no-padding>
-            <ion-label stacked>{{'PHONE_NUMBER' | translate}} <span class="mandatory">*</span></ion-label>
-            <ion-input formControlName="phone" type="number" inputmode="numeric" pattern="[0-9]*"></ion-input>
+            <ion-label stacked
+              >{{'PHONE_NUMBER' | translate}}
+              <span class="mandatory">*</span></ion-label
+            >
+            <ion-input
+              formControlName="phone"
+              type="number"
+              inputmode="numeric"
+              pattern="[0-9]*"
+            ></ion-input>
           </ion-item>
           <ion-item no-padding no-padding>
-            <ion-label stacked>{{'COUNTRY' | translate}} <span class="mandatory">*</span></ion-label>
-            <ion-select formControlName="country" interface="popover" (ionChange)="getBillingStates()">
-              <ion-option *ngFor="let x of countries" [value]="x.id" [innerHTML]="x.name"></ion-option>
+            <ion-label stacked
+              >{{'COUNTRY' | translate}}
+              <span class="mandatory">*</span></ion-label
+            >
+            <ion-select
+              formControlName="country"
+              interface="popover"
+              (ionChange)="getBillingStates()"
+            >
+              <ion-option
+                *ngFor="let x of countries"
+                [value]="x.id"
+                [innerHTML]="x.name"
+              ></ion-option>
             </ion-select>
             <!-- <ionic-selectable item-content formControlName="country" itemValueField="id" itemTextField="name" [items]="countries"
               [canSearch]="true" (onChange)="getBillingStates()">
@@ -55,9 +81,16 @@
           </ion-item>
 
           <ion-item no-padding no-padding *ngIf="billingStates.length > 0">
-            <ion-label stacked>{{'STATE' | translate}} <span class="mandatory">*</span></ion-label>
+            <ion-label stacked
+              >{{'STATE' | translate}}
+              <span class="mandatory">*</span></ion-label
+            >
             <ion-select formControlName="state" interface="popover">
-              <ion-option *ngFor="let x of billingStates" [value]="x.id" [innerHTML]="x.name"></ion-option>
+              <ion-option
+                *ngFor="let x of billingStates"
+                [value]="x.id"
+                [innerHTML]="x.name"
+              ></ion-option>
             </ion-select>
           </ion-item>
 
@@ -67,18 +100,30 @@
           </ion-item> -->
 
           <ion-item no-padding no-padding>
-            <ion-label stacked>{{'CITY' | translate}} <span class="mandatory">*</span></ion-label>
+            <ion-label stacked
+              >{{'CITY' | translate}}
+              <span class="mandatory">*</span></ion-label
+            >
             <ion-input formControlName="city" type="text"></ion-input>
           </ion-item>
 
           <ion-item no-padding no-padding>
-            <ion-label stacked>{{'POSTCODE' | translate}} <span class="mandatory">*</span></ion-label>
+            <ion-label stacked
+              >{{'POSTCODE' | translate}}
+              <span class="mandatory">*</span></ion-label
+            >
             <ion-input formControlName="postcode" type="text"></ion-input>
           </ion-item>
 
           <ion-item no-padding no-padding>
-            <ion-label stacked>{{'ADDRESS_1_1' | translate}} <span class="mandatory">*</span></ion-label>
-            <ion-textarea formControlName="address_1" name="description"></ion-textarea>
+            <ion-label stacked
+              >{{'ADDRESS_1_1' | translate}}
+              <span class="mandatory">*</span></ion-label
+            >
+            <ion-textarea
+              formControlName="address_1"
+              name="description"
+            ></ion-textarea>
           </ion-item>
           <!-- <ion-item no-padding no-padding>
             <ion-label stacked>{{'ADDRESS_2_2' | translate}}</ion-label>
@@ -90,15 +135,25 @@
     <div *ngIf="page=='shipping'" class="shipping">
       <form [formGroup]="formShipping" (ngSubmit)="shippingSubmit()" novalidate>
         <ion-list no-lines padding-left padding-right>
-
           <ion-item no-padding no-padding>
-            <ion-label stacked>{{'FIRST_NAME' | translate}} <span class="mandatory">*</span></ion-label>
-            <ion-input formControlName="first_name" type="text" placeholder="First Name"></ion-input>
+            <ion-label stacked
+              >{{'FIRST_NAME' | translate}}
+              <span class="mandatory">*</span></ion-label
+            >
+            <ion-input
+              formControlName="first_name"
+              type="text"
+              placeholder="First Name"
+            ></ion-input>
           </ion-item>
 
           <ion-item no-padding no-padding>
             <ion-label stacked>{{'LAST_NAME' | translate}}</ion-label>
-            <ion-input formControlName="last_name" type="text" placeholder="Last Name"></ion-input>
+            <ion-input
+              formControlName="last_name"
+              type="text"
+              placeholder="Last Name"
+            ></ion-input>
           </ion-item>
 
           <!-- <ion-item no-padding no-padding>
@@ -107,16 +162,34 @@
           </ion-item> -->
 
           <ion-item no-padding no-padding>
-            <ion-label stacked>{{'COUNTRY' | translate}} <span class="mandatory">*</span></ion-label>
-            <ion-select formControlName="country" interface="popover" (ionChange)="getShippingStates()">
-              <ion-option *ngFor="let x of countries" [value]="x.id" [innerHTML]="x.name"></ion-option>
+            <ion-label stacked
+              >{{'COUNTRY' | translate}}
+              <span class="mandatory">*</span></ion-label
+            >
+            <ion-select
+              formControlName="country"
+              interface="popover"
+              (ionChange)="getShippingStates()"
+            >
+              <ion-option
+                *ngFor="let x of countries"
+                [value]="x.id"
+                [innerHTML]="x.name"
+              ></ion-option>
             </ion-select>
           </ion-item>
 
           <ion-item no-padding no-padding *ngIf="shippingStates.length > 0">
-            <ion-label stacked>{{'STATE' | translate}} <span class="mandatory">*</span></ion-label>
+            <ion-label stacked
+              >{{'STATE' | translate}}
+              <span class="mandatory">*</span></ion-label
+            >
             <ion-select formControlName="state" interface="popover">
-              <ion-option *ngFor="let x of shippingStates" [value]="x.id" [innerHTML]="x.name"></ion-option>
+              <ion-option
+                *ngFor="let x of shippingStates"
+                [value]="x.id"
+                [innerHTML]="x.name"
+              ></ion-option>
             </ion-select>
           </ion-item>
 
@@ -126,18 +199,30 @@
           </ion-item> -->
 
           <ion-item no-padding no-padding>
-            <ion-label stacked>{{'CITY' | translate}} <span class="mandatory">*</span></ion-label>
+            <ion-label stacked
+              >{{'CITY' | translate}}
+              <span class="mandatory">*</span></ion-label
+            >
             <ion-input formControlName="city" type="text"></ion-input>
           </ion-item>
 
           <ion-item no-padding no-padding>
-            <ion-label stacked>{{'POSTCODE' | translate}} <span class="mandatory">*</span></ion-label>
+            <ion-label stacked
+              >{{'POSTCODE' | translate}}
+              <span class="mandatory">*</span></ion-label
+            >
             <ion-input formControlName="postcode" type="text"></ion-input>
           </ion-item>
 
           <ion-item no-padding no-padding>
-            <ion-label stacked>{{'ADDRESS_1_1' | translate}} <span class="mandatory">*</span></ion-label>
-            <ion-textarea formControlName="address_1" name="description"></ion-textarea>
+            <ion-label stacked
+              >{{'ADDRESS_1_1' | translate}}
+              <span class="mandatory">*</span></ion-label
+            >
+            <ion-textarea
+              formControlName="address_1"
+              name="description"
+            ></ion-textarea>
           </ion-item>
 
           <!-- <ion-item no-padding no-padding no-lines>
@@ -153,7 +238,10 @@
       </div>
 
       <div *ngIf="reviewData">
-        <div class="order-details" *ngIf="reviewData.cart_discount_coupon_error">
+        <div
+          class="order-details"
+          *ngIf="reviewData.cart_discount_coupon_error"
+        >
           <ion-list>
             <ion-item no-padding no-lines text-wrap>
               <span [innerHTML]="reviewData.cart_discount_coupon_error"></span>
@@ -161,29 +249,54 @@
           </ion-list>
         </div>
 
-        <div class="order-details" *ngIf="reviewData.cart_discount_coupon && reviewData.cart_discount_coupon.length>0">
+        <div
+          class="order-details"
+          *ngIf="reviewData.cart_discount_coupon && reviewData.cart_discount_coupon.length>0"
+        >
           <ion-list no-lines no-margin no-padding>
             <ion-list-header mode="md">
               {{"APPLIED_COUPONS" | translate}}
             </ion-list-header>
-            <ion-item no-padding no-lines *ngFor="let coupon of reviewData.cart_discount_coupon; let i=index">
+            <ion-item
+              no-padding
+              no-lines
+              *ngFor="let coupon of reviewData.cart_discount_coupon; let i=index"
+            >
               <span [innerHTML]="coupon.code"></span>
               <span item-end [innerHTML]="coupon.discount"></span>
             </ion-item>
           </ion-list>
         </div>
 
-        <div class="order-details" *ngIf="reviewData.shipping_method && reviewData.shipping_method.length>0">
-          <ion-list no-lines no-margin no-padding radio-group [(ngModel)]="reviewData.chosen_shipping_method">
+        <div
+          class="order-details"
+          *ngIf="reviewData.shipping_method && reviewData.shipping_method.length>0"
+        >
+          <ion-list
+            no-lines
+            no-margin
+            no-padding
+            radio-group
+            [(ngModel)]="reviewData.chosen_shipping_method"
+          >
             <ion-list-header mode="md">
               {{"SHIPPING_METHODS" | translate}}
             </ion-list-header>
             <ng-container *ngFor="let method of reviewData.shipping_method">
               <ion-item no-padding no-lines>
-                <ion-label [innerHtml]="method.shipping_method_name"></ion-label>
-                <span item-end [innerHTML]="method.shipping_method_price"></span>
-                <ion-radio [value]="method.id" tappable color="light"
-                  (click)="getReview(method.id,reviewData.chosen_gateway,reviewData.pay_via_wallet)">
+                <ion-label
+                  [innerHtml]="method.shipping_method_name"
+                ></ion-label>
+                <span
+                  item-end
+                  [innerHTML]="method.shipping_method_price"
+                ></span>
+                <ion-radio
+                  [value]="method.id"
+                  tappable
+                  color="light"
+                  (click)="getReview(method.id,reviewData.chosen_gateway,reviewData.pay_via_wallet)"
+                >
                 </ion-radio>
               </ion-item>
             </ng-container>
@@ -201,22 +314,34 @@
         </div>
 
         <div class="order-details">
-
           <ion-list no-lines mode="md" no-margin no-padding>
             <ion-list-header mode="md" icon-start no-margin>
               {{'ORDER_SUMMARY' | translate}}
             </ion-list-header>
 
-            <ion-item no-padding no-lines *ngFor="let item of reviewData.product">
+            <ion-item
+              no-padding
+              no-lines
+              *ngFor="let item of reviewData.product"
+            >
               <span> {{item.product_name}} x{{item.product_qty}} </span>
-              <span item-end [innerHTML]="item.product_total" class="order"> </span>
+              <span item-end [innerHTML]="item.product_total" class="order">
+              </span>
             </ion-item>
 
             <ion-item no-padding no-lines>
               <span> {{"SUBTOTAL" | translate}} </span>
-              <span item-end [innerHTML]="reviewData.cart_subtotal" class="order"></span>
+              <span
+                item-end
+                [innerHTML]="reviewData.cart_subtotal"
+                class="order"
+              ></span>
             </ion-item>
-            <ion-item no-padding no-lines *ngIf="reviewData.shipping_method && reviewData.shipping_method.length>0">
+            <ion-item
+              no-padding
+              no-lines
+              *ngIf="reviewData.shipping_method && reviewData.shipping_method.length>0"
+            >
               <div [innerHTML]="'SHIPPING_FEE' | translate"></div>
               <div item-end [innerHTML]="shipping_price()"></div>
             </ion-item>
@@ -226,14 +351,25 @@
             </ion-item>
 
             <ng-container *ngIf="reviewData.cart_tax_total">
-              <ion-item no-padding no-lines *ngFor="let key of objectKeys(reviewData.cart_tax_total)">
+              <ion-item
+                no-padding
+                no-lines
+                *ngFor="let key of objectKeys(reviewData.cart_tax_total)"
+              >
                 <div [innerHTML]="key"></div>
-                <div item-end [innerHTML]="reviewData.cart_tax_total[key]"></div>
+                <div
+                  item-end
+                  [innerHTML]="reviewData.cart_tax_total[key]"
+                ></div>
               </ion-item>
             </ng-container>
 
             <ng-container *ngIf="reviewData.cart_fees">
-              <ion-item no-padding no-lines *ngFor="let key of objectKeys(reviewData.cart_fees)">
+              <ion-item
+                no-padding
+                no-lines
+                *ngFor="let key of objectKeys(reviewData.cart_fees)"
+              >
                 <div [innerHTML]="key"></div>
                 <div item-end [innerHTML]="reviewData.cart_fees[key]"></div>
               </ion-item>
@@ -247,32 +383,58 @@
               <span> {{"TOTAL" | translate}} </span>
               <span item-end [innerHTML]="reviewData.cart_order_total"></span>
             </ion-item>
-            <ion-item no-padding no-lines text-wrap *ngIf="reviewData.wallet_message">
+            <ion-item
+              no-padding
+              no-lines
+              text-wrap
+              *ngIf="reviewData.wallet_message"
+            >
               <span [innerHTML]="reviewData.wallet_message"></span>
             </ion-item>
-            <ion-item no-padding no-lines class="wallet-payment" *ngIf="reviewData.hasOwnProperty('pay_via_wallet')">
+            <ion-item
+              no-padding
+              no-lines
+              class="wallet-payment"
+              *ngIf="reviewData.hasOwnProperty('pay_via_wallet')"
+            >
               <ion-label>{{'PAY_VIA_WALLET' | translate}}</ion-label>
-              <ion-checkbox [(ngModel)]="reviewData.pay_via_wallet" color="light"
-                (ionChange)="getReview(reviewData.chosen_shipping_method,reviewData.chosen_gateway,reviewData.pay_via_wallet)">
+              <ion-checkbox
+                [(ngModel)]="reviewData.pay_via_wallet"
+                color="light"
+                (ionChange)="getReview(reviewData.chosen_shipping_method,reviewData.chosen_gateway,reviewData.pay_via_wallet)"
+              >
               </ion-checkbox>
             </ion-item>
           </ion-list>
         </div>
 
-
         <div class="order-details payment_method">
-
-          <ion-list no-lines radio-group name="radio" [(ngModel)]="reviewData.chosen_gateway" *ngIf="reviewData">
+          <ion-list
+            no-lines
+            radio-group
+            name="radio"
+            [(ngModel)]="reviewData.chosen_gateway"
+            *ngIf="reviewData"
+          >
             <ion-list-header mode="md">
               {{"PAYMENT_METHODS" | translate}}
             </ion-list-header>
-            <ion-item no-padding no-lines *ngFor="let option of reviewData.payment_gateway; let i=index">
-              <ion-label><span [innerHTML]="option.gateway_title"></span></ion-label>
-              <ion-radio [value]="option.gateway_id" tappable color="light"
-                (click)="getReview(reviewData.chosen_shipping_method,reviewData.chosen_gateway,reviewData.pay_via_wallet)">
+            <ion-item
+              no-padding
+              no-lines
+              *ngFor="let option of reviewData.payment_gateway; let i=index"
+            >
+              <ion-label
+                ><span [innerHTML]="option.gateway_title"></span
+              ></ion-label>
+              <ion-radio
+                [value]="option.gateway_id"
+                tappable
+                color="light"
+                (click)="getReview(reviewData.chosen_shipping_method,reviewData.chosen_gateway,reviewData.pay_via_wallet)"
+              >
               </ion-radio>
             </ion-item>
-
           </ion-list>
         </div>
       </div>
@@ -287,18 +449,44 @@
       <ion-toggle [(ngModel)]="isToggled" item-end></ion-toggle>
     </ion-item>
   </ion-col>
-  <form *ngIf="page=='billing'" [formGroup]="formBilling" (ngSubmit)="billingSubmit()" novalidate>
+  <form
+    *ngIf="page=='billing'"
+    [formGroup]="formBilling"
+    (ngSubmit)="billingSubmit()"
+    novalidate
+  >
     <ion-col>
-      <button ion-button type="button" icon-end full default class="accent-background" (click)="billingSubmit()">
+      <button
+        ion-button
+        type="button"
+        icon-end
+        full
+        default
+        class="accent-background"
+        (click)="billingSubmit()"
+      >
         {{'NEXT'| translate}}
       </button>
     </ion-col>
   </form>
 
-  <form *ngIf="page=='shipping'" [formGroup]="formShipping" (ngSubmit)="shippingSubmit(true)" novalidate>
+  <form
+    *ngIf="page=='shipping'"
+    [formGroup]="formShipping"
+    (ngSubmit)="shippingSubmit(true)"
+    novalidate
+  >
     <ion-row>
       <ion-col col-6>
-        <button ion-button type="button" icon-start full class="primary-background" default (click)="goToBilling()">
+        <button
+          ion-button
+          type="button"
+          icon-start
+          full
+          class="primary-background"
+          default
+          (click)="goToBilling()"
+        >
           {{'PREVIOUS' | translate}}
         </button>
       </ion-col>
@@ -316,8 +504,9 @@
       </button>
     </ion-col>
     <ion-col *ngIf="reviewData && !reviewData.shipping_required_msg">
-      <button ion-button full (click)="orderNow()" class="accent-background">{{"PLACE_ORDER" | translate}}</button>
+      <button ion-button full (click)="orderNow()" class="accent-background">
+        {{"PLACE_ORDER" | translate}}
+      </button>
     </ion-col>
   </ion-row>
-
 </ion-footer>

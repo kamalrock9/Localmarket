@@ -126,7 +126,7 @@
               backgroundSize="cover"
               [src]="blog.block_img ? blog.block_img : ''"
               tappable
-              (click)="goToBlog(blog)"
+              (click)="goToBlock('ProductPage', blog)"
             >
             </img-loader>
             <h5 [innerHTML]="blog.block_title"></h5>
@@ -143,22 +143,8 @@
       class="custom-product-slider"
       *ngIf="layout.sale_products && layout.sale_products.length>0"
     >
-      <!-- <ion-item no-lines>
-      {{"TRENDING_OFFERS"| translate}}
-      <button
-        item-end
-        ion-button
-        clear
-        icon-end
-        tappable
-        (click)="goTo('ProductPage',{on_sale:true})"
-      >
-        See More
-        <ion-icon name="arrow-forward"></ion-icon>
-      </button>
-    </ion-item> -->
       <img
-        src="assets/imgs/bannerTopOfProduct.jpg"
+        [src]="layout.new_top_offer_img"
         style="
           width: 100%;
           height: 42px;
@@ -219,7 +205,7 @@
       [dir]="dir"
       #slider
       tappable
-      (click)="handleSlideClick()"
+      (click)="handleSlideClickSeconBanner()"
     >
       <ion-slide *ngFor="let banner of layout.second_banner">
         <img [src]="banner.second_banner_img" class="banner_img" />
@@ -254,7 +240,7 @@
     <ion-slides margin-bottom slidesPerView="2" [dir]="dir">
       <ion-slide *ngFor="let product of layout.second_banner_product">
         <div class="custom-product">
-          <div tappable (click)="goTo('ProductdetailPage', product)">
+          <div>
             <!-- <img-loader class="img" [src]="product.images[0].src"> </img-loader> -->
             <img-loader
               style="
@@ -267,7 +253,7 @@
               backgroundSize="cover"
               [src]="product.banner2_product_img ? product.banner2_product_img : ''"
               tappable
-              (click)="goTo('ProductPage', banner2_product_img)"
+              (click)="goToSecondBannerProduct('ProductPage', product)"
             >
             </img-loader>
             <!-- <img-loader class="img" [src]="product.images[0].src"> </img-loader> -->
@@ -285,7 +271,7 @@
       [dir]="dir"
       #slider
       tappable
-      (click)="handleSlideClick()"
+      (click)="handleSlideClickThirdBanner()"
     >
       <ion-slide *ngFor="let banner of layout.third_banner">
         <img [src]="banner.third_banner_img" class="banner_img" />
@@ -298,13 +284,13 @@
         <ng-container *ngFor="let banner of layout.third_banner_icon">
           <ion-col col-8 style="flex: 0%;">
             <img-loader
-              style="margin-left: 33%;"
-              width="20px"
-              height="20px"
+              style="margin-left: 25%;"
+              width="30px"
+              height="30px"
               backgroundSize="cover"
               [src]="banner.banner3_icon_img ? banner.banner3_icon_img : ''"
               tappable
-              (click)="goTo('ProductPage', x)"
+              (click)="goToThirdBannerIcon('ProductPage', banner)"
             >
             </img-loader>
             <h5
@@ -317,11 +303,15 @@
     </ion-grid>
 
     <div style="margin-left: 8px; margin-right: 8px;">
-      <h6 style="margin-bottom: 10px;">New Buyer Rewards</h6>
+      <h6
+        style="margin-bottom: 10px;"
+        [innerHTML]="layout.single_banner_data[0].single_banner_heading"
+      ></h6>
       <img
         backgroundSize="cover"
         [src]="layout.single_banner_data[0].single_banner_img ? layout.single_banner_data[0].single_banner_img : ''"
         class="single_banner"
+        (click)="goToSingleBannerData('ProductPage',layout.single_banner_data[0])"
       />
     </div>
 
@@ -329,16 +319,29 @@
       style="margin-left: 8px; margin-right: 8px;"
       *ngFor="let banner of layout.banner_10x_first;"
     >
-      <img [src]="banner.banner_10x_first_img" class="single_banner" />
+      <img
+        [src]="banner.banner_10x_first_img"
+        class="single_banner"
+        (click)="goTobanner_10x_first('ProductPage',banner)"
+      />
     </div>
 
     <ng-container style="margin-top: 8px;">
       <ion-card class="brandstore">
-        <button ion-button round>Bakery Store</button>
+        <button ion-button round>
+          <h6
+            [innerHTML]="layout.new_arrival_button"
+            style="text-align: center; color: white;"
+          ></h6>
+        </button>
         <ion-grid>
           <ion-row>
             <ion-col col-4 *ngFor="let product of layout.new_arrival">
-              <img [src]="product.new_arrival_img" class="img-brand" />
+              <img
+                [src]="product.new_arrival_img"
+                class="img-brand"
+                (click)="goTonew_arrival('ProductPage',product)"
+              />
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -349,7 +352,11 @@
       style="margin-left: 8px; margin-right: 8px;"
       *ngFor="let banner of layout.banner_10x_second;"
     >
-      <img [src]="banner.banner_10x_second_img" class="single_banner" />
+      <img
+        [src]="banner.banner_10x_second_img"
+        class="single_banner"
+        (click)="goTobanner_10x_second('ProductPage',banner)"
+      />
     </div>
 
     <ng-container style="margin-top: 8px;">

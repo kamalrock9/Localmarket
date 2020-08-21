@@ -1,42 +1,76 @@
 <ion-header>
   <ion-navbar>
-    <ion-title><span [innerHTML]="params.search || ('PRODUCTS' | translate)"></span></ion-title>
+    <ion-title
+      ><span [innerHTML]="params.search || ('PRODUCTS' | translate)"></span
+    ></ion-title>
     <ion-buttons end>
-        <button mode="md" ion-button clear icon-only (click)="showSearch()">
-            <ion-icon name="md-search"></ion-icon>
-          </button>
+      <button mode="md" ion-button clear icon-only (click)="showSearch()">
+        <ion-icon name="md-search"></ion-icon>
+      </button>
       <button mode="md" ion-button icon-only (click)="goTo('WishlistPage')">
-        <ion-badge *ngIf="wishlist.total && wishlist.total > 0">{{wishlist.total}}</ion-badge>
+        <ion-badge *ngIf="wishlist.total && wishlist.total > 0"
+          >{{wishlist.total}}</ion-badge
+        >
         <ion-icon name="md-heart"></ion-icon>
       </button>
       <button mode="md" ion-button clear icon-only (click)="goTo('CartPage')">
-        <ion-badge *ngIf="settings.all && settings.cartCount > 0">{{settings.cartCount}}</ion-badge>
+        <ion-badge *ngIf="settings.all && settings.cartCount > 0"
+          >{{settings.cartCount}}</ion-badge
+        >
         <ion-icon name="md-cart"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
   <ion-row no-padding class="sorting">
     <ion-col no-padding col-4>
-      <button no-padding no-margin ion-button full tappable icon-start clear (click)="filter(1)">
+      <button
+        no-padding
+        no-margin
+        ion-button
+        full
+        tappable
+        icon-start
+        clear
+        (click)="filter(1)"
+      >
         <ion-icon name="ios-menu-outline"></ion-icon>
-        <span [innerHTML]="this.items[1].cat_name || 'CATEGORIES' | translate"></span>
+        <span
+          [innerHTML]="this.items[1].cat_name || 'CATEGORIES' | translate"
+        ></span>
       </button>
     </ion-col>
     <ion-col no-padding col-4>
-      <button no-padding no-margin ion-button full tappable icon-start clear (click)="sort()">
+      <button
+        no-padding
+        no-margin
+        ion-button
+        full
+        tappable
+        icon-start
+        clear
+        (click)="sort()"
+      >
         <ion-icon name="ios-swap-outline"></ion-icon>
         {{'SORT' | translate}}
       </button>
     </ion-col>
     <ion-col no-padding col-4>
-      <button no-padding no-margin ion-button full tappable icon-start clear (click)="filter(0)">
+      <button
+        no-padding
+        no-margin
+        ion-button
+        full
+        tappable
+        icon-start
+        clear
+        (click)="filter(0)"
+      >
         <ion-icon name="ios-funnel-outline"></ion-icon>
         {{'FILTER' | translate}}
       </button>
     </ion-col>
   </ion-row>
 </ion-header>
-
 
 <ion-content no-padding>
   <!-- <div class="loader_outer" *ngIf="show_loader">
@@ -45,11 +79,17 @@
 
   <ion-grid *ngIf="show_loader">
     <ion-row>
-      <ion-col col-6 col-md-3 col-sm-4 no-padding *ngFor="let x of [0,1,2,3,4,5,6,7]">
-        <skeleton-item no-animated  height="160px"></skeleton-item>
-        <skeleton-item no-animated ></skeleton-item>
-        <skeleton-item no-animated  width="50%"></skeleton-item>
-        <skeleton-item no-animated  width="70%" height=10px></skeleton-item>
+      <ion-col
+        col-6
+        col-md-3
+        col-sm-4
+        no-padding
+        *ngFor="let x of [0,1,2,3,4,5,6,7]"
+      >
+        <skeleton-item no-animated height="160px"></skeleton-item>
+        <skeleton-item no-animated></skeleton-item>
+        <skeleton-item no-animated width="50%"></skeleton-item>
+        <skeleton-item no-animated width="70%" height="10px"></skeleton-item>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -58,14 +98,18 @@
     <ion-grid>
       <ion-row align-items-center>
         <ion-col align-self-center text-center>
-          <ion-icon name="cart" class="accent" style="transform: scale(3);"></ion-icon>
+          <ion-icon
+            name="cart"
+            class="accent"
+            style="transform: scale(3);"
+          ></ion-icon>
           <h4 margin-top class="accent">{{'NO_PRODUCTS' | translate}}</h4>
         </ion-col>
       </ion-row>
     </ion-grid>
   </div>
 
-  <ion-scroll scrollX="true" class="category-slide" *ngIf="!show_loader && categories && categories.length>0">
+  <!-- <ion-scroll scrollX="true" class="category-slide" *ngIf="!show_loader && categories && categories.length>0">
     <ion-row nowrap>
       <ng-container *ngFor="let x of categories; let i=index">
         <ion-col col-auto no-padding>
@@ -73,34 +117,83 @@
             tappable (click)="goTo('ProductPage', x)">
             <h5 [innerHTML]="x.name"></h5>
           </img-loader>
-          <!-- <div class="img" [ngStyle]="{'background-image':(x.image && x.image.src)?'url('+x.image.src+')':'url(http://via.placeholder.com/90x60)'}"
+           <div class="img" [ngStyle]="{'background-image':(x.image && x.image.src)?'url('+x.image.src+')':'url(http://via.placeholder.com/90x60)'}"
                 tappable (click)="goTo('ProductPage', x)">
                 <h5 [innerHTML]="x.name"></h5>
-              </div> -->
+              </div>
         </ion-col>
       </ng-container>
     </ion-row>
-  </ion-scroll>
+  </ion-scroll> -->
+
+  <ion-grid>
+    <ion-row>
+      <ng-container *ngFor="let x of categories; let i=index">
+        <ion-col col-8 style="flex: 0%;">
+          <img-loader
+            class="imageCat"
+            width="60px"
+            height="60px"
+            backgroundSize="cover"
+            [src]="x.image ? x.image : ''"
+            tappable
+            (click)="goTo('ProductPage', x)"
+          >
+          </img-loader>
+          <h5 [innerHTML]="x.name"></h5>
+          <!-- <div class="img" [ngStyle]="{'background-image':(x.image && x.image.src)?'url('+x.image.src+')':'url(http://via.placeholder.com/90x60)'}"
+              tappable (click)="goTo('ProductPage', x)">
+              <h5 [innerHTML]="x.name"></h5>
+            </div> -->
+        </ion-col>
+      </ng-container>
+    </ion-row>
+  </ion-grid>
 
   <ion-grid *ngIf="!show_loader">
     <ion-row>
-      <ion-col col-6 col-md-3 col-sm-4 no-padding *ngFor="let product of products">
+      <ion-col
+        col-6
+        col-md-3
+        col-sm-4
+        no-padding
+        *ngFor="let product of products"
+      >
         <div class="product-item">
-          <button class="fav" tappable (click)="setFav(product)" ion-button clear icon-only>
-            <ion-icon no-padding name="heart{{!wishlist.isFav(product) ? '-outline' : ''}}"></ion-icon>
+          <button
+            class="fav"
+            tappable
+            (click)="setFav(product)"
+            ion-button
+            clear
+            icon-only
+          >
+            <ion-icon
+              no-padding
+              name="heart{{!wishlist.isFav(product) ? '-outline' : ''}}"
+            ></ion-icon>
           </button>
           <div tappable (click)="goTo('ProductdetailPage', product)">
             <img-loader class="img" [src]="product.images[0].src">
-              <ion-badge *ngIf="product.on_sale">{{product | discount}}</ion-badge>
+              <ion-badge *ngIf="product.on_sale"
+                >{{product | discount}}</ion-badge
+              >
             </img-loader>
             <h5 [innerHTML]="product.name" class="product-name"></h5>
             <div class="price">
               <span [innerHTML]="product.price_html"></span>
             </div>
             <div class="rate">
-              <rating *ngIf="product.average_rating" max="5" readOnly="true" [(ngModel)]="product.average_rating">
+              <rating
+                *ngIf="product.average_rating"
+                max="5"
+                readOnly="true"
+                [(ngModel)]="product.average_rating"
+              >
               </rating>
-              <span class="rating_count" *ngIf="product.rating_count">({{product.rating_count}})</span>
+              <span class="rating_count" *ngIf="product.rating_count"
+                >({{product.rating_count}})</span
+              >
             </div>
           </div>
         </div>
@@ -109,7 +202,6 @@
   </ion-grid>
 
   <ion-infinite-scroll *ngIf="hasMore" (ionInfinite)="loadMoreProducts($event)">
-    <ion-infinite-scroll-content>
-    </ion-infinite-scroll-content>
+    <ion-infinite-scroll-content> </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>

@@ -51,7 +51,7 @@ page-checkout {
             }
 
             .select-icon {
-              content: url('./../assets/svgs/arrow-down.svg') !important;
+              content: url("./../assets/svgs/arrow-down.svg") !important;
               margin: 0px;
               width: 15px !important;
               height: 20px !important;
@@ -74,8 +74,6 @@ page-checkout {
             }
           }
 
-
-
           &:last-child {
             border-bottom-color: transparent;
             box-shadow: none;
@@ -83,7 +81,6 @@ page-checkout {
         }
 
         .item-input-has-focus {
-
           ion-input,
           ion-select {
             border-bottom: 1px solid var(--accent_color) !important;
@@ -110,9 +107,8 @@ page-checkout {
             background: #f6f6f6c2;
             @include padding(0, 0, 0, 7px);
 
-
             span:nth-of-type(1) {
-              color: #00CC00;
+              color: #00cc00;
               @include margin(null, 6px, null, null);
             }
           }
@@ -170,7 +166,6 @@ page-checkout {
                 @include margin(null, 0px !important, null, null);
                 @include margin(null, null, 0px !important, null);
                 @include margin(null, null, null, 5px !important);
-
               }
             }
           }
@@ -222,13 +217,10 @@ page-checkout {
             border: none !important;
             border-color: transparent;
           }
-
         }
       }
     }
   }
-
-
 
   %remain-steps {
     &:before {
@@ -250,7 +242,7 @@ page-checkout {
     font-size: 1.1rem;
     margin-bottom: 0;
 
-    >li {
+    > li {
       counter-increment: stepNum;
       text-align: center;
       display: table-cell;
@@ -258,11 +250,11 @@ page-checkout {
       color: green;
 
       &:before {
-        content: '\f00c';
-        content: '\2713;';
-        content: '\10003';
-        content: '\10004';
-        content: '\2713';
+        content: "\f00c";
+        content: "\2713;";
+        content: "\10003";
+        content: "\10004";
+        content: "\2713";
         display: block;
         margin: 0 auto 4px;
         background-color: green;
@@ -282,7 +274,7 @@ page-checkout {
       }
 
       &:after {
-        content: '';
+        content: "";
         height: 2px;
         width: 100%;
         background-color: green;
@@ -306,8 +298,7 @@ page-checkout {
           color: #fff;
         }
 
-
-        ~li {
+        ~ li {
           color: #808080;
           @extend %remain-steps;
 
