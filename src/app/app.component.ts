@@ -381,11 +381,11 @@ export class MyApp {
     });
   }
   contact() {
-    this.iab.create(App.url + "/contact-us/", "_system", {
-      location: "no",
-      closebuttoncaption: "Done",
-    });
-    /* if (
+    // this.iab.create(App.url + "/contact-us/", "_system", {
+    //   location: "no",
+    //   closebuttoncaption: "Done",
+    // });
+    if (
       this.settings.appSettings.contact_email &&
       this.settings.appSettings.contact_phone &&
       this.settings.appSettings.contact_email !== "" &&
@@ -415,7 +415,7 @@ export class MyApp {
       this.email();
     } else {
       this.call();
-    }*/
+    }
   }
   order_request() {
     this.iab.create(

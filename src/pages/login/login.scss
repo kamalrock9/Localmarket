@@ -32,7 +32,7 @@ page-login {
   }
 
   .col button {
-    border: 1px solid #fff;
+    border: 1px solid #000;
   }
 
   .alternate-login p {
@@ -63,7 +63,7 @@ page-login {
   // Fullscreen centered image background
   .content {
     //background: var(--primary_color_dark) !important;
-    background: url("../assets/imgs/login-background.jpg");
+    background: url("../assets/imgs/loginBackground.jpg");
     background-size: cover;
     background-repeat: no-repeat;
   }

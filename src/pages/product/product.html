@@ -101,7 +101,7 @@
           <ion-icon
             name="cart"
             class="accent"
-            style="transform: scale(3);"
+            style="transform: scale(3)"
           ></ion-icon>
           <h4 margin-top class="accent">{{'NO_PRODUCTS' | translate}}</h4>
         </ion-col>
@@ -109,24 +109,35 @@
     </ion-grid>
   </div>
 
-  <!-- <ion-scroll scrollX="true" class="category-slide" *ngIf="!show_loader && categories && categories.length>0">
+  <ion-scroll
+    scrollX="true"
+    class="custom-category-slide"
+    *ngIf="!show_loader && categories && categories.length>0"
+  >
     <ion-row nowrap>
       <ng-container *ngFor="let x of categories; let i=index">
         <ion-col col-auto no-padding>
-          <img-loader class="img" width="90px" height="60px" backgroundSize="cover" [src]="x.image ? x.image.src : ''"
-            tappable (click)="goTo('ProductPage', x)">
+          <img-loader
+            class="img"
+            width="90px"
+            height="60px"
+            backgroundSize="cover"
+            [src]="x.image ? x.image.src : ''"
+            tappable
+            (click)="goTo('ProductPage', x)"
+          >
             <h5 [innerHTML]="x.name"></h5>
           </img-loader>
-           <div class="img" [ngStyle]="{'background-image':(x.image && x.image.src)?'url('+x.image.src+')':'url(http://via.placeholder.com/90x60)'}"
+          <!-- <div class="img" [ngStyle]="{'background-image':(x.image && x.image.src)?'url('+x.image.src+')':'url(http://via.placeholder.com/90x60)'}"
                 tappable (click)="goTo('ProductPage', x)">
                 <h5 [innerHTML]="x.name"></h5>
-              </div>
+              </div> -->
         </ion-col>
       </ng-container>
     </ion-row>
-  </ion-scroll> -->
+  </ion-scroll>
 
-  <ion-grid>
+  <!-- <ion-grid>
     <ion-row>
       <ng-container *ngFor="let x of categories; let i=index">
         <ion-col col-8 style="flex: 0%;">
@@ -141,14 +152,14 @@
           >
           </img-loader>
           <h5 [innerHTML]="x.name"></h5>
-          <!-- <div class="img" [ngStyle]="{'background-image':(x.image && x.image.src)?'url('+x.image.src+')':'url(http://via.placeholder.com/90x60)'}"
+           <div class="img" [ngStyle]="{'background-image':(x.image && x.image.src)?'url('+x.image.src+')':'url(http://via.placeholder.com/90x60)'}"
               tappable (click)="goTo('ProductPage', x)">
               <h5 [innerHTML]="x.name"></h5>
-            </div> -->
+            </div> 
         </ion-col>
       </ng-container>
     </ion-row>
-  </ion-grid>
+  </ion-grid> -->
 
   <ion-grid *ngIf="!show_loader">
     <ion-row>

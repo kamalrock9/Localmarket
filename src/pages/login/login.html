@@ -1,25 +1,33 @@
 <ion-header>
   <ion-navbar>
     <ion-buttons left>
-      <button ion-button tappable clear large (click)="dismiss()">
-        <ion-icon name="close" style="translate: scale(2);"></ion-icon>
+      <button
+        style="color: #000000 !important"
+        ion-button
+        tappable
+        clear
+        large
+        (click)="dismiss()"
+      >
+        <ion-icon name="close" style="translate: scale(2)"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
   <div class="login" *ngIf="page=='login'" #textInput>
-    <div class="top_header">
+    <!-- <div class="top_header">
       <h2>{{'WELCOME_TO_WOOAPP' | translate:storeName}}</h2>
-      <p style="padding: 20px 60px; line-height: 1.5;">
+      <p style="padding: 20px 60px; line-height: 1.5">
         {{"FASHION_INFO"| translate}}
       </p>
-    </div>
+    </div> -->
 
     <!-- <ion-row class="social-login-toggle" style> -->
-    <div class="social-login-toggle">
+    <div class="social-login-toggle" style="margin-top: 70px">
       <ion-col>
         <button
+          style="color: #000000 !important"
           block
           ion-button
           outline
@@ -33,6 +41,7 @@
       </ion-col>
       <ion-col>
         <button
+          style="color: #000000 !important"
           block
           ion-button
           outline
@@ -47,9 +56,9 @@
     </div>
     <!-- </ion-row> -->
 
-    <div class="alternate-login social-login-toggle">
+    <!-- <div class="alternate-login social-login-toggle">
       <p>{{"LOGIN_METHODS" | translate}}</p>
-    </div>
+    </div> -->
 
     <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate mode="ios">
       <ion-item no-padding>
@@ -93,7 +102,7 @@
       </button>
     </form>
 
-    <div class="go-back">
+    <!-- <div class="go-back">
       <span>{{"DONT_HAVE_ACCOUNT" | translate}}</span>
       <button
         type="button"
@@ -105,7 +114,7 @@
       >
         {{'SIGN_UP' | translate}}
       </button>
-    </div>
+    </div> -->
   </div>
 
   <div class="reset" *ngIf="page=='reset'">

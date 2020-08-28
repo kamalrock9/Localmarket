@@ -1,8 +1,6 @@
 <ion-header no-border no-lines>
   <ion-navbar>
-    <ion-title>
-      {{"NOTIFICATIONS" | translate}}
-    </ion-title>
+    <ion-title> {{"NOTIFICATIONS" | translate}} </ion-title>
     <!-- <ion-buttons end>
       <button mode="md" ion-button clear icon-only (click)="clear()">
         <ion-icon name="delete"></ion-icon>
@@ -23,20 +21,31 @@
     </ion-grid>
   </div>
 
-  <ion-list >
+  <ion-list>
     <ion-item-sliding *ngFor="let x of notif" class="notification-item">
-      <ion-item no-padding >
+      <ion-item style="margin-left: 0px !important">
         <ion-item no-lines no-padding (click)="showAlert(x)">
+          <!-- <img src="assets/svgs/voucher.svg" style="width:24px;height: 36px" item-start /> -->
           <ion-icon name="ios-pricetag-outline" item-start></ion-icon>
           <div>
             <h3>{{x.title}}</h3>
             <p>{{x.body}}</p>
           </div>
         </ion-item>
-        <img-loader useImg [src]="x.bigPicture" *ngIf="x.bigPicture && x.bigPicture!==''" ></img-loader>
-      </ion-item> 
+        <img-loader
+          useImg
+          [src]="x.bigPicture"
+          *ngIf="x.bigPicture && x.bigPicture!==''"
+        ></img-loader>
+      </ion-item>
       <ion-item-options side="end">
-        <button ion-button small class="accent-background" tappable (click)="remove(x)">
+        <button
+          ion-button
+          small
+          class="accent-background"
+          tappable
+          (click)="remove(x)"
+        >
           <ion-icon name="trash"></ion-icon>
           {{"REMOVE" | translate}}
         </button>

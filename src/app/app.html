@@ -11,7 +11,7 @@
         <p>{{user.email}}</p>
         <ion-avatar item-end>
           <img
-            style="width: 50px; height: 50px; border-radius: 25px;"
+            style="width: 50px; height: 50px; border-radius: 25px"
             [src]="user.avatar_url"
           />
           <!-- <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -71,11 +71,11 @@
             x="0px"
             y="0px"
             viewBox="0 0 55 55"
-            style="enable-background: new 0 0 55 55;"
+            style="enable-background: new 0 0 55 55"
             xml:space="preserve"
           >
             <path
-              style="fill: var(--toolbar_text_color);"
+              style="fill: var(--toolbar_text_color)"
               d="M55,27.5C55,12.337,42.663,0,27.5,0S0,12.337,0,27.5c0,8.009,3.444,15.228,8.926,20.258l-0.026,0.023l0.892,0.752
              c0.058,0.049,0.121,0.089,0.179,0.137c0.474,0.393,0.965,0.766,1.465,1.127c0.162,0.117,0.324,0.234,0.489,0.348
              c0.534,0.368,1.082,0.717,1.642,1.048c0.122,0.072,0.245,0.142,0.368,0.212c0.613,0.349,1.239,0.678,1.88,0.98
@@ -130,7 +130,7 @@
         *ngIf="this.settings.appSettings && this.settings.appSettings.contact_phone !== ''"
       >
         <ion-icon item-start name="logo-whatsapp"></ion-icon>
-        {{'ORDER_REQUEST' | translate}}
+        Whatsapp chat support
       </ion-item>
 
       <ion-item menuClose tappable class="btn" (click)="goTo('ProductPage','')">
@@ -252,7 +252,7 @@
       </ion-item>
       <ion-item menuClose tappable class="btn" menuClose (click)="contact()">
         <ion-icon item-start name="ios-call-outline"></ion-icon>
-        {{'CONTACT' | translate}}
+        CONTACT TO LM
       </ion-item>
       <ion-item menuClose tappable class="btn" menuClose (click)="about()">
         <ion-icon item-start name="ios-contacts-outline"></ion-icon>
