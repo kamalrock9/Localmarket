@@ -250,33 +250,33 @@ export class LoginPage {
       .then((res) => {
         res.mode = "google";
         console.log(res);
-        let data = JSON.stringify(res);
-        this.alertCtrl
-          .create({
-            title: "",
-            message: data,
-            buttons: [
-              {
-                text: "OK",
-              },
-            ],
-          })
-          .present();
+        //let data = JSON.stringify(res);
+        // this.alertCtrl
+        //   .create({
+        //     title: "",
+        //     message: data,
+        //     buttons: [
+        //       {
+        //         text: "OK",
+        //       },
+        //     ],
+        //   })
+        //   .present();
         this.user.socialLogin(res).subscribe(
           (res: any) => {
             console.log(res);
-            let data = JSON.stringify(res.details);
-            this.alertCtrl
-              .create({
-                title: "",
-                message: data,
-                buttons: [
-                  {
-                    text: "OK",
-                  },
-                ],
-              })
-              .present();
+            //let data = JSON.stringify(res.details);
+            // this.alertCtrl
+            //   .create({
+            //     title: "",
+            //     message: data,
+            //     buttons: [
+            //       {
+            //         text: "OK",
+            //       },
+            //     ],
+            //   })
+            //   .present();
             this.loader.dismiss();
             if (res.code == 1) {
               this.user.loggedIn(res.details);
