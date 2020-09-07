@@ -42,7 +42,7 @@ export class HomePage {
   params: any = {};
   page: number = 1;
   hasMore: boolean = false;
-  sortby: string = "popularity";
+  sortby: string = "date";
   per_page: number = 30;
   show_loader: boolean = true;
   showEmpty: boolean = false;
@@ -160,7 +160,7 @@ export class HomePage {
       : "";
     this.sortby = this.navParams.data.hasOwnProperty("params")
       ? this.navParams.data.params.sortby
-      : "popularity";
+      : "date";
     this.on_sale = this.navParams.data.hasOwnProperty("params")
       ? this.navParams.data.params.on_sale
       : false;

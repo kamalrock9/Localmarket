@@ -436,7 +436,7 @@ export class MyApp {
       autoShow: true,
     });
     this.admob.on(this.admob.events.REWARD_VIDEO_LOAD_FAIL).subscribe(() => {
-      this.toast.show("Something went wrong try again later.");
+      this.toast.show("Next video will play after couple of minutes.");
       videoStarted = false;
       this.loader.dismiss();
     });
@@ -456,7 +456,7 @@ export class MyApp {
           })
           .catch((err) => {
             console.log(err);
-            this.toast.show("Something went wrong try later");
+            this.toast.show("Next video will play after couple of minutes");
           });
       }
       videoStarted = false;
