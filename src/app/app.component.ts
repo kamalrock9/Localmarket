@@ -380,6 +380,12 @@ export class MyApp {
       closebuttoncaption: "Done",
     });
   }
+  contact_to_LM() {
+    this.iab.create("https://www.localmt.in/contact-us/", "_system", {
+      location: "no",
+      closebuttoncaption: "Done",
+    });
+  }
   contact() {
     // this.iab.create(App.url + "/contact-us/", "_system", {
     //   location: "no",
