@@ -29,7 +29,7 @@ export class ProductPage {
   params: any = {};
   page: number = 1;
   hasMore: boolean = false;
-  sortby: string = "popularity";
+  sortby: string = "date";
   per_page: number = 30;
   show_loader: boolean = true;
   showEmpty: boolean = false;
@@ -66,7 +66,7 @@ export class ProductPage {
     this.items[1].id = this.navParams.data.params.id;
     this.items[1].cat_name = this.navParams.data.params.name;
     this.params.search = this.navParams.data.params.search_data;
-    this.sortby = this.navParams.data.params.sortby || "popularity";
+    this.sortby = this.navParams.data.params.sortby || "date";
     this.on_sale = this.navParams.data.params.on_sale || false;
     this.featured = this.navParams.data.params.featured || false;
     console.log(this.params);

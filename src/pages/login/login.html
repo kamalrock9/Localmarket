@@ -117,7 +117,7 @@
     </div> -->
   </div>
 
-  <div class="reset" *ngIf="page=='reset'">
+  <!-- <div class="reset" *ngIf="page=='reset'">
     <h1>{{'RESET_PASS' | translate}}</h1>
     <p>{{'FORGOT_DESC' | translate}}</p>
     <form [formGroup]="resetForm" (ngSubmit)="reset()" novalidate mode="ios">
@@ -140,30 +140,44 @@
       <ion-icon name="arrow-back"></ion-icon>
       <span>{{'GO_BACK' | translate}}</span>
     </div>
-  </div>
+  </div> -->
 
   <div class="signup" *ngIf="page=='signup'">
-    <div class="top_header">
+    <!-- <div class="top_header">
       <h2>{{"WELCOME_TO_WOOAPP" | translate:storeName}}</h2>
       <p>{{"LOGIN_METHOD" | translate}}</p>
-    </div>
+    </div> -->
 
     <ion-row class="social-login-toggle">
       <ion-col col-6>
-        <button block ion-button outline icon-start (click)="facebookLogin()">
+        <button
+          style="color: #000000 !important"
+          block
+          ion-button
+          outline
+          icon-start
+          (click)="facebookLogin()"
+        >
           <ion-icon name="logo-facebook"></ion-icon>
           {{"FACEBOOK" | translate}}
         </button>
       </ion-col>
       <ion-col col-6>
-        <button block ion-button outline icon-start (click)="googleLogin()">
+        <button
+          style="color: #000000 !important"
+          block
+          ion-button
+          outline
+          icon-start
+          (click)="googleLogin()"
+        >
           <ion-icon name="logo-google"></ion-icon>
           {{"GOOGLE" | translate}}
         </button>
       </ion-col>
     </ion-row>
 
-    <div class="alternate-login social-login-toggle">
+    <!-- <div class="alternate-login social-login-toggle">
       <p>{{'OR' | translate}}</p>
     </div>
     <input type="hidden" #textInput />
@@ -248,7 +262,7 @@
       <button small ion-button outline tappable (tap)="goToLogin()">
         {{'SIGN_IN' | translate}}
       </button>
-    </div>
+    </div> -->
   </div>
 
   <div class="referral" *ngIf="page=='referral'">
