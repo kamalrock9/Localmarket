@@ -76,16 +76,19 @@ page-login {
     }
 
     .label {
-      color: #fff;
+      color: #000;
       font-size: 13px;
     }
 
     .input {
       .text-input {
-        color: #fff;
-        padding: 5px 0;
+        color: #000;
+        padding: 5px 5px;
         width: 100%;
-        border-bottom: 1px solid #fff;
+        border-bottom: 1px solid #000;
+        border-top: 1px solid #000;
+        border-left: 1px solid #000;
+        border-right: 1px solid #000;
         margin-top: 0px;
       }
     }
@@ -93,7 +96,7 @@ page-login {
 
   .item.item-input-has-focus.input-has-focus {
     .label {
-      color: #fff;
+      color: #000;
     }
   }
 
@@ -180,24 +183,26 @@ page-login {
     width: calc(100% - 32px);
 
     h1 {
-      color: #fff;
+      color: #000;
     }
 
     p {
       font-size: 1.3rem;
       font-weight: 300;
-      color: #fffffe;
-      color: #fffffe;
+      color: #000000;
+      color: #000000;
       margin-top: 10px;
     }
 
     .item {
       .text-input::placeholder {
-        color: #ddd;
+        color: #000;
+        border-color: 1px solid #000;
       }
 
       .text-input {
-        color: white;
+        color: #000;
+        border-color: 1px solid #000;
       }
     }
   }

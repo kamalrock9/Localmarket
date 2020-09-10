@@ -238,7 +238,7 @@
   "ORDER_FAILED": "Order Failed",
   "REFERRAL_CODE": "Referral code",
   "HAVE_REFERRAL_CODE": "Have a referral code?",
-  "REFERRAL_CODE_DESC": "Enter a referral cde which you got from your friend. Refferal code is case-sensitive.",
+  "REFERRAL_CODE_DESC": "Enter a referral code which you got from your friend. Referral code is case-sensitive.",
   "SKIP": "Skip",
   "ADD_MONEY_TO_WALLET": "Add money to wallet",
   "AMOUNT": "Amount",
@@ -246,5 +246,6 @@
   "NAME_CAN_ONLY_CONTAIN_LETTERS": "Name can only contain letters",
   "PLEASE_ENTER_THE_VALID_EMAIL": "Please Enter the Vaild Email Address",
   "ORDER_REQUEST": "Order Request",
-  "YOU_SAVE": "You Save:"
+  "YOU_SAVE": "You Save:",
+  "REFFERAL_CODE": "Referral Code"
 }
