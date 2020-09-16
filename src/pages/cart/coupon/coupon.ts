@@ -28,6 +28,8 @@ export class CouponPage {
   appliedCoupon: Array<any>;
   dir: string;
   errMsg: any;
+  customCoupon: boolean = false;
+  customError: string = "";
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -74,6 +76,8 @@ export class CouponPage {
     }
 
     this.loader.show();
+    console.log(this.pakage);
+    console.log(coupon);
     this.rest
       .applyCoupon(this.pakage, coupon)
       .then((res: any) => {
@@ -83,8 +87,13 @@ export class CouponPage {
         this.zone.run(() => {
           if (data.code && data.code == 201) {
             if (data.message && data.message.length > 0) {
+              this.customCoupon = true;
+              this.customError = data.message[0].notice;
               //  this.errMsg = data.message.join();
-              this.toast.show(data.message[0].notice);
+              // console.log(
+              //   String(data.message[0].notice).replace(/<[^>]+>/gm, "")
+              // );
+              // this.toast.show(data.message[0].notice);
             } else if (data.code && data.code == 202) {
               if (data.message && data.message !== "") {
                 this.errMsg = data.message;
@@ -115,5 +124,8 @@ export class CouponPage {
   }
   toggleERR() {
     this.errMsg = undefined;
+  }
+  toggleCustomCouponERR() {
+    this.customCoupon = false;
   }
 }
